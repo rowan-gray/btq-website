@@ -10,7 +10,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   description:
-    'Radiant helps you sell more by revealing sensitive information about your customers.',
+    'Better Transport Queensland advocates for public and active transport as well as regional transport and freight rail.',
 }
 
 function Hero() {
