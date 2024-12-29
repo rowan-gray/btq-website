@@ -9,7 +9,6 @@ import { Bars2Icon } from '@heroicons/react/24/solid'
 import { motion } from 'framer-motion'
 import { Link } from './link'
 import { Logo } from './logo'
-import { Button } from './button'
 
 const links = [
   { href: 'https://forum.bettertransportqueensland.org', label: 'Forum' },
