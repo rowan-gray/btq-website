@@ -30,12 +30,14 @@
                 </g>
                 <path id="path3" d="M-39.298,-789.28L-23.298,-789.28" style="fill:none;fill-rule:nonzero;stroke:rgb(0,128,96);stroke-width:28px;"/>
                 <g id="path6-8-7-6-1-1" transform="matrix(1,0,0,-1,0,0)">
-                    <path d="M172.702,870.28L172.702,870.28C172.702,898.257 149.68,921.28 121.702,921.28" style="fill:none;fill-rule:nonzero;stroke:rgb(204,0,204);stroke-width:28px;"/>
+                    <clipPath id="_clip1">
+                        <path d="M126.702,870.28L113.702,870.28L113.702,935.274L177.505,935.274C148.465,927.952 126.702,901.458 126.702,870.28ZM177.505,935.274C182.699,936.584 188.125,937.28 193.702,937.28L193.702,935.274L177.505,935.274ZM193.702,905.28L193.702,870.28L158.702,870.28C158.702,889.48 174.501,905.28 193.702,905.28Z"/>
+                    </clipPath>
+                    <g clip-path="url(#_clip1)">
+                        <path d="M172.702,870.28L172.702,870.28C172.702,898.257 149.68,921.28 121.702,921.28" style="fill:none;fill-rule:nonzero;stroke:rgb(204,0,204);stroke-width:28px;"/>
+                    </g>
                 </g>
                 <path id="path1-9-1-5-0-4-8-3-5-6-1" d="M172.702,-870.28L172.702,-627.28" style="fill:none;fill-rule:nonzero;stroke:rgb(204,0,204);stroke-width:28px;"/>
-                <g id="path6-8-7-6-1-1-2" transform="matrix(-1,0,0,-1,0,0)">
-                    <path d="M-142.702,870.28L-142.702,870.28C-142.702,898.257 -165.724,921.28 -193.702,921.28" style="fill:none;fill-rule:nonzero;stroke:white;stroke-width:32px;stroke-linecap:butt;"/>
-                </g>
                 <g id="path6-8-7-6-1-1-2-3" transform="matrix(-1,0,0,-1,0,0)">
                     <path d="M-142.702,870.28L-142.702,870.28C-142.702,898.257 -165.724,921.28 -193.702,921.28" style="fill:none;fill-rule:nonzero;stroke:rgb(54,98,230);stroke-width:28px;"/>
                 </g>
