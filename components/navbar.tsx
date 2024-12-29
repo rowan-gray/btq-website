@@ -32,20 +32,20 @@ function DesktopNav({filled}: {filled: true | undefined}) {
   )
 }
 
-function MobileNavButton() {
+function MobileNavButton({filled}: {filled: true | undefined}) {
   return (
     <DisclosureButton
       className="flex size-12 items-center justify-center self-center rounded-lg data-[hover]:bg-black/5 lg:hidden"
       aria-label="Open main menu"
     >
-      <Bars2Icon className="size-6" />
+      <Bars2Icon className={`size-6 ${!filled ? "text-black" : ""}`} />
     </DisclosureButton>
   )
 }
 
-function MobileNav() {
+function MobileNav({filled}: {filled: true | undefined}) {
   return (
-    <DisclosurePanel className="lg:hidden">
+    <DisclosurePanel className={`lg:hidden ${!filled ? "text-black" : "text-gray-200"}`}>
       <div className="flex flex-col gap-6 py-4">
         {links.map(({ href, label }, linkIndex) => (
           <motion.div
@@ -58,15 +58,15 @@ function MobileNav() {
             }}
             key={href}
           >
-            <Link href={href} className="text-base font-medium text-gray-200">
+            <Link href={href} className="text-base font-medium">
               {label}
             </Link>
           </motion.div>
         ))}
       </div>
       <div className="absolute left-1/2 w-screen -translate-x-1/2">
-        <div className="absolute inset-x-0 top-0 border-t border-black/5" />
-        <div className="absolute inset-x-0 top-2 border-t border-black/5" />
+        <div className={`absolute inset-x-0 top-0 border-t ${!filled ? "border-black/5" : "border-gray-200/5"} `} />
+        <div className={`absolute inset-x-0 top-2 border-t ${!filled ? "border-black/5" : "border-gray-200/5"}`} />
       </div>
     </DisclosurePanel>
   )
@@ -89,9 +89,9 @@ export function Navbar({ banner, filled }: { banner?: React.ReactNode, filled?: 
           )}
         </div>
         <DesktopNav filled={filled}/>
-        <MobileNavButton />
+        <MobileNavButton filled={filled}/>
       </header>
-      <MobileNav />
+      <MobileNav filled={filled}/>
     </Disclosure>
   )
 }
