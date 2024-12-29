@@ -167,16 +167,7 @@ function FrequentlyAskedQuestions() {
   )
 }
 
-export default function Pricing({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
-  let tier =
-    typeof searchParams.tier === 'string'
-      ? tiers.find(({ slug }) => slug === searchParams.tier)!
-      : tiers[0]
-
+export default function Pricing() {
   return (
     <main className="overflow-hidden">
       <Container>
