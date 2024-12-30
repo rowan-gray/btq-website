@@ -19,26 +19,26 @@ import { Heading } from './text'
 
 const testimonials = [
   {
-    img: '/testimonials/president.jpg',
-    name: 'Rowan Gray',
+    img: '/committee/president.png',
+    name: 'Rowan G',
     title: 'President',
     email: "president@bettertransportqueensland.org"
   },
   {
-    img: '/testimonials/treasurer.jpg',
+    img: '/committee/treasurer.png',
     name: 'Marc ',
     title: 'Treasurer',
     email: "treasurer@bettertransportqueensland.org"
   },
   {
-    img: '/testimonials/secretary.jpg',
-    name: 'Peter ',
+    img: '/committee/secretary.png',
+    name: 'Peter V',
     title: 'Secretary',
     email: "secretary@bettertransportqueensland.org"
   },
   {
-    img: '/testimonials/webmaster.png',
-    name: 'Tristan Duncombe',
+    img: '/committee/webmaster.png',
+    name: 'Tristan D',
     title: 'Webmaster',
     email: "webmaster@bettertransportqueensland.org"
   },

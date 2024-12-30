@@ -4,6 +4,7 @@ import { Navbar } from '@/components/navbar'
 import { Committee } from '@/components/committee'
 import { Heading, Lead } from '@/components/text'
 import type { Metadata } from 'next'
+import { Card } from '@/components/card'
 
 export const metadata: Metadata = {
     title: 'Contact',
@@ -19,18 +20,18 @@ function Header() {
           Get in touch with us to learn more about our mission and how you can help us improve transport throughout Queensland.
         </Lead>
         <section className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
-          <div className="rounded-lg border border-gray-200 p-6 shadow-md">
+          <Card>
             <h3 className="text-lg font-semibold">General Inquiries</h3>
             <p className="mt-4 text-sm text-gray-600">
               For any general inquiries or questions, please contact us at <a href="mailto:inquries@bettertransportqueensland.org" className="text-pink-500 hover:underline">inquiries@bettertransportqueensland.org</a>
             </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 p-6 shadow-md">
+          </Card>
+          <Card>
             <h3 className="text-lg font-semibold">Media Inquiries</h3>
             <p className="mt-4 text-sm text-gray-600">
               For any media inquiries or questions, please contact us at <a href="mailto:media@bettertransportqueensland.org" className="text-pink-500 hover:underline">media@bettertransportqueensland.org</a>
             </p>
-          </div>
+          </Card>
         </section>
         <Committee />
       </Container>

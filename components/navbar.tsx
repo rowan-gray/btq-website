@@ -13,6 +13,7 @@ import { Logo } from './logo'
 const links = [
   { href: 'https://forum.bettertransportqueensland.org', label: 'Forum' },
   { href: '/member', label: 'Membership' },
+  { href: '/releases', label: 'Media Releases' },
   { href: '/contact', label: 'Contact' },
 ]
 

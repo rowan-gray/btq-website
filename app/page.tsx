@@ -58,12 +58,30 @@ function FeatureSection() {
         </Lead>
         <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
           <div className="max-w-lg">
+            <h2 className="text-2xl font-medium tracking-tight">Who are we?</h2>
+            <p className="mb-3 text-md/6 text-gray-600">
+              Better Transport Queensland is a not-for-profit advocacy group consisting of
+              like-minded members who want to make a positive difference for our future.
+            </p>
+            <h2 className="text-2xl font-medium tracking-tight">Our goals</h2>
+            <p className="mb-3 text-md/6 text-gray-600">
+              At Better Transport Queensland, we believe that a better future for Queenslanders
+              relies on improved public, active, and freight transport.
+            </p>
             <h2 className="text-2xl font-medium tracking-tight">Our mission</h2>
-            <p className="mt-6 text-sm/6 text-gray-600">
-              Better Transport Queensland Inc. is a non-for-profit organisation 
-              focused on advocating for public and active transport. We are a very 
-              active and diverse community of people who are passionate about improving 
-              transport throughout Queensland.
+            <p className="mb-3 text-md/6 text-gray-600">
+              To achieve our goal, we advocate for better transport in Queensland through the prioritisation
+              of transport investment in active/public transport and regional/freight rail.
+
+              Improved public and active transport are essential for moving high volumes of
+              people in our quickly expanding state. It is also needed to ensure that everyone has
+              equal opportunities for employment and socialising, regardless of whether one can afford
+              a personal vehicle or not. We believe that no one should be forced to buy a car to get to where they need to go!
+
+              Reducing heavy vehicle traffic on our major roads is desperately needed to improve our environmental impact.
+              Moving freight by heavy rail is drastically more efficient than moving freight by single b-hauls.
+              That is why we believe that the Queensland Government should be investing in and prioritising important
+              heavy-rail corridors for freight, such as the North Coast Line.
             </p>
           </div>
           <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">

@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'Fira Sans', 'system-ui', 'sans-serif'],
+        sans: ['Fira Sans', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         '4xl': '2rem',

@@ -8,12 +8,14 @@ const variants = {
     'rounded-full border border-transparent shadow-md',
     'whitespace-nowrap text-base font-medium text-white',
     'bg-indigo-300/35 data-[hover]:bg-indigo-500/35',
+    'selection:bg-pink-400 selection:text-indigo-800'
   ),
   secondary: clsx(
     'inline-flex items-center justify-center px-4 py-[calc(theme(spacing.2)-1px)]',
     'rounded-full border border-transparent shadow-md',
     'whitespace-nowrap text-base font-medium text-white',
     'bg-pink-400 data-[hover]:bg-pink-600',
+    'selection:bg-indigo-800 selection:text-pink-600'
   ),
   outline: clsx(
     'inline-flex items-center justify-center px-2 py-[calc(theme(spacing.[1.5])-1px)]',
