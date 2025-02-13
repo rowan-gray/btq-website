@@ -62,7 +62,7 @@ function SocialLinks({filled}: {filled?: true}) {
         <SocialIconInstagram className="size-4" />
       </Link>
       <Link
-        href="https://bsky.app"
+        href="htps://bsky.app/profile/bettertransportqueensland.org"
         target="_blank"
         aria-label="Visit us on Bluesky"
         className={`${filled ? "text-white data-[hover]:text-white/80" : "text-black data-[hover]:text-black/80"}`}
@@ -70,7 +70,7 @@ function SocialLinks({filled}: {filled?: true}) {
         <SocialIconBluesky className="size-4" />
       </Link>
       <Link
-        href="https://linkedin.com"
+        href="https://www.linkedin.com/company/better-transport-queensland"
         target="_blank"
         aria-label="Visit us on LinkedIn"
         className={`${filled ? "text-white data-[hover]:text-white/80" : "text-black data-[hover]:text-black/80"}`}
