@@ -21,19 +21,18 @@ function Header() {
         </Lead>
         <section className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
           <Card>
-            <h3 className="text-lg font-semibold">General Inquiries</h3>
+            <h3 className="text-lg font-semibold">General Enquiries</h3>
             <p className="mt-4 text-sm text-gray-600">
-              For any general inquiries or questions, please contact us at <a href="mailto:inquries@bettertransportqueensland.org" className="text-pink-500 hover:underline">inquiries@bettertransportqueensland.org</a>
+              For any general enquiries or questions, please contact us at <a href="mailto:enquries@bettertransportqueensland.org" className="text-pink-500 hover:underline">enquiries@bettertransportqueensland.org</a>
             </p>
           </Card>
           <Card>
-            <h3 className="text-lg font-semibold">Media Inquiries</h3>
+            <h3 className="text-lg font-semibold">Media Enquiries</h3>
             <p className="mt-4 text-sm text-gray-600">
-              For any media inquiries or questions, please contact us at <a href="mailto:media@bettertransportqueensland.org" className="text-pink-500 hover:underline">media@bettertransportqueensland.org</a>
+              For any media enquiries or questions, please contact us at <a href="mailto:media@bettertransportqueensland.org" className="text-pink-500 hover:underline">media@bettertransportqueensland.org</a>
             </p>
           </Card>
         </section>
-        <Committee />
       </Container>
     )
   }

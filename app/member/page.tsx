@@ -29,23 +29,23 @@ const tiers = [
     slug: 'concession',
     description: 'Reduced pricing for eligible members.',
     priceMonthly: 30,
-    href: '#',
     highlights: [
       { description: 'Over 18 years old' },
       { description: 'Must support the objectives of the association' },
-      { description: 'Be a current full-time university student OR hold a Pensioner Concession Card' },
+      { description: 'Be a current university student OR hold a Pensioner Concession Card' },
     ],
+    href: 'https://forum.bettertransportqueensland.org',
   },
   {
     name: 'Ordinary' as const,
     slug: 'ordinary',
     description: 'Have a say in Better Transport Queensland!',
     priceMonthly: 50,
-    href: '#',
     highlights: [
       { description: 'Over 18 years old' },
       { description: 'Must support the objectives of the association' },
     ],
+    href: 'https://forum.bettertransportqueensland.org',
   },
 ]
 
@@ -147,18 +147,43 @@ function FrequentlyAskedQuestions() {
         <div className="mx-auto mb-32 mt-16 max-w-xl space-y-12">
           <dl>
             <dt className="text-sm font-semibold">
-              Do I need to be a member to contribute to the forum?
+              What is a member?
             </dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              No, you do not need to be a member to contribute to the forum.
+              Members are financially committed users of the forum who would like to contribute to the running, maintenance, and decision making of the organisation.
             </dd>
           </dl>
           <dl>
             <dt className="text-sm font-semibold">
-              Why should I join?
+              Am I a member if I sign up to the forum?
             </dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              Joining Better Transport Queensland gives you the opportunity to have a say in the the management of the association and any future changes within the association.
+              There is a distinction between a logged-in user of the forum and a member of the organisation. 
+
+              Logged-in users are able to view more categories and topics than anonymous users, however they are unable to vote at annual general meetings or be a member of the working or executive committee.
+            </dd>
+            <dd className="mt-4 text-sm/6 text-gray-600 font-semibold">
+              You do need to be a paid member to access the member-only section of the forum!
+            </dd>
+          </dl>
+          <dl>
+            <dt className="text-sm font-semibold">
+              Why should I become a member?
+            </dt>
+            <dd className="mt-4 text-sm/6 text-gray-600">
+              If you are a frequent user of the forum and believe in the goals and objectives of the organisation, we highly encourage you to become a member. 
+
+              Running the forum is costly, so we rely on paying members to stay up and running. Our members are vital in ensuring we can continue to provide a safe place for interested members of the public to get involved in our mission.
+
+              Members are also able to vote at annual general meetings and participate in the working and management committee of the organisation. This gives you the opportunity to shape the future of the association.
+            </dd>
+          </dl>
+          <dl>
+            <dt className="text-sm font-semibold">
+              How are fees decided?
+            </dt>
+            <dd className="mt-4 text-sm/6 text-gray-600">
+              Membership fees are carefully considered by the Treasurer to ensure that we are able to keep the forum and organisation up and running.
             </dd>
           </dl>
         </div>
