@@ -14,6 +14,7 @@ const links = [
   { href: 'https://forum.bettertransportqueensland.org', label: 'Forum' },
   { href: '/member', label: 'Membership' },
   { href: '/releases', label: 'Media Releases' },
+  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ]
 
