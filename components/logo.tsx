@@ -2,8 +2,10 @@ import { clsx } from 'clsx'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import logo from '@/public/logo.svg'
+import logo_dark from '@/public/logo_dark.svg'
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({ className, filled }: { className?: string, filled: true | undefined}) {
+  console.log(filled)
   return (
     <motion.div
       variants={{ idle: {}, active: {} }}
@@ -11,12 +13,24 @@ export function Logo({ className }: { className?: string }) {
       whileHover="active"
       className={clsx(className, 'overflow-visible flex items-center')}
     >
-      <Image
-        src={logo}
-        alt="Logo"
-        width={75}
-        height={34}
-      />
+      {
+        filled ? (
+          <Image
+            src={logo_dark}
+            alt="Logo"
+            width={150}
+            height={50}
+          />
+        ) : (
+          <Image
+            src={logo}
+            alt="Logo"
+            width={150}
+            height={50}
+          />
+        )
+      }
+
     </motion.div>
   )
 }

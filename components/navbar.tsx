@@ -81,7 +81,7 @@ export function Navbar({ banner, filled }: { banner?: React.ReactNode, filled?: 
         <div className="flex gap-6 items-center">
           <div className="flex items-center py-3">
             <Link href="/" title="Home">
-              <Logo className="h-9 text-white" />
+              <Logo className="h-9 text-white" filled={filled} />
             </Link>
           </div>
           {banner && (
