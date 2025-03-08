@@ -5,7 +5,6 @@ import logo from '@/public/logo.svg'
 import logo_dark from '@/public/logo_dark.svg'
 
 export function Logo({ className, filled }: { className?: string, filled: true | undefined}) {
-  console.log(filled)
   return (
     <motion.div
       variants={{ idle: {}, active: {} }}
