@@ -76,7 +76,7 @@ function MobileNav({filled}: {filled: true | undefined}) {
 
 export function Navbar({ banner, filled }: { banner?: React.ReactNode, filled?: true }) {
   return (
-    <Disclosure as="header" className="pt-12 sm:pt-16 dark:text-white">
+    <Disclosure as="header" className="pt-12 sm:pt-16 dark:text-white mt-2">
       <header className="flex justify-between items-center">
         <div className="flex gap-6 items-center">
           <div className="flex items-center py-3">

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 function Hero() {
   return (
-    <div className="mx-2 mt-2 rounded-4xl bg-indigo-800 selection:bg-pink-400 selection:text-indigo-800">
+    <div className="mx-2 rounded-4xl bg-indigo-800 selection:bg-pink-400 selection:text-indigo-800">
       <Container className="relative">
         <Navbar
           banner={
