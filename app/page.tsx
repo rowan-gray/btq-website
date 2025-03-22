@@ -1,3 +1,4 @@
+import { createPageMetadata } from '@/app/layout'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
@@ -7,7 +8,6 @@ import { Heading, Lead } from '@/components/text'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { createPageMetadata } from './layout'
 
 export const metadata: Metadata = createPageMetadata({
   title: undefined,
