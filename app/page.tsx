@@ -58,6 +58,12 @@ function Hero() {
 }
 
 function UpcomingEvents() {
+  const endDate = new Date('2025-04-06T17:00:00+10:00')
+
+  if (Date.now() > endDate.getTime()) {
+    return
+  }
+
   return (
     <div className="overflow-hidden">
       <Container className="pb-24">
