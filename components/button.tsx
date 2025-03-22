@@ -9,7 +9,7 @@ const variants = {
     'whitespace-nowrap text-base font-medium text-white',
     'bg-pink-400 data-[hover]:bg-pink-600',
     'selection:bg-indigo-800 selection:text-pink-600',
-    'transition duration-200 ease-in-out' // Added hover animation
+    'transition duration-200 ease-in-out', // Added hover animation
   ),
   secondary: clsx(
     'inline-flex items-center justify-center px-4 py-[calc(theme(spacing.2)-1px)]',
@@ -17,23 +17,21 @@ const variants = {
     'whitespace-nowrap text-base font-medium text-white',
     'bg-indigo-500 data-[hover]:bg-indigo-600',
     'selection:bg-pink-400 selection:text-indigo-800',
-    'transition duration-200 ease-in-out' // Added hover animation
+    'transition duration-200 ease-in-out', // Added hover animation
   ),
   outline: clsx(
     'inline-flex items-center justify-center px-2 py-[calc(theme(spacing.[1.5])-1px)]',
     'rounded-lg border border-transparent shadow ring-1 ring-black/10',
     'whitespace-nowrap text-sm font-medium text-gray-950',
     'data-[disabled]:bg-transparent data-[hover]:bg-gray-50 data-[disabled]:opacity-40',
-    'transition duration-200 ease-in-out' // Added hover animation
+    'transition duration-200 ease-in-out', // Added hover animation
   ),
 }
 
-type ButtonProps = {
-  variant?: keyof typeof variants
-} & (
-    | React.ComponentPropsWithoutRef<typeof Link>
-    | (Headless.ButtonProps & { href?: undefined })
-  )
+type ButtonProps = { variant?: keyof typeof variants } & (
+  | React.ComponentPropsWithoutRef<typeof Link>
+  | (Headless.ButtonProps & { href?: undefined })
+)
 
 export function Button({
   variant = 'primary',
