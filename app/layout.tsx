@@ -28,9 +28,13 @@ export const metadata: Metadata = {
     'max-image-preview': 'large',
     'max-video-preview': -1,
   },
-};
+}
 
-export const createPageMetadata = (params: { title: string | undefined, description: string, slug: string | undefined }): Metadata => {
+export const createPageMetadata = (params: {
+  title: string | undefined
+  description: string
+  slug: string | undefined
+}): Metadata => {
   return {
     title: params.title ?? 'Better Transport Queensland',
     description: params.description,
@@ -59,22 +63,29 @@ export const createPageMetadata = (params: { title: string | undefined, descript
       description: params.description,
       images: ['https://bettertransportqueensland.org/banner.png'],
     },
-  };
-};
+  }
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet"
+        />
       </head>
-      <body className="font-sans text-gray-950 antialiased bg-[#f1f1f1]">{children}</body>
+      <body className="bg-[#f1f1f1] font-sans text-gray-950 antialiased">
+        {children}
+      </body>
     </html>
   )
 }

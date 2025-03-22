@@ -1,3 +1,4 @@
+import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Gradient } from '@/components/gradient'
@@ -5,13 +6,13 @@ import { Link } from '@/components/link'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead, Subheading } from '@/components/text'
 import type { Metadata } from 'next'
-import { createPageMetadata } from "../layout";
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Member',
-  description: 'Join Better Transport Queensland (BTQ) and make your voice heard! Become part of the movement driving change for sustainable, public, and active transport solutions in Queensland.',
+  description:
+    'Join Better Transport Queensland (BTQ) and make your voice heard! Become part of the movement driving change for sustainable, public, and active transport solutions in Queensland.',
   slug: 'member',
-});
+})
 
 const tiers = [
   {
@@ -19,9 +20,7 @@ const tiers = [
     slug: 'forum',
     description: 'Access to our forum and community.',
     priceMonthly: 0,
-    highlights: [
-      { description: 'None!' },
-    ],
+    highlights: [{ description: 'None!' }],
     buttonText: 'Join the forum',
     href: 'https://forum.bettertransportqueensland.org',
   },
@@ -33,7 +32,10 @@ const tiers = [
     highlights: [
       { description: 'Over 18 years old' },
       { description: 'Must support the objectives of the association' },
-      { description: 'Be a current university student OR hold a Pensioner Concession Card' },
+      {
+        description:
+          'Be a current university student OR hold a Pensioner Concession Card',
+      },
     ],
     href: 'https://forum.bettertransportqueensland.org',
   },
@@ -53,9 +55,14 @@ const tiers = [
 function Header() {
   return (
     <Container className="mt-16">
-      <Heading as="h1">Influence change to improve transport throughout Queensland!</Heading>
+      <Heading as="h1">
+        Influence change to improve transport throughout Queensland!
+      </Heading>
       <Lead className="mt-6 max-w-3xl">
-        Better Transport Queensland is a not-for-profit organisation that advocates for public and active transport as well as regional transport and freight rail. We are a community of people who are passionate about improving transport throughout Queensland.
+        Better Transport Queensland is a not-for-profit organisation that
+        advocates for public and active transport as well as regional transport
+        and freight rail. We are a community of people who are passionate about
+        improving transport throughout Queensland.
       </Lead>
     </Container>
   )
@@ -78,17 +85,19 @@ function PricingCards() {
 
 function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
   return (
-    <div className="rounded-3xl bg-white p-10 pb-9 shadow-2xl ring-1 ring-black/5 relative">
+    <div className="relative rounded-3xl bg-white p-10 pb-9 shadow-2xl ring-1 ring-black/5">
       <Subheading>{tier.name}</Subheading>
       <p className="mt-2 text-sm/6 text-gray-950/75">{tier.description}</p>
       <div className="mt-8 flex items-center gap-4">
-        <div className="text-5xl font-medium text-gray-950">${tier.priceMonthly}</div>
+        <div className="text-5xl font-medium text-gray-950">
+          ${tier.priceMonthly}
+        </div>
         <div className="text-sm/5 text-gray-950/75">
           <p>AUD</p>
           <p>per year</p>
         </div>
       </div>
-      <div className="mt-8 mb-8">
+      <div className="mb-8 mt-8">
         <h3 className="text-sm/6 font-medium text-gray-950">Requirements</h3>
         <ul className="mt-3 space-y-3">
           {tier.highlights.map((props, featureIndex) => (
@@ -96,7 +105,7 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
           ))}
         </ul>
       </div>
-      <button className="absolute bottom-4 right-4 text-xs rounded-xl bg-pink-400 data-[hover]:bg-pink-600">
+      <button className="absolute bottom-4 right-4 rounded-xl bg-pink-400 text-xs data-[hover]:bg-pink-600">
         <Link href={tier.href} className="inline-block px-4 py-2 text-white">
           {tier?.buttonText || 'Join now'}
         </Link>
@@ -137,7 +146,7 @@ function PlusIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function FrequentlyAskedQuestions() {
   // TODO ACCORDION
   return (
-    <Container className='mt-32'>
+    <Container className="mt-32">
       <section id="faqs" className="scroll-mt-8">
         <Subheading className="text-center">
           Frequently asked questions
@@ -147,11 +156,11 @@ function FrequentlyAskedQuestions() {
         </Heading>
         <div className="mx-auto mb-32 mt-16 max-w-xl space-y-12">
           <dl>
-            <dt className="text-sm font-semibold">
-              What is a member?
-            </dt>
+            <dt className="text-sm font-semibold">What is a member?</dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              Members are financially committed users of the forum who would like to contribute to the running, maintenance, and decision making of the organisation.
+              Members are financially committed users of the forum who would
+              like to contribute to the running, maintenance, and decision
+              making of the organisation.
             </dd>
           </dl>
           <dl>
@@ -159,12 +168,15 @@ function FrequentlyAskedQuestions() {
               Am I a member if I sign up to the forum?
             </dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              There is a distinction between a logged-in user of the forum and a member of the organisation.
-
-              Logged-in users are able to view more categories and topics than anonymous users, however they are unable to vote at annual general meetings or be a member of the working or executive committee.
+              There is a distinction between a logged-in user of the forum and a
+              member of the organisation. Logged-in users are able to view more
+              categories and topics than anonymous users, however they are
+              unable to vote at annual general meetings or be a member of the
+              working or executive committee.
             </dd>
-            <dd className="mt-4 text-sm/6 text-gray-600 font-semibold">
-              You do need to be a paid member to access the member-only section of the forum!
+            <dd className="mt-4 text-sm/6 font-semibold text-gray-600">
+              You do need to be a paid member to access the member-only section
+              of the forum!
             </dd>
           </dl>
           <dl>
@@ -172,19 +184,23 @@ function FrequentlyAskedQuestions() {
               Why should I become a member?
             </dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              If you are a frequent user of the forum and believe in the goals and objectives of the organisation, we highly encourage you to become a member.
-
-              Running the forum is costly, so we rely on paying members to stay up and running. Our members are vital in ensuring we can continue to provide a safe place for interested members of the public to get involved in our mission.
-
-              Members are also able to vote at annual general meetings and participate in the working and management committee of the organisation. This gives you the opportunity to shape the future of the association.
+              If you are a frequent user of the forum and believe in the goals
+              and objectives of the organisation, we highly encourage you to
+              become a member. Running the forum is costly, so we rely on paying
+              members to stay up and running. Our members are vital in ensuring
+              we can continue to provide a safe place for interested members of
+              the public to get involved in our mission. Members are also able
+              to vote at annual general meetings and participate in the working
+              and management committee of the organisation. This gives you the
+              opportunity to shape the future of the association.
             </dd>
           </dl>
           <dl>
-            <dt className="text-sm font-semibold">
-              How are fees decided?
-            </dt>
+            <dt className="text-sm font-semibold">How are fees decided?</dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              Membership fees are carefully considered by the Treasurer to ensure that we are able to keep the forum and organisation up and running.
+              Membership fees are carefully considered by the Treasurer to
+              ensure that we are able to keep the forum and organisation up and
+              running.
             </dd>
           </dl>
         </div>
