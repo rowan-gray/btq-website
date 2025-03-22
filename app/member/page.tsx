@@ -5,12 +5,13 @@ import { Link } from '@/components/link'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead, Subheading } from '@/components/text'
 import type { Metadata } from 'next'
+import { createPageMetadata } from "../layout";
 
-export const metadata: Metadata = {
-  title: 'Membership',
-  description:
-    'Want to have your voice hear about BTQ? Joining allows you to make a change!',
-}
+export const metadata: Metadata = createPageMetadata({
+  title: 'Member',
+  description: 'Join Better Transport Queensland (BTQ) and make your voice heard! Become part of the movement driving change for sustainable, public, and active transport solutions in Queensland.',
+  slug: 'member',
+});
 
 const tiers = [
   {
@@ -158,7 +159,7 @@ function FrequentlyAskedQuestions() {
               Am I a member if I sign up to the forum?
             </dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              There is a distinction between a logged-in user of the forum and a member of the organisation. 
+              There is a distinction between a logged-in user of the forum and a member of the organisation.
 
               Logged-in users are able to view more categories and topics than anonymous users, however they are unable to vote at annual general meetings or be a member of the working or executive committee.
             </dd>
@@ -171,7 +172,7 @@ function FrequentlyAskedQuestions() {
               Why should I become a member?
             </dt>
             <dd className="mt-4 text-sm/6 text-gray-600">
-              If you are a frequent user of the forum and believe in the goals and objectives of the organisation, we highly encourage you to become a member. 
+              If you are a frequent user of the forum and believe in the goals and objectives of the organisation, we highly encourage you to become a member.
 
               Running the forum is costly, so we rely on paying members to stay up and running. Our members are vital in ensuring we can continue to provide a safe place for interested members of the public to get involved in our mission.
 

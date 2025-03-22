@@ -6,6 +6,16 @@ import { ArrowLongLeftIcon } from "@heroicons/react/16/solid";
 import RSSParser from "rss-parser";
 import DOMPurify from "isomorphic-dompurify";
 import parse from 'html-react-parser';
+import type { Metadata } from 'next';
+import { createPageMetadata } from "../../layout";
+
+export const generateMetadata = ({ params }: { params: { number: number } }): Metadata => {
+    return createPageMetadata({
+        title: `Blog ${params.number}`,
+        description: 'Explore the Better Transport Queensland blog, where engaged community members share their opinions and insights on public, active, and sustainable transport (not official policy). Stay informed and join the conversation!',
+        slug: `blog/${params.number.toString()}`,
+    });
+};
 
 export async function generateStaticParams() {
     const parser = new RSSParser();

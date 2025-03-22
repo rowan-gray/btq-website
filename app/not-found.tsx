@@ -3,15 +3,6 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import '@/styles/tailwind.css'
-import type { Metadata } from 'next'
-
-
-export const metadata: Metadata = {
-    title: {
-        template: '%s - Better Transport Queensland',
-        default: 'Better Transport Queensland',
-    },
-}
 
 export default function RootLayout({
     children,

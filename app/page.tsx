@@ -7,11 +7,14 @@ import { Heading, Lead } from '@/components/text'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import { createPageMetadata } from './layout'
 
-export const metadata: Metadata = {
-  description:
-    'Better Transport Queensland advocates for public and active transport as well as regional transport and freight rail.',
-}
+export const metadata: Metadata = createPageMetadata({
+  title: undefined,
+  description: 'Better Transport Queensland champions sustainable public and active transport while promoting efficient regional transport and freight rail solutions for a connected and greener future.',
+  slug: undefined, // If no specific slug is needed, leave it as an empty string
+});
+
 
 function Hero() {
   return (
@@ -26,7 +29,7 @@ function Hero() {
               Our new forum is now available!
               <ChevronRightIcon className="size-4" />
             </Link>
-          } 
+          }
           filled
         />
         <div className="pb-24 pt-16 sm:pb-32 sm:pt-24 md:pb-48 md:pt-32">
@@ -139,8 +142,8 @@ export default function Home() {
           <FeatureSection />
         </div>
       </main>
-      
-      <Footer filled/>
+
+      <Footer filled />
     </div>
   )
 }

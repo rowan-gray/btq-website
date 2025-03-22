@@ -6,6 +6,16 @@ import { ArrowLongLeftIcon } from "@heroicons/react/16/solid";
 import RSSParser from "rss-parser";
 import DOMPurify from "isomorphic-dompurify";
 import parse from 'html-react-parser';
+import type { Metadata } from 'next';
+import { createPageMetadata } from "../../layout";
+
+export const generateMetadata = ({ params }: { params: { number: number } }): Metadata => {
+    return createPageMetadata({
+        title: `Media Release ${params.number}`,
+        description: 'Stay informed with the latest official media releases from Better Transport Queensland—covering public, active, and sustainable transport updates fresh from the source!',
+        slug: `releases/${params.number.toString()}`,
+    });
+};
 
 export async function generateStaticParams() {
     const parser = new RSSParser();
