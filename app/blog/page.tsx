@@ -5,6 +5,14 @@ import { Navbar } from "@/components/navbar";
 import { Heading, Lead } from "@/components/text";
 import React from "react";
 import RSSParser from "rss-parser";
+import type { Metadata } from 'next';
+import { createPageMetadata } from "../layout";
+
+export const metadata: Metadata = createPageMetadata({
+    title: 'Blog',
+    description: 'Explore the Better Transport Queensland blog, where engaged community members share their opinions and insights on public, active, and sustainable transport (not official policy). Stay informed and join the conversation!',
+    slug: 'blog',
+});
 
 async function fetchPosts() {
     const parser = new RSSParser();
@@ -41,7 +49,7 @@ export default async function Page() {
             <Container>
                 <Navbar />
             </Container>
-            <Snippets/>
+            <Snippets />
             <Footer />
         </main>
     );

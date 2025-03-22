@@ -6,7 +6,61 @@ export const metadata: Metadata = {
     template: '%s - Better Transport Queensland',
     default: 'Better Transport Queensland',
   },
-}
+  openGraph: {
+    title: {
+      template: '%s - Better Transport Queensland',
+      default: 'Better Transport Queensland',
+    },
+  },
+  twitter: {
+    title: {
+      template: '%s - Better Transport Queensland',
+      default: 'Better Transport Queensland',
+    },
+  },
+  // Robots metadata
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    noimageindex: false,
+    'max-snippet': -1,
+    'max-image-preview': 'large',
+    'max-video-preview': -1,
+  },
+};
+
+export const createPageMetadata = (params: { title: string | undefined, description: string, slug: string | undefined }): Metadata => {
+  return {
+    title: params.title ?? 'Better Transport Queensland',
+    description: params.description,
+    alternates: {
+      canonical: `https://bettertransportqueensland.org/${params.slug}`,
+    },
+    openGraph: {
+      title: params.title ?? 'Better Transport Queensland',
+      description: params.description,
+      siteName: 'Better Transport Queensland',
+      url: `https://bettertransportqueensland.org${params.slug ? `/${params.slug}` : ''}`,
+      images: [
+        {
+          url: 'https://bettertransportqueensland.org/banner.png',
+          width: 1200,
+          height: 630,
+          alt: 'Better Transport Queensland Banner',
+        },
+      ],
+      locale: 'en_AU',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: params.title ?? 'Better Transport Queensland',
+      description: params.description,
+      images: ['https://bettertransportqueensland.org/banner.png'],
+    },
+  };
+};
 
 export default function RootLayout({
   children,

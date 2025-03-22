@@ -5,6 +5,14 @@ import { Navbar } from "@/components/navbar";
 import { Heading, Lead } from "@/components/text";
 import React from "react";
 import RSSParser from "rss-parser";
+import type { Metadata } from 'next'
+import { createPageMetadata } from "../layout";
+
+export const metadata: Metadata = createPageMetadata({
+    title: 'Media Releases',
+    description: 'Stay informed with the latest official media releases from Better Transport Queensland—covering public, active, and sustainable transport updates fresh from the source!',
+    slug: 'releases',
+});
 
 async function fetchPosts() {
     const parser = new RSSParser();
@@ -41,7 +49,7 @@ export default async function Page() {
             <Container>
                 <Navbar />
             </Container>
-            <Snippets/>
+            <Snippets />
             <Footer />
         </main>
     );
