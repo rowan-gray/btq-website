@@ -61,9 +61,9 @@ function UpcomingEvents() {
   return (
     <div>
       <Container>
-        <Heading as="h1">2025 Policy Platform - Match 6th</Heading>
+        <Heading as="h1">2025 Policy Platform - April 6th</Heading>
         <Lead className="mt-6 max-w-3xl">
-          Join us for our inaugural policy platform on March 6th at Kenmore
+          Join us for our inaugural policy platform on April 6th at Kenmore
           Library! This is your opportunity to shape the future of transport in
           Queensland and make your voice heard.
         </Lead>
@@ -87,12 +87,12 @@ function FeatureSection() {
           Empowering Queenslanders to Shape the Future of Transport!
         </Heading>
         <Lead className="mt-6 max-w-3xl">
-          We’re on a mission to improve transport throughout Queensland. We
+          We&apos;re on a mission to improve transport throughout Queensland. We
           advocate for public and active transport as well as regional transport
           and freight rail.
         </Lead>
-        <section className="mt-16 grid grid-cols-1 lg:grid-cols-2">
-          <div className="max-w-lg space-y-6">
+        <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:space-x-8">
+          <div className="space-y-6 lg:max-w-lg">
             {/* Who are we? */}
             <div className="rounded-lg bg-white p-6 shadow-md">
               <h2 className="border-b border-gray-200 pb-2 text-2xl font-medium tracking-tight">
@@ -111,13 +111,14 @@ function FeatureSection() {
                 Our goals
               </h2>
               <p className="text-md/6 mt-3 text-gray-600">
-                We believe Queensland’s brighter future starts with world-class
-                public, active, and freight transport systems. Our goal is to
-                shift the narrative on Queensland&apos;s transport away from
-                car-centric ideologies and towards research-driven investments
-                in cutting-edge transport solutions.
+                We believe Queensland&apos;s brighter future starts with
+                world-class public, active, and freight transport systems. Our
+                goal is to shift the narrative on Queensland&apos;s transport
+                away from car-centric ideologies and towards research-driven
+                investments in cutting-edge transport solutions.
               </p>
             </div>
+
             {/* Our mission */}
             <div className="space-y-6 rounded-lg bg-white p-6 shadow-md">
               <h2 className="border-b border-gray-200 pb-2 text-2xl font-medium tracking-tight">
@@ -157,7 +158,7 @@ function FeatureSection() {
                     to protecting the environment and creating a sustainable
                     future. Freight transportation by heavy rail is
                     significantly more efficient than by single B-doubles.
-                    Prioritizing key freight rail corridors, such as the North
+                    Prioritising key freight rail corridors, such as the North
                     Coast Line, can make a transformative difference.
                   </p>
                 </div>
