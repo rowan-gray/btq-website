@@ -1,11 +1,10 @@
-import { createPageMetadata } from '@/app/layout'
+import { createPageMetadata, fetchRSSFeedWithCache } from '@/app/layout'
 import { Card } from '@/components/card'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead } from '@/components/text'
 import type { Metadata } from 'next'
-import RSSParser from 'rss-parser'
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Media Releases',
@@ -14,9 +13,11 @@ export const metadata: Metadata = createPageMetadata({
   slug: 'releases',
 })
 
+const cacheKey = 'media-feed'
+
 async function fetchPosts() {
-  const parser = new RSSParser()
-  const feed = await parser.parseURL(
+  const feed = await fetchRSSFeedWithCache(
+    cacheKey,
     'https://forum.bettertransportqueensland.org/c/media/media-releases/11.rss',
   )
   return feed.items || []
@@ -31,8 +32,17 @@ async function Snippets() {
         Stay up to date with our latest media releases.
       </Lead>
       <ul className="mt-3">
-        {posts.map((post, i) => (
-          <Card key={i} link={'/releases/' + (i + 1)}>
+        {posts.map((post: any, i: number) => (
+          <Card
+            key={i}
+            link={
+              '/releases/' +
+              post.link.replace(
+                'https://forum.bettertransportqueensland.org/t',
+                '',
+              )
+            }
+          >
             <Lead>{post.title}</Lead>
             <div className="mb-2">
               @{post.creator} {new Date(post.pubDate || '').toLocaleString()}

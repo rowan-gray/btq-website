@@ -1,5 +1,32 @@
 import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
+import NodeCache from 'node-cache'
+import RSSParser from 'rss-parser'
+
+export const cache = new NodeCache({ stdTTL: 900, checkperiod: 120 }) // 900 seconds = 15 minutes
+
+export const fetchRSSFeedWithCache = async (
+  cacheKey: string,
+  url: string,
+): Promise<any | null> => {
+  if (cache.has(cacheKey)) {
+    console.log('Cache hit') // Debug: Cache was used
+    return cache.get(cacheKey)
+  } else {
+    console.log('Cache miss') // Debug: Cache wasn't used
+
+    const parser = new RSSParser()
+
+    try {
+      const response = await parser.parseURL(url)
+      cache.set(cacheKey, response) // Cache the feed for 15 minutes
+      return response
+    } catch (error) {
+      console.error('Failed to fetch RSS feed:', error) // Log the error for debugging
+      return null // Gracefully return null in case of an error
+    }
+  }
+}
 
 export const metadata: Metadata = {
   title: {

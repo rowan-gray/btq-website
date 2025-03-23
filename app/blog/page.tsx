@@ -1,11 +1,11 @@
-import { createPageMetadata } from '@/app/layout'
+import { createPageMetadata, fetchRSSFeedWithCache } from '@/app/layout'
+
 import { Card } from '@/components/card'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead } from '@/components/text'
 import type { Metadata } from 'next'
-import RSSParser from 'rss-parser'
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Blog',
@@ -14,9 +14,11 @@ export const metadata: Metadata = createPageMetadata({
   slug: 'blog',
 })
 
+const cacheKey = 'blog-feed'
+
 async function fetchPosts() {
-  const parser = new RSSParser()
-  const feed = await parser.parseURL(
+  const feed = await fetchRSSFeedWithCache(
+    cacheKey,
     'https://forum.bettertransportqueensland.org/c/media/blog/57.rss',
   )
   return feed.items || []
@@ -31,8 +33,17 @@ async function Snippets() {
         See thoughts from the BTQ Community.
       </Lead>
       <ul className="mt-3">
-        {posts.map((post, i) => (
-          <Card key={i} link={'/blog/' + (i + 1)}>
+        {posts.map((post: any, i: number) => (
+          <Card
+            key={i}
+            link={
+              '/blog/' +
+              post.link.replace(
+                'https://forum.bettertransportqueensland.org/t',
+                '',
+              )
+            }
+          >
             <Lead>{post.title}</Lead>
             <div className="mb-2">
               @{post.creator} {new Date(post.pubDate || '').toLocaleString()}
