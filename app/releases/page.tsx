@@ -6,6 +6,8 @@ import { Navbar } from '@/components/navbar'
 import { Heading, Lead } from '@/components/text'
 import type { Metadata } from 'next'
 import RSSParser from 'rss-parser'
+import parse, * as parser from 'html-react-parser'
+import DOMPurify from 'isomorphic-dompurify'
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Media Releases',
@@ -24,6 +26,7 @@ async function fetchPosts() {
 
 async function Snippets() {
   const posts = await fetchPosts()
+  posts.pop()
   return (
     <Container className="mb-16 mt-16">
       <Heading as="h1">Media Releases</Heading>
@@ -37,7 +40,15 @@ async function Snippets() {
             <div className="mb-2">
               @{post.creator} {new Date(post.pubDate || '').toLocaleString()}
             </div>
-            <div>{post.contentSnippet?.split('\n').slice(0, -2).join(' ')}</div>
+            <div>
+                {parse(
+                  DOMPurify.sanitize(
+                  (post.content || '')
+                    .replace(/<h1>[\s\S]*?<\/h1>/gi, '')
+                    .replace(/<em>[\s\S]*?<\/em>/gi, '')
+                    .replace(/alt=".*?"/gi, '')
+                  ).match(/<div[^>]*data-wrap="summary"[^>]*>([\s\S]*?)<\/div>/i)?.[0] || '')}
+            </div>
           </Card>
         ))}
       </ul>
@@ -47,11 +58,13 @@ async function Snippets() {
 
 export default async function Page() {
   return (
-    <main className="overflow-hidden">
+    <main className="flex min-h-screen flex-col overflow-hidden">
       <Container>
-        <Navbar />
+      <Navbar />
       </Container>
-      <Snippets />
+      <div className="flex-grow">
+        <Snippets />
+      </div>
       <Footer />
     </main>
   )

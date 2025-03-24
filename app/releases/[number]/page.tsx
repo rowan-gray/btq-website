@@ -61,9 +61,15 @@ function renderWithTailwind(html: string) {
             node.attribs.class += ' my-6 border-t border-gray-300'
             break
           case 'a':
-            node.attribs.class ||= ''
-            node.attribs.class +=
-              ' text-blue-500 underline hover:text-blue-600'
+            if (
+              node.children &&
+              node.children.some(child => child instanceof parser.Element && child.name === 'img')
+            ) {
+              delete node.attribs.href
+            } else {
+              node.attribs.class ||= ''
+              node.attribs.class += ' text-blue-500 underline hover:text-blue-600'
+            }
             break
         }
       }
