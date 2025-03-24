@@ -4,10 +4,10 @@ import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead } from '@/components/text'
 import { ArrowLongLeftIcon } from '@heroicons/react/16/solid'
-import parse from 'html-react-parser'
 import DOMPurify from 'isomorphic-dompurify'
 import type { Metadata } from 'next'
 import RSSParser from 'rss-parser'
+import parse, * as parser from 'html-react-parser'
 
 export const generateMetadata = ({
   params,
@@ -31,6 +31,47 @@ export async function generateStaticParams() {
   return items.map((_, i) => ({ number: (i + 1).toString() }))
 }
 
+function renderWithTailwind(html: string) {
+  return parse(html, {
+    replace: (node: parser.DOMNode) => {
+      if (node instanceof parser.Element) {
+        switch (node.name) {
+          case 'h1':
+            node.attribs.class ||= ''
+            node.attribs.class += ' mb-2 text-3xl font-bold'
+            break
+          case 'h2':
+            node.attribs.class ||= ''
+            node.attribs.class += ' mb-2 text-2xl font-bold'
+            break
+          case 'h3':
+            node.attribs.class ||= ''
+            node.attribs.class += ' mb-2 text-xl font-bold'
+            break
+          case 'p':
+            node.attribs.class ||= ''
+            node.attribs.class += ' mb-4'
+            break
+          case 'img':
+            node.attribs.class ||= ''
+            node.attribs.class += ' my-4 rounded-md shadow-md'
+            break
+          case 'hr':
+            node.attribs.class ||= ''
+            node.attribs.class += ' my-6 border-t border-gray-300'
+            break
+          case 'a':
+            node.attribs.class ||= ''
+            node.attribs.class +=
+              ' text-blue-500 underline hover:text-blue-600'
+            break
+        }
+      }
+      return node
+    },
+  })
+}
+
 export default async function Page({
   params: { number },
 }: {
@@ -42,6 +83,7 @@ export default async function Page({
   )
   const items = feed.items || []
   const post = items[Number(number) - 1]
+  const cleanHtml = DOMPurify.sanitize(post.content || '')
   return (
     <main className="overflow-hidden">
       <Container>
@@ -60,7 +102,7 @@ export default async function Page({
           <ArrowLongLeftIcon className="size-5 text-pink-400" /> Go back to
           Media Releases
         </a>
-        <div>{parse(DOMPurify.sanitize(post.content || ''))}</div>
+        <div>{renderWithTailwind(cleanHtml)}</div>
       </Container>
       <Footer />
     </main>
