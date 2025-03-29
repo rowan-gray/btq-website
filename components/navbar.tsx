@@ -1,12 +1,12 @@
 'use client'
 
+import { Link } from '@/components/link'
+import { Logo } from '@/components/logo'
 import { Disclosure } from '@headlessui/react'
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { Link } from './link'
-import { Logo } from './logo'
 
 const links = [
   { href: 'https://forum.bettertransportqueensland.org', label: 'Forum' },

@@ -1,13 +1,10 @@
 import { createPageMetadata } from '@/app/layout'
-import { Card } from '@/components/card'
 import { Container } from '@/components/container'
+import { Snippets } from '@/components/feed-snippets'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead } from '@/components/text'
 import type { Metadata } from 'next'
-import RSSParser from 'rss-parser'
-import parse, * as parser from 'html-react-parser'
-import DOMPurify from 'isomorphic-dompurify'
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Media Releases',
@@ -16,54 +13,28 @@ export const metadata: Metadata = createPageMetadata({
   slug: 'releases',
 })
 
-async function fetchPosts() {
-  const parser = new RSSParser()
-  const feed = await parser.parseURL(
-    'https://forum.bettertransportqueensland.org/c/media/media-releases/11.rss',
-  )
-  return feed.items || []
-}
+const cacheKey = 'media-feed'
+const feedUrl =
+  'https://forum.bettertransportqueensland.org/c/media/media-releases/11.rss'
 
-async function Snippets() {
-  const posts = await fetchPosts()
-  posts.pop()
-  return (
-    <Container className="mb-16 mt-16">
-      <Heading as="h1">Media Releases</Heading>
-      <Lead className="mt-6 max-w-3xl">
-        Stay up to date with our latest media releases.
-      </Lead>
-      <ul className="mt-3">
-        {posts.map((post, i) => (
-          <Card key={i} link={'/releases/' + (i + 1)}>
-            <Lead>{post.title}</Lead>
-            <div className="mb-2">
-              @{post.creator} {new Date(post.pubDate || '').toLocaleString()}
-            </div>
-            <div>
-                {parse(
-                  DOMPurify.sanitize(
-                  (post.content || '')
-                    .replace(/<h1>[\s\S]*?<\/h1>/gi, '')
-                    .replace(/<em>[\s\S]*?<\/em>/gi, '')
-                    .replace(/alt=".*?"/gi, '')
-                  ).match(/<div[^>]*data-wrap="summary"[^>]*>([\s\S]*?)<\/div>/i)?.[0] || '')}
-            </div>
-          </Card>
-        ))}
-      </ul>
-    </Container>
-  )
-}
-
-export default async function Page() {
+export default function Page() {
   return (
     <main className="flex min-h-screen flex-col overflow-hidden">
       <Container>
-      <Navbar />
+        <Navbar />
       </Container>
       <div className="flex-grow">
-        <Snippets />
+        <Container className="mb-16 mt-16">
+          <Heading as="h1">Media Releases</Heading>
+          <Lead className="mt-6 max-w-3xl">
+            Stay up to date with our latest media releases.
+          </Lead>
+          <Snippets
+            cacheKey={cacheKey}
+            feedUrl={feedUrl}
+            redirectRoute="releases"
+          />
+        </Container>
       </div>
       <Footer />
     </main>

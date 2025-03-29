@@ -1,5 +1,8 @@
 'use client'
 
+import { Container } from '@/components/container'
+import { Link } from '@/components/link'
+import { Heading } from '@/components/text'
 import * as Headless from '@headlessui/react'
 import { ArrowLongRightIcon } from '@heroicons/react/20/solid'
 import { clsx } from 'clsx'
@@ -13,34 +16,31 @@ import {
 } from 'framer-motion'
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import useMeasure, { type RectReadOnly } from 'react-use-measure'
-import { Container } from './container'
-import { Link } from './link'
-import { Heading } from './text'
 
 const testimonials = [
   {
     img: '/committee/president.png',
     name: 'Rowan G',
     title: 'President',
-    email: "president@bettertransportqueensland.org"
+    email: 'president@bettertransportqueensland.org',
   },
   {
     img: '/committee/treasurer.png',
     name: 'Marc ',
     title: 'Treasurer',
-    email: "treasurer@bettertransportqueensland.org"
+    email: 'treasurer@bettertransportqueensland.org',
   },
   {
     img: '/committee/secretary.png',
     name: 'Peter V',
     title: 'Secretary',
-    email: "secretary@bettertransportqueensland.org"
+    email: 'secretary@bettertransportqueensland.org',
   },
   {
     img: '/committee/webmaster.png',
     name: 'Tristan D',
     title: 'Webmaster',
-    email: "webmaster@bettertransportqueensland.org"
+    email: 'webmaster@bettertransportqueensland.org',
   },
 ]
 
@@ -114,7 +114,10 @@ function CommitteeCard({
         <figcaption className="mt-6 pt-6">
           <p className="text-sm/6 font-medium text-white">{name}</p>
           <p className="text-sm/6 font-medium">
-            <a href={`mailto:${email}`} className="text-pink-400 hover:underline">
+            <a
+              href={`mailto:${email}`}
+              className="text-pink-400 hover:underline"
+            >
               {title}
             </a>
           </p>
@@ -187,8 +190,7 @@ export function Committee() {
             scrollX={scrollX}
             onClick={() => scrollTo(testimonialIndex)}
             email={email}
-          >
-          </CommitteeCard>
+          ></CommitteeCard>
         ))}
         <div className="w-[42rem] shrink-0 sm:w-[54rem]" />
       </div>

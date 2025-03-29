@@ -91,8 +91,8 @@ function FeatureSection() {
           advocate for public and active transport as well as regional transport
           and freight rail.
         </Lead>
-        <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:space-x-8">
-          <div className="space-y-6 lg:max-w-lg">
+        <section className="mt-16 grid grid-cols-1 lg:grid-cols-2">
+          <div className="space-y-6 lg:mr-6">
             {/* Who are we? */}
             <div className="rounded-lg bg-white p-6 shadow-md">
               <h2 className="border-b border-gray-200 pb-2 text-2xl font-medium tracking-tight">
@@ -179,7 +179,7 @@ function FeatureSection() {
               </div>
             </div>
           </div>
-          <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
+          <div className="pt-12 lg:row-span-2 lg:ml-6">
             <div className="-mx-8 grid grid-cols-2 gap-4 sm:-mx-16 sm:grid-cols-4 lg:mx-0 lg:grid-cols-2 lg:gap-4 xl:gap-8">
               <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
                 <Image
@@ -218,7 +218,7 @@ function FeatureSection() {
                 />
               </div>
             </div>
-            <div className="pt-24">
+            <div className="pt-12">
               <Heading as="h2">Join the conversation on the BTQ Forum!</Heading>
               <Lead className="mt-6 max-w-3xl">
                 Stay up-to-date with the latest insights directly from the
@@ -229,7 +229,7 @@ function FeatureSection() {
               <Button
                 className="mt-6"
                 variant="primary"
-                href="https://forum.bettertransportqueensland.org/t/notice-of-general-special-general-and-policy-meetings-april-6th-2025/346"
+                href="https://forum.bettertransportqueensland.org"
               >
                 Join the conversation
               </Button>

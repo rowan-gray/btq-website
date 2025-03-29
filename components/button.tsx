@@ -1,6 +1,6 @@
+import { Link } from '@/components/link'
 import * as Headless from '@headlessui/react'
 import { clsx } from 'clsx'
-import { Link } from './link'
 
 const variants = {
   primary: clsx(
@@ -28,9 +28,12 @@ const variants = {
   ),
 }
 
-type ButtonProps = { variant?: keyof typeof variants } & (
-  | React.ComponentPropsWithoutRef<typeof Link>
-  | (Headless.ButtonProps & { href?: undefined })
+type ButtonProps = {
+  variant?: keyof typeof variants
+  className?: string
+} & (
+  | ({ href: string } & React.ComponentPropsWithoutRef<typeof Link>)
+  | ({ href?: undefined } & Headless.ButtonProps)
 )
 
 export function Button({
@@ -40,9 +43,9 @@ export function Button({
 }: ButtonProps) {
   className = clsx(className, variants[variant])
 
-  if (typeof props.href === 'undefined') {
+  if (props.href !== undefined) {
+    return <Link {...props} className={className} />
+  } else {
     return <Headless.Button {...props} className={className} />
   }
-
-  return <Link {...props} className={className} />
 }
