@@ -22,7 +22,7 @@ export const fetchRSSFeedWithCache = async (
       cache.set(cacheKey, response) // Cache the feed for 15 minutes
       return response
     } catch (error) {
-      console.error('Failed to fetch RSS feed:', error) // Log the error for debugging
+      console.warn('Failed to fetch RSS feed:', error) // Log the error for debugging
       return null // Gracefully return null in case of an error
     }
   }
@@ -97,7 +97,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scrollbar-gutter-stable">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

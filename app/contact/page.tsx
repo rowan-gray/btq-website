@@ -27,7 +27,7 @@ function Header() {
           <p className="mt-4 text-sm text-gray-600">
             For any general enquiries or questions, please contact us at{' '}
             <a
-              href="mailto:enquries@btq.org.au"
+              href="mailto:enquiries@btq.org.au"
               className="text-pink-500 hover:underline"
             >
               enquiries@btq.org.au

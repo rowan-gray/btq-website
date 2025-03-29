@@ -1,6 +1,6 @@
-import { createPageMetadata, fetchRSSFeedWithCache } from '@/app/layout'
-import { Card } from '@/components/card'
+import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/container'
+import { Snippets } from '@/components/feed-snippets'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead } from '@/components/text'
@@ -14,54 +14,28 @@ export const metadata: Metadata = createPageMetadata({
 })
 
 const cacheKey = 'media-feed'
+const feedUrl =
+  'https://forum.bettertransportqueensland.org/c/media/media-releases/11.rss'
 
-async function fetchPosts() {
-  const feed = await fetchRSSFeedWithCache(
-    cacheKey,
-    'https://forum.bettertransportqueensland.org/c/media/media-releases/11.rss',
-  )
-  return feed.items || []
-}
-
-async function Snippets() {
-  const posts = await fetchPosts()
+export default function Page() {
   return (
-    <Container className="mb-16 mt-16">
-      <Heading as="h1">Media Releases</Heading>
-      <Lead className="mt-6 max-w-3xl">
-        Stay up to date with our latest media releases.
-      </Lead>
-      <ul className="mt-3">
-        {posts.map((post: any, i: number) => (
-          <Card
-            key={i}
-            link={
-              '/releases/' +
-              post.link.replace(
-                'https://forum.bettertransportqueensland.org/t',
-                '',
-              )
-            }
-          >
-            <Lead>{post.title}</Lead>
-            <div className="mb-2">
-              @{post.creator} {new Date(post.pubDate || '').toLocaleString()}
-            </div>
-            <div>{post.contentSnippet?.split('\n').slice(0, -2).join(' ')}</div>
-          </Card>
-        ))}
-      </ul>
-    </Container>
-  )
-}
-
-export default async function Page() {
-  return (
-    <main className="overflow-hidden">
+    <main className="flex min-h-screen flex-col overflow-hidden">
       <Container>
         <Navbar />
       </Container>
-      <Snippets />
+      <div className="flex-grow">
+        <Container className="mb-16 mt-16">
+          <Heading as="h1">Media Releases</Heading>
+          <Lead className="mt-6 max-w-3xl">
+            Stay up to date with our latest media releases.
+          </Lead>
+          <Snippets
+            cacheKey={cacheKey}
+            feedUrl={feedUrl}
+            redirectRoute="releases"
+          />
+        </Container>
+      </div>
       <Footer />
     </main>
   )
