@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 
 function Header() {
   return (
-    <Container className="mb-16 mt-16">
+    <Container className="mt-16 mb-16">
       <Heading as="h1">Contact us</Heading>
       <Lead className="mt-6 max-w-3xl">
         Get in touch with us to learn more about our mission and how you can
@@ -53,11 +53,13 @@ function Header() {
 
 export default function Company() {
   return (
-    <main className="overflow-hidden">
+    <main className="flex min-h-screen flex-col overflow-hidden">
       <Container>
         <Navbar />
       </Container>
-      <Header />
+      <div className="flex-grow">
+        <Header />
+      </div>
       <Footer />
     </main>
   )
