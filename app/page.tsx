@@ -51,33 +51,33 @@ function Hero() {
   )
 }
 
-function UpcomingEvents() {
-  const endDate = new Date('2025-04-06T17:00:00+10:00')
+// function UpcomingEvents() {
+//   const endDate = new Date('2025-04-06T17:00:00+10:00')
 
-  if (Date.now() > endDate.getTime()) {
-    return
-  }
+//   if (Date.now() > endDate.getTime()) {
+//     return
+//   }
 
-  return (
-    <div>
-      <Container>
-        <Heading as="h1">2025 Policy Platform - April 6th</Heading>
-        <Lead className="mt-6 max-w-3xl">
-          Join us for our inaugural policy platform on April 6th at Kenmore
-          Library! This is your opportunity to shape the future of transport in
-          Queensland and make your voice heard.
-        </Lead>
-        <Button
-          className="mt-6"
-          variant="primary"
-          href="https://forum.bettertransportqueensland.org/t/notice-of-general-special-general-and-policy-meetings-april-6th-2025/346"
-        >
-          Learn more here
-        </Button>
-      </Container>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <Container>
+//         <Heading as="h1">2025 Policy Platform - April 6th</Heading>
+//         <Lead className="mt-6 max-w-3xl">
+//           Join us for our inaugural policy platform on April 6th at Kenmore
+//           Library! This is your opportunity to shape the future of transport in
+//           Queensland and make your voice heard.
+//         </Lead>
+//         <Button
+//           className="mt-6"
+//           variant="primary"
+//           href="https://forum.bettertransportqueensland.org/t/notice-of-general-special-general-and-policy-meetings-april-6th-2025/346"
+//         >
+//           Learn more here
+//         </Button>
+//       </Container>
+//     </div>
+//   )
+// }
 
 function FeatureSection() {
   return (
