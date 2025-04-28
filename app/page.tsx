@@ -247,7 +247,6 @@ export default function Home() {
       <Hero />
       <main>
         <div className="space-y-32 pb-24 pt-32">
-          <UpcomingEvents />
           <FeatureSection />
         </div>
       </main>
