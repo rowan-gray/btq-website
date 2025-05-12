@@ -6,13 +6,8 @@ name: Docker
 # documentation.
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-    types: [ "closed" ]  # Ensures workflow runs when PRs are merged
-  merge_group:
-    branches: [ "main" ]  # Runs on merges in merge queue
+  release:
+    types: [released]
 
 env:
   # Use docker.io for Docker Hub if empty
