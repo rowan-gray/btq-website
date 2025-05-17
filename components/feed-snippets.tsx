@@ -1,7 +1,7 @@
 import { fetchRSSFeedWithCache, type RSSItem } from '@/app/layout'
 import { Card } from '@/components/card'
 import { LocalTime } from '@/components/local-time'
-import { Lead } from '@/components/text'
+import { Subheading } from '@/components/text'
 import parse, * as parser from 'html-react-parser'
 import DOMPurify from 'isomorphic-dompurify'
 import type { ReactNode } from 'react'
@@ -100,7 +100,7 @@ export async function Snippets(params: {
 
             {/* Title Section */}
             <div>
-              <Lead>{post.title}</Lead>
+              <Subheading>{post.title}</Subheading>
               <div className="mb-2">
                 {params.showAuthor ? <>@{post.creator} </> : null}
                 {<LocalTime date={new Date(post.pubDate || '')} />}
