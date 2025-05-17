@@ -94,16 +94,16 @@ export const createPageMetadata = (params: {
     title: params.title ?? 'Better Transport Queensland',
     description: params.description,
     alternates: {
-      canonical: `https://bettertransportqueensland.org/${params.slug}`,
+      canonical: `https://www.bettertransportqueensland.org${params.slug ? `/${params.slug}` : ''}`,
     },
     openGraph: {
       title: params.title ?? 'Better Transport Queensland',
       description: params.description,
       siteName: 'Better Transport Queensland',
-      url: `https://bettertransportqueensland.org${params.slug ? `/${params.slug}` : ''}`,
+      url: `https://www.bettertransportqueensland.org${params.slug ? `/${params.slug}` : ''}`,
       images: [
         {
-          url: 'https://bettertransportqueensland.org/banner.png',
+          url: 'https://www.bettertransportqueensland.org/banner.png',
           width: 1200,
           height: 630,
           alt: 'Better Transport Queensland Banner',
@@ -116,7 +116,7 @@ export const createPageMetadata = (params: {
       card: 'summary_large_image',
       title: params.title ?? 'Better Transport Queensland',
       description: params.description,
-      images: ['https://bettertransportqueensland.org/banner.png'],
+      images: ['https://www.bettertransportqueensland.org/banner.png'],
     },
   }
 }
