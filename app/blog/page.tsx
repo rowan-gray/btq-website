@@ -29,7 +29,7 @@ export default function Page() {
           <Lead className="mt-6 max-w-3xl">
             See thoughts from the BTQ Community.
           </Lead>
-          <Snippets categoryId={57} redirectRoute="blog" showAuthor />
+          <Snippets categoryId="57" redirectRoute="blog" showAuthor />
         </Container>
       </div>
       <Footer />

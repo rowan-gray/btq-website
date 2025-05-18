@@ -44,11 +44,11 @@ function TryGetDomWithDataWrapId(
 }
 
 export async function Snippets(params: {
-  categoryId: number
+  categoryId: string
   redirectRoute: string
   showAuthor?: boolean
 }) {
-  const posts = await fetchPosts(String(params.categoryId))
+  const posts = await fetchPosts(params.categoryId)
 
   // Remove the last post from the list
   posts.pop()
@@ -59,7 +59,7 @@ export async function Snippets(params: {
       No posts available at the moment. Please try again later.
     </p>
   ) : (
-    <ul className="mt-3">
+    <ul className="mt-3 flex flex-col gap-3">
       {posts.map((post: RSSItem, i: number) => (
         <Card
           key={i}
@@ -71,9 +71,9 @@ export async function Snippets(params: {
             )
           }
         >
-          <div className="flex flex-col gap-4 sm:flex-row lg:block">
+          <div className="flex flex-col items-center gap-4 lg:grid lg:grid-cols-[16rem_1fr]">
             {/* Image Section */}
-            <div className="w-full sm:mb-4 sm:max-w-64 lg:float-left lg:mr-4 lg:mb-1 lg:w-64">
+            <div className="flex w-full items-center justify-center lg:w-64">
               {TryGetDomWithDataWrapId(
                 post.content,
                 'summary-image',
@@ -83,7 +83,8 @@ export async function Snippets(params: {
                       switch (node.name) {
                         case 'img':
                           node.attribs.class ||= ''
-                          node.attribs.class += 'rounded-md shadow-md'
+                          node.attribs.class +=
+                            'w-full lg:w-64 h-auto rounded-md shadow-md object-contain'
                           break
                       }
                     }
@@ -100,18 +101,16 @@ export async function Snippets(params: {
               )}
             </div>
 
-            {/* Title Section */}
-            <div>
+            {/* Title & Summary Section */}
+            <div className="flex flex-col">
               <Subheading>{post.title}</Subheading>
               <div className="mb-2">
                 {params.showAuthor ? <>@{post.creator} </> : null}
                 {<LocalTime date={new Date(post.pubDate || '')} />}
               </div>
+              <div>{TryGetDomWithDataWrapId(post.content, 'summary')}</div>
             </div>
           </div>
-
-          {/* Summary Section */}
-          <div>{TryGetDomWithDataWrapId(post.content, 'summary')}</div>
         </Card>
       ))}
     </ul>
