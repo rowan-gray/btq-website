@@ -28,7 +28,7 @@ export default function Page() {
           <Lead className="mt-6 max-w-3xl">
             Stay up to date with our latest media releases.
           </Lead>
-          <Snippets categoryId={11} redirectRoute="releases" />
+          <Snippets categoryId="11" redirectRoute="releases" />
         </Container>
       </div>
       <Footer />

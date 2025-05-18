@@ -9,7 +9,7 @@ import parse, * as parser from 'html-react-parser'
 import DOMPurify from 'isomorphic-dompurify'
 import type { ReactNode } from 'react'
 
-async function fetchPosts(categoryId: number): Promise<RSSItem[]> {
+async function fetchPosts(categoryId: string): Promise<RSSItem[]> {
   const feed = await fetchPostsFromCategory(categoryId)
   return feed?.items || []
 }
@@ -44,7 +44,7 @@ function TryGetDomWithDataWrapId(
 }
 
 export async function Snippets(params: {
-  categoryId: number
+  categoryId: string
   redirectRoute: string
   showAuthor?: boolean
 }) {
