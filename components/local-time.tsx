@@ -8,7 +8,7 @@ export function LocalTime({ date }: { date: Date | string | number }) {
   return (
     <Suspense key={hydrated ? 'local' : 'utc'}>
       <time dateTime={new Date(date).toISOString()}>
-        {new Date(date).toLocaleTimeString()}
+        {new Date(date).toLocaleString()}
         {hydrated ? '' : ' (UTC)'}
       </time>
     </Suspense>
