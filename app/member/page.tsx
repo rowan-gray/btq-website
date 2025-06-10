@@ -1,4 +1,5 @@
 import { createPageMetadata } from '@/app/layout'
+import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Gradient } from '@/components/gradient'
@@ -105,11 +106,9 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
           ))}
         </ul>
       </div>
-      <button className="absolute right-4 bottom-4 rounded-xl bg-pink-400 text-xs data-[hover]:bg-pink-600">
-        <Link href={tier.href} className="inline-block px-4 py-2 text-white">
-          {tier?.buttonText || 'Coming soon...'}
-        </Link>
-      </button>
+      <Button className="absolute right-4 bottom-4" size="small">
+        <Link href={tier.href}>{tier?.buttonText || 'Coming soon...'}</Link>
+      </Button>
     </div>
   )
 }
@@ -156,34 +155,30 @@ function FrequentlyAskedQuestions() {
         </Heading>
         <div className="mx-auto mt-16 mb-32 max-w-xl space-y-12">
           <dl>
-            <dt className="text-sm font-semibold">What is a member?</dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dt className="text-lg font-semibold">What is a member?</dt>
+            <dd className="text-md/6 mt-4">
               Members are financially committed users of the forum who would
               like to contribute to the running, maintenance, and decision
               making of the organisation.
             </dd>
           </dl>
           <dl>
-            <dt className="text-sm font-semibold">
+            <dt className="text-lg font-semibold">
               Am I a member if I sign up to the forum?
             </dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dd className="text-md/6 mt-4">
               There is a distinction between a logged-in user of the forum and a
               member of the organisation. Logged-in users are able to view more
               categories and topics than anonymous users, however they are
               unable to vote at annual general meetings or be a member of the
               working or executive committee.
             </dd>
-            <dd className="mt-4 text-sm/6 font-semibold text-gray-600">
-              You do need to be a paid member to access the member-only section
-              of the forum!
-            </dd>
           </dl>
           <dl>
-            <dt className="text-sm font-semibold">
+            <dt className="text-lg font-semibold">
               Why should I become a member?
             </dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dd className="text-md/6 mt-4">
               If you are a frequent user of the forum and believe in the goals
               and objectives of the organisation, we highly encourage you to
               become a member. Running the forum is costly, so we rely on paying
@@ -196,8 +191,8 @@ function FrequentlyAskedQuestions() {
             </dd>
           </dl>
           <dl>
-            <dt className="text-sm font-semibold">How are fees decided?</dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dt className="text-lg font-semibold">How are fees decided?</dt>
+            <dd className="text-md/6 mt-4">
               Membership fees are carefully considered by the Treasurer to
               ensure that we are able to keep the forum and organisation up and
               running.
