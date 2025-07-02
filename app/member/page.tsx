@@ -21,8 +21,7 @@ type Requirement = {
 }
 
 type Tier = {
-  name: 'Forum Member' | 'Concessional' | 'Ordinary'
-  slug: string
+  name: string
   description: string
   priceMonthly: number
   highlights: { description: string }[]
@@ -33,18 +32,16 @@ type Tier = {
 
 const tiers: Tier[] = [
   {
-    name: 'Forum Member' as const,
-    slug: 'forum',
-    description: 'Access to our forum and community.',
+    name: 'Join the Forum' as const,
+    description: 'Be part of the community.',
     priceMonthly: 0,
     highlights: [{ description: 'Create topics, reply, and more!' }],
     requirements: [{ description: 'None!' }],
-    buttonText: 'Join the forum',
+    buttonText: 'Join the Forum',
     href: 'https://forum.bettertransportqueensland.org',
   },
   {
     name: 'Concessional' as const,
-    slug: 'concession',
     description: 'Reduced pricing for eligible members.',
     priceMonthly: 30,
     highlights: [
@@ -68,7 +65,6 @@ const tiers: Tier[] = [
   },
   {
     name: 'Ordinary' as const,
-    slug: 'ordinary',
     description: 'Have a say in Better Transport Queensland!',
     priceMonthly: 50,
     highlights: [
@@ -81,7 +77,7 @@ const tiers: Tier[] = [
       { description: 'Support the objectives of the association' },
     ],
     buttonText: 'Become a Member',
-    href: 'https://forum.bettertransportqueensland.org/s/prod_SaquDOxU6azV7D',
+    href: 'https://forum.bettertransportqueensland.org/s/prod_SaqrRoJZ89kVjg',
   },
 ]
 
