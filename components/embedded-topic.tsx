@@ -143,7 +143,7 @@ export default async function EmbeddedTopic(params: {
         <ArrowLongLeftIcon className="size-5 text-pink-400" /> Go back to Media
         Releases
       </Link>
-      <div className="px-12">{renderWithTailwind(cleanHtml)}</div>
+      <div className="sm:px-8 lg:px-12">{renderWithTailwind(cleanHtml)}</div>
       <div className="mt-8 rounded-4xl bg-indigo-800 p-12 text-white selection:bg-pink-400 selection:text-indigo-800">
         <Heading as="h2" dark>
           {params.linkToTopic
