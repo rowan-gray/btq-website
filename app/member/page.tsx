@@ -7,6 +7,7 @@ import { Gradient } from '@/components/gradient'
 import { Link } from '@/components/link'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { MinusIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({
@@ -16,41 +17,69 @@ export const metadata: Metadata = createPageMetadata({
   slug: 'member',
 })
 
-const tiers = [
+type Requirement = {
+  description: string
+  options?: string[]
+}
+
+type Tier = {
+  name: string
+  description: string
+  priceMonthly: number
+  highlights: { description: string }[]
+  requirements: Requirement[]
+  buttonText: string
+  href: string
+}
+
+const tiers: Tier[] = [
   {
-    name: 'Forum Member' as const,
-    slug: 'forum',
-    description: 'Access to our forum and community.',
+    name: 'Join the Forum' as const,
+    description: 'Be part of the community.',
     priceMonthly: 0,
-    highlights: [{ description: 'None!' }],
-    buttonText: 'Join the forum',
+    highlights: [{ description: 'Create topics, reply, and more!' }],
+    requirements: [{ description: 'None!' }],
+    buttonText: 'Join the Forum',
     href: 'https://forum.bettertransportqueensland.org/signup',
   },
   {
     name: 'Concessional' as const,
-    slug: 'concession',
     description: 'Reduced pricing for eligible members.',
     priceMonthly: 30,
     highlights: [
-      { description: 'Over 18 years old' },
-      { description: 'Must support the objectives of the association' },
+      { description: 'Voting rights at general meetings' },
+      { description: "Access to the Member's Area of the forum" },
+      { description: 'Priority for site visits and events' },
+    ],
+    requirements: [
+      { description: 'Be 18 years of age or older' },
+      { description: 'Support the objectives of the association' },
       {
-        description:
-          'Be a current university student OR hold a Pensioner Concession Card',
+        description: 'Hold one of the following approved concession cards:',
+        options: [
+          'Government issued concession card',
+          'A student card issued by an Australian or New Zealand school or university',
+        ],
       },
     ],
-    href: 'https://forum.bettertransportqueensland.org',
+    buttonText: 'Become a Member',
+    href: 'https://forum.bettertransportqueensland.org/s/prod_SaquDOxU6azV7D',
   },
   {
     name: 'Ordinary' as const,
-    slug: 'ordinary',
     description: 'Have a say in Better Transport Queensland!',
     priceMonthly: 50,
     highlights: [
-      { description: 'Over 18 years old' },
-      { description: 'Must support the objectives of the association' },
+      { description: 'Voting rights at general meetings' },
+      { description: "Access to the Member's Area of the forum" },
+      { description: 'Priority for site visits and events' },
     ],
-    href: 'https://forum.bettertransportqueensland.org',
+    requirements: [
+      { description: 'Be 18 years of age or older' },
+      { description: 'Support the objectives of the association' },
+    ],
+    buttonText: 'Become a Member',
+    href: 'https://forum.bettertransportqueensland.org/s/prod_SaqrRoJZ89kVjg',
   },
 ]
 
@@ -100,15 +129,23 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </div>
       </div>
       <div className="mt-8 mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950">Requirements</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950">Benefits</h3>
         <ul className="mt-3 space-y-3">
-          {tier.highlights.map((props, featureIndex) => (
+          {tier.highlights?.map((props, featureIndex) => (
             <FeatureItem key={featureIndex} {...props} />
           ))}
         </ul>
       </div>
+      <div className="mb-8">
+        <h3 className="text-sm/6 font-medium text-gray-950">Requirements</h3>
+        <ul className="mt-3 space-y-1">
+          {tier.requirements?.map((requirement, featureIndex) => (
+            <RequirementItem key={featureIndex} requirement={requirement} />
+          ))}
+        </ul>
+      </div>
       <Button className="absolute right-4 bottom-4" size="small">
-        <Link href={tier.href}>{tier?.buttonText || 'Available July 1!'}</Link>
+        <Link href={tier.href}>{tier?.buttonText || 'Unavailable...'}</Link>
       </Button>
     </div>
   )
@@ -131,6 +168,32 @@ function FeatureItem({
       </span>
       {disabled && <span className="sr-only">Not included:</span>}
       {description}
+    </li>
+  )
+}
+
+function RequirementItem({ requirement }: { requirement: Requirement }) {
+  return (
+    <li className="flex flex-col gap-1 text-sm text-gray-950/75">
+      <div className="flex items-start gap-3">
+        <span className="inline-flex h-6 items-center">
+          <MinusIcon className="h-3.5 w-3.5 shrink-0 fill-gray-950/30" />
+        </span>
+        <span>{requirement.description}</span>
+      </div>
+
+      {requirement.options && (
+        <ol className="mt-1 ml-7 space-y-1 text-xs text-gray-700">
+          {requirement.options.map((option, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <span className="inline-flex h-4 items-center pt-[0.125rem]">
+                <MinusIcon className="h-2.5 w-2.5 shrink-0 fill-gray-700/30" />
+              </span>
+              <span>{option}</span>
+            </li>
+          ))}
+        </ol>
+      )}
     </li>
   )
 }
