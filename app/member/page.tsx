@@ -5,6 +5,7 @@ import { Gradient } from '@/components/gradient'
 import { Link } from '@/components/link'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead, Subheading } from '@/components/text'
+import { MinusIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({
@@ -14,47 +15,75 @@ export const metadata: Metadata = createPageMetadata({
   slug: 'member',
 })
 
-const tiers = [
+type Requirement = {
+  description: string
+  options?: string[]
+}
+
+type Tier = {
+  name: string
+  description: string
+  priceMonthly: number
+  highlights: { description: string }[]
+  requirements: Requirement[]
+  buttonText: string
+  href: string
+}
+
+const tiers: Tier[] = [
   {
-    name: 'Forum Member' as const,
-    slug: 'forum',
-    description: 'Access to our forum and community.',
+    name: 'Join the Forum' as const,
+    description: 'Be part of the community.',
     priceMonthly: 0,
-    highlights: [{ description: 'None!' }],
-    buttonText: 'Join the forum',
+    highlights: [{ description: 'Create topics, reply, and more!' }],
+    requirements: [{ description: 'None!' }],
+    buttonText: 'Join the Forum',
     href: 'https://forum.bettertransportqueensland.org',
   },
   {
     name: 'Concessional' as const,
-    slug: 'concession',
     description: 'Reduced pricing for eligible members.',
     priceMonthly: 30,
     highlights: [
-      { description: 'Over 18 years old' },
-      { description: 'Must support the objectives of the association' },
+      { description: 'Voting rights at general meetings' },
+      { description: "Access to the Member's Area of the forum" },
+      { description: 'Priority for site visits and events' },
+    ],
+    requirements: [
+      { description: 'Be 18 years of age or older' },
+      { description: 'Support the objectives of the association' },
       {
-        description:
-          'Be a current university student OR hold a Pensioner Concession Card',
+        description: 'Hold one of the following approved concession cards:',
+        options: [
+          'Government issued concession card',
+          'A student card issued by an Australian or New Zealand school or university',
+        ],
       },
     ],
-    href: 'https://forum.bettertransportqueensland.org',
+    buttonText: 'Become a Member',
+    href: 'https://forum.bettertransportqueensland.org/s/prod_SaquDOxU6azV7D',
   },
   {
     name: 'Ordinary' as const,
-    slug: 'ordinary',
     description: 'Have a say in Better Transport Queensland!',
     priceMonthly: 50,
     highlights: [
-      { description: 'Over 18 years old' },
-      { description: 'Must support the objectives of the association' },
+      { description: 'Voting rights at general meetings' },
+      { description: "Access to the Member's Area of the forum" },
+      { description: 'Priority for site visits and events' },
     ],
-    href: 'https://forum.bettertransportqueensland.org',
+    requirements: [
+      { description: 'Be 18 years of age or older' },
+      { description: 'Support the objectives of the association' },
+    ],
+    buttonText: 'Become a Member',
+    href: 'https://forum.bettertransportqueensland.org/s/prod_SaqrRoJZ89kVjg',
   },
 ]
 
 function Header() {
   return (
-    <Container className="mt-16">
+    <Container>
       <Heading as="h1">
         Influence change to improve transport throughout Queensland!
       </Heading>
@@ -98,18 +127,27 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </div>
       </div>
       <div className="mt-8 mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950">Requirements</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950">Benefits</h3>
         <ul className="mt-3 space-y-3">
-          {tier.highlights.map((props, featureIndex) => (
+          {tier.highlights?.map((props, featureIndex) => (
             <FeatureItem key={featureIndex} {...props} />
           ))}
         </ul>
       </div>
-      <button className="absolute right-4 bottom-4 rounded-xl bg-pink-400 text-xs data-[hover]:bg-pink-600">
-        <Link href={tier.href} className="inline-block px-4 py-2 text-white">
-          {tier?.buttonText || 'Coming soon...'}
-        </Link>
-      </button>
+      <div className="mb-8">
+        <h3 className="text-sm/6 font-medium text-gray-950">Requirements</h3>
+        <ul className="mt-3 space-y-1">
+          {tier.requirements?.map((requirement, featureIndex) => (
+            <RequirementItem key={featureIndex} requirement={requirement} />
+          ))}
+        </ul>
+      </div>
+      <Link
+        href={tier.href}
+        className="absolute right-4 bottom-4 rounded-xl bg-pink-400 px-4 py-2 text-xs text-white transition hover:bg-pink-600"
+      >
+        {tier?.buttonText || 'Coming soon...'}
+      </Link>
     </div>
   )
 }
@@ -135,6 +173,32 @@ function FeatureItem({
   )
 }
 
+function RequirementItem({ requirement }: { requirement: Requirement }) {
+  return (
+    <li className="flex flex-col gap-1 text-sm text-gray-950/75">
+      <div className="flex items-start gap-3">
+        <span className="inline-flex h-6 items-center">
+          <MinusIcon className="h-3.5 w-3.5 shrink-0 fill-gray-950/30" />
+        </span>
+        <span>{requirement.description}</span>
+      </div>
+
+      {requirement.options && (
+        <ol className="mt-1 ml-7 space-y-1 text-xs text-gray-700">
+          {requirement.options.map((option, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <span className="inline-flex h-4 items-center pt-[0.125rem]">
+                <MinusIcon className="h-2.5 w-2.5 shrink-0 fill-gray-700/30" />
+              </span>
+              <span>{option}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+    </li>
+  )
+}
+
 function PlusIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg viewBox="0 0 15 15" aria-hidden="true" {...props}>
@@ -156,34 +220,30 @@ function FrequentlyAskedQuestions() {
         </Heading>
         <div className="mx-auto mt-16 mb-32 max-w-xl space-y-12">
           <dl>
-            <dt className="text-sm font-semibold">What is a member?</dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dt className="text-lg font-semibold">What is a member?</dt>
+            <dd className="text-md/6 mt-4">
               Members are financially committed users of the forum who would
               like to contribute to the running, maintenance, and decision
               making of the organisation.
             </dd>
           </dl>
           <dl>
-            <dt className="text-sm font-semibold">
+            <dt className="text-lg font-semibold">
               Am I a member if I sign up to the forum?
             </dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dd className="text-md/6 mt-4">
               There is a distinction between a logged-in user of the forum and a
               member of the organisation. Logged-in users are able to view more
               categories and topics than anonymous users, however they are
               unable to vote at annual general meetings or be a member of the
               working or executive committee.
             </dd>
-            <dd className="mt-4 text-sm/6 font-semibold text-gray-600">
-              You do need to be a paid member to access the member-only section
-              of the forum!
-            </dd>
           </dl>
           <dl>
-            <dt className="text-sm font-semibold">
+            <dt className="text-lg font-semibold">
               Why should I become a member?
             </dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dd className="text-md/6 mt-4">
               If you are a frequent user of the forum and believe in the goals
               and objectives of the organisation, we highly encourage you to
               become a member. Running the forum is costly, so we rely on paying
@@ -196,8 +256,8 @@ function FrequentlyAskedQuestions() {
             </dd>
           </dl>
           <dl>
-            <dt className="text-sm font-semibold">How are fees decided?</dt>
-            <dd className="mt-4 text-sm/6 text-gray-600">
+            <dt className="text-lg font-semibold">How are fees decided?</dt>
+            <dd className="text-md/6 mt-4">
               Membership fees are carefully considered by the Treasurer to
               ensure that we are able to keep the forum and organisation up and
               running.
@@ -209,7 +269,7 @@ function FrequentlyAskedQuestions() {
   )
 }
 
-export default function Pricing() {
+export default function MembershipPage() {
   return (
     <main className="overflow-hidden">
       <Container>
