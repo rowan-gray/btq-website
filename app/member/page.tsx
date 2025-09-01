@@ -85,7 +85,7 @@ const tiers: Tier[] = [
 
 function Header() {
   return (
-    <Container className="mt-16">
+    <Container>
       <Heading as="h1">
         Influence change to improve transport throughout Queensland!
       </Heading>
@@ -309,7 +309,7 @@ function FrequentlyAskedQuestions() {
     </Container>
   )
 }
-export default function Pricing() {
+export default function MembershipPage() {
   return (
     <main className="overflow-hidden">
       <Container>

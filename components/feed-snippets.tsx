@@ -8,10 +8,44 @@ import {
 import parse, * as parser from 'html-react-parser'
 import DOMPurify from 'isomorphic-dompurify'
 import type { ReactNode } from 'react'
+import React from 'react'
 
 async function fetchPosts(categoryId: string): Promise<RSSItem[]> {
   const feed = await fetchPostsFromCategory(categoryId)
   return feed?.items || []
+}
+
+function stripBoldingAndEmphasis(node: React.ReactNode): React.ReactNode {
+  if (typeof node === 'string' || typeof node === 'number' || node == null) {
+    return node // plain text, number, or null — return as is
+  }
+
+  if (Array.isArray(node)) {
+    return node.map((child, i) => (
+      <React.Fragment key={i}>{stripBoldingAndEmphasis(child)}</React.Fragment>
+    ))
+  }
+
+  if (React.isValidElement(node)) {
+    // Narrow to a ReactElement so props is typed
+    const element = node as React.ReactElement<any>
+    const tag =
+      typeof element.type === 'string' ? element.type.toLowerCase() : null
+
+    // If it's a bold/emphasis tag, skip it and just render its children
+    if (tag && ['b', 'strong', 'em', 'i'].includes(tag)) {
+      return <>{stripBoldingAndEmphasis(element.props.children)}</>
+    }
+
+    // Otherwise, clone the element with its children processed
+    return React.cloneElement(
+      element,
+      { ...element.props },
+      stripBoldingAndEmphasis(element.props.children),
+    )
+  }
+
+  return null // fallback for anything unexpected
 }
 
 function TryGetDomWithDataWrapId(
@@ -24,7 +58,7 @@ function TryGetDomWithDataWrapId(
 
   // Dynamically replace "summary" with the value of `id`
   const regex = new RegExp(
-    `<div[^>]*data-wrap="${id}"[^>]*>([\\s\\S]*?)<\\/div>`,
+    `<([a-zA-Z0-9]+)([^>]*\\bdata-wrap\\s*=\\s*"${id}"[^>]*)>((?:(?!<\\/\\1>)[\\s\\S])*)<\\/\\1>`,
     'i',
   )
 
@@ -84,7 +118,7 @@ export async function Snippets(params: {
                         case 'img':
                           node.attribs.class ||= ''
                           node.attribs.class +=
-                            'w-full lg:w-64 h-auto rounded-md shadow-md object-contain'
+                            'w-full lg:w-64 h-auto rounded-md shadow-md object-cover aspect-[16/9]'
                           break
                       }
                     }
@@ -100,8 +134,8 @@ export async function Snippets(params: {
                 },
               ) ?? (
                 <img
-                  src="banner.png"
-                  className="h-auto w-full rounded-md object-contain shadow-md lg:w-64"
+                  src="/banner.png"
+                  className="aspect-[16/9] h-auto w-full rounded-md object-cover shadow-md lg:w-64"
                 />
               )}
             </div>
@@ -113,7 +147,11 @@ export async function Snippets(params: {
                 {params.showAuthor ? <>@{post.creator} </> : null}
                 {<LocalTime date={new Date(post.pubDate || '')} />}
               </div>
-              <div>{TryGetDomWithDataWrapId(post.content, 'summary')}</div>
+              <div>
+                {stripBoldingAndEmphasis(
+                  TryGetDomWithDataWrapId(post.content, 'summary'),
+                )}
+              </div>
             </div>
           </div>
         </Card>

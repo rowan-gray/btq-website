@@ -44,6 +44,10 @@ function renderWithTailwind(html: string) {
             node.attribs.class += ' mb-2 text-xl font-bold'
             break
           case 'p':
+            if (node.childNodes.length == 0) {
+              return null
+            }
+
             // This will remove the first paragraph only if it is italicised.
             // This allows media releases and blog posts to have content at
             // the start which only shows up on the forum.
@@ -68,22 +72,30 @@ function renderWithTailwind(html: string) {
           case 'em':
             break
           case 'img':
+            // handle emojis
+            if (
+              node.attribs.src.startsWith(
+                'https://forum.bettertransportqueensland.org/images/emoji',
+              )
+            ) {
+              node.attribs.class =
+                (node.attribs.class || '') + ' inline align-text-bottom ml-0.5'
+              break
+            }
+
+            // handle other images
             node.attribs.class ||= ''
             node.attribs.class += 'w-full object-contain'
 
             if (node.attribs?.alt) {
-              const aspectRatio =
-                parseFloat(node.attribs.width) / parseFloat(node.attribs.height)
-              const maxWidthClass = aspectRatio < 3 / 2 ? 'w-fit' : 'w-full'
-
               return (
                 <div className="mx-auto mt-4 w-full">
                   <div
-                    className={`${maxWidthClass} overflow-hidden rounded-md shadow-md`}
+                    className={`aspect-[16/9] overflow-hidden rounded-md object-cover shadow-md`}
                   >
                     {parser.domToReact([node])}
                   </div>
-                  <p className="mt-2 text-sm text-gray-500">
+                  <p className="mt-2 mb-2 text-sm text-gray-500">
                     {node.attribs.alt}
                   </p>
                 </div>
@@ -149,7 +161,7 @@ export default async function EmbeddedTopic(params: {
   )
 
   return (
-    <section className="mx-auto max-w-216">
+    <section className="mx-auto max-w-256">
       <Heading as="h1">{post.title}</Heading>
       <Lead className="pb-5">
         {post.creator && (
