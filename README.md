@@ -1,5 +1,7 @@
 # BTQ Website
 
+
+
 ## Getting started
 
 To get started with this template, first install the npm dependencies:
@@ -21,8 +23,7 @@ Finally, open [http://localhost:3000](http://localhost:3000) in your browser to 
 You can start editing this by modifying the files in the `/app` folder. The site will auto-update as you edit these files.
 
 ## License
-
-Copyright (C) 2025 Better Transport Queensland Inc.
+Copyright (C) 2025 Better Transport Queensland
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -31,11 +32,11 @@ the Free Software Foundation, either version 2 of the License, or
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ## Learn more
 
