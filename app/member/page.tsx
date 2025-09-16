@@ -225,8 +225,9 @@ function FrequentlyAskedQuestions() {
             committee.
           </p>
           <p>
-            Members also receive exclusive access to the <b>Member's Area</b>{' '}
-            and <b>Draft Media Releases</b> categories on the forum.
+            Members also receive exclusive access to the{' '}
+            <b>Member&apos;s Area</b> and <b>Draft Media Releases</b> categories
+            on the forum.
           </p>
         </div>
       ),
@@ -248,8 +249,8 @@ function FrequentlyAskedQuestions() {
           </p>
           <p>
             To thank members for their support, we provide exclusive access to
-            the <b>Member's Area</b> and <b>Draft Media Releases</b> categories
-            on the forum.
+            the <b>Member&apos;s Area</b> and <b>Draft Media Releases</b>{' '}
+            categories on the forum.
           </p>
           <p>
             Members are also able to vote at annual general meetings and

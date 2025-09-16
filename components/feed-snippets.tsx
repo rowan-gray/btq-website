@@ -7,12 +7,17 @@ import {
 } from '@/helpers/discourseTopicHelper'
 import parse, * as parser from 'html-react-parser'
 import DOMPurify from 'isomorphic-dompurify'
+import Image from 'next/image'
 import type { ReactNode } from 'react'
 import React from 'react'
 
 async function fetchPosts(categoryId: string): Promise<RSSItem[]> {
   const feed = await fetchPostsFromCategory(categoryId)
   return feed?.items || []
+}
+
+type Props = {
+  children?: React.ReactNode
 }
 
 function stripBoldingAndEmphasis(node: React.ReactNode): React.ReactNode {
@@ -26,18 +31,15 @@ function stripBoldingAndEmphasis(node: React.ReactNode): React.ReactNode {
     ))
   }
 
-  if (React.isValidElement(node)) {
-    // Narrow to a ReactElement so props is typed
-    const element = node as React.ReactElement<any>
+  if (React.isValidElement<Props>(node)) {
+    const element = node // typed as React.ReactElement<Props>
     const tag =
       typeof element.type === 'string' ? element.type.toLowerCase() : null
 
-    // If it's a bold/emphasis tag, skip it and just render its children
     if (tag && ['b', 'strong', 'em', 'i'].includes(tag)) {
       return <>{stripBoldingAndEmphasis(element.props.children)}</>
     }
 
-    // Otherwise, clone the element with its children processed
     return React.cloneElement(
       element,
       { ...element.props },
@@ -133,10 +135,14 @@ export async function Snippets(params: {
                   )
                 },
               ) ?? (
-                <img
-                  src="/banner.png"
-                  className="aspect-[16/9] h-auto w-full rounded-md object-cover shadow-md lg:w-64"
-                />
+                <div className="relative aspect-[16/9] w-full lg:w-64">
+                  <Image
+                    alt="Better Transport Queensland logo with airport train on viaduct in the background."
+                    src="/banner.png"
+                    fill
+                    className="rounded-md object-cover shadow-md"
+                  />
+                </div>
               )}
             </div>
 
