@@ -54,8 +54,8 @@ const committeeMembers: CommitteeMember[] = [
     role: 'Web Master',
     email: 'webmaster@btq.org.au',
   },
-  { name: 'Peter V', role: 'Non‑Governing Director' },
-  { name: 'Alex D', role: 'Non‑Governing Director' },
+  { name: 'Peter V', role: 'Non-Governing Director' },
+  { name: 'Alex D', role: 'Non-Governing Director' },
 ]
 
 function GeneralContacts() {
@@ -67,8 +67,8 @@ function GeneralContacts() {
         help us improve transport throughout Queensland.
       </Lead>
       <p className="mt-4 max-w-3xl text-gray-600">
-        We're always happy to take part in interviews on any topic relating to
-        Queensland's transport system, such as policy, infrastructure,
+        We&apos;re always happy to take part in interviews on any topic relating
+        to Queensland&apos;s transport system, such as policy, infrastructure,
         accessibility, and community impacts.
       </p>
       <section className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
@@ -107,9 +107,9 @@ function ManagementCommittee() {
       <Heading as="h2">Management Committee</Heading>
       <p className="mt-6 max-w-3xl text-gray-600">
         Our Management Committee is made up of dedicated volunteers who guide
-        Better Transport Queensland's strategy, governance, and advocacy work.
-        Each member brings unique expertise and a shared commitment to improving
-        transport outcomes across the state.
+        Better Transport Queensland&apos;s strategy, governance, and advocacy
+        work. Each member brings unique expertise and a shared commitment to
+        improving transport outcomes across the state.
       </p>
 
       <p className="mt-4 max-w-3xl text-gray-600">
