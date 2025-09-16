@@ -85,7 +85,7 @@ function renderWithTailwind(html: string) {
 
             const aspectRatio =
               parseFloat(node.attribs.width) / parseFloat(node.attribs.height)
-            const isApproximately16by9 = aspectRatio < 5 / 4
+            const isApproximately16by9 = aspectRatio < 3 / 2
             // handle other images
             node.attribs.class ||= ''
             node.attribs.class += `${isApproximately16by9 ? 'w-fit' : 'aspect-[16/9] w-full  object-cover'}`

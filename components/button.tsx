@@ -6,15 +6,15 @@ const variants = {
   primary: clsx(
     'inline-flex items-center justify-center border border-transparent shadow-md',
     'text-base font-bold whitespace-nowrap text-white',
-    'bg-fuchsia-500 data-[hover]:bg-fuchsia-700',
-    'selection:bg-indigo-800 selection:text-fuchsia-600',
+    'bg-pink-500 data-[hover]:bg-pink-700',
+    'selection:bg-indigo-800 selection:text-pink-600',
     'transition duration-200 ease-in-out',
   ),
   secondary: clsx(
     'inline-flex items-center justify-center border border-transparent shadow-md',
     'text-base font-bold whitespace-nowrap text-white',
     'bg-indigo-500 data-[hover]:bg-indigo-600',
-    'selection:bg-fuchsia-400 selection:text-indigo-800',
+    'selection:bg-pink-400 selection:text-indigo-800',
     'transition duration-200 ease-in-out',
   ),
   outline: clsx(
