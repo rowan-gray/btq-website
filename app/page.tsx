@@ -51,6 +51,42 @@ function Hero() {
   )
 }
 
+function PolicyPlatform() {
+  return (
+    <div>
+      <Container>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
+          {/* Text section */}
+          <div className="order-2 flex-1 lg:order-1">
+            <Heading as="h1">The 2025 Policy Platform is Now Available</Heading>
+            <Lead className="mt-6 max-w-3xl">
+              The Policy Platform sets out Better Transport Queensland&apos;s
+              strategic vision for a safer, more accessible, and
+              better-integrated transport system across the state. It outlines
+              key priorities for public, active, and freight transport in
+              Queensland.
+            </Lead>
+            <Button className="mt-6" variant="primary" href="/policy-platform">
+              Learn more here
+            </Button>
+          </div>
+
+          {/* Image section */}
+          <div className="order-1 aspect-video w-full overflow-hidden rounded-xl shadow-xl outline outline-1 outline-black/10 lg:order-2 lg:max-w-[520px]">
+            <Image
+              alt="2025 Policy Platform cover"
+              src="/2025_policy_platform.webp"
+              width={1920}
+              height={1080}
+              className="block h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
 // function UpcomingEvents() {
 //   const endDate = new Date('2025-04-06T17:00:00+10:00')
 
@@ -247,6 +283,7 @@ export default function Home() {
       <Hero />
       <main>
         <div className="space-y-32 pt-32 pb-24">
+          <PolicyPlatform />
           <FeatureSection />
         </div>
       </main>
