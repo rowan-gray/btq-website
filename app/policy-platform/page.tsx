@@ -14,7 +14,7 @@ export const metadata: Metadata = createPageMetadata({
 })
 
 const policyDocumentPdf =
-  'https://forum.bettertransportqueensland.org/uploads/short-url/2mfevivQuCvuoKolfAGCcRcrEQt.pdf'
+  'https://forum.bettertransportqueensland.org/uploads/short-url/eAhu24EKkI8oKeKzy8lC4uIyzs2.pdf'
 
 export default function Page() {
   return (
