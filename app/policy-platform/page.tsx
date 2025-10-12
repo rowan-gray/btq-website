@@ -9,7 +9,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = createPageMetadata({
   title: 'Policy Platform',
   description:
-    "The Policy Platform sets out Better Transport Queensland's strategic vision for a safer, more accessible, and better-integrated transport system across the state. It outlines key priorities for public, active, and freight transport in Queensland.",
+    "The Policy Platform sets out Better Transport Queensland's (BTQ's) strategic vision for a safer, more accessible, and better-integrated transport system across the state. It outlines key priorities for public, active, and freight transport in Queensland.",
   slug: 'policy-platform',
 })
 

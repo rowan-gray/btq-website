@@ -92,7 +92,7 @@ function SocialLinks({ filled }: { filled?: true }) {
 function Copyright() {
   return (
     <div className="">
-      &copy; {new Date().getFullYear()} Better Transport Queensland
+      &copy; {new Date().getFullYear()} Better Transport Queensland Inc.
     </div>
   )
 }
