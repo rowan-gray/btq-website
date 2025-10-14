@@ -10,7 +10,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = createPageMetadata({
   title: 'Blog',
   description:
-    'Explore the Better Transport Queensland blog, where engaged community members share their opinions and insights on public, active, and sustainable transport (not official policy). Stay informed and join the conversation!',
+    'Explore diverse perspectives from passionate community members on the Better Transport Queensland (BTQ) blog. Dive into personal opinions, creative ideas, and vibrant discussions about public, active, and sustainable transport—directly from the voices that care the most!',
   slug: 'blog',
 })
 
