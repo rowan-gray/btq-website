@@ -48,9 +48,9 @@ export default function Page() {
             </Button>
           </div>
 
-          <hr className="my-12 border-t border-gray-300" />
+          <hr className="my-12 hidden border-t border-gray-300 lg:block" />
 
-          <div className="mt-12 flex justify-center">
+          <div className="mt-12 hidden justify-center lg:flex">
             <div className="relative aspect-[1/1.414] w-full max-w-[840px] overflow-hidden rounded-lg border border-gray-300 shadow-md">
               <iframe
                 src={policyDocumentPdf}
