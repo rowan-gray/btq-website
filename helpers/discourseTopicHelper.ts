@@ -131,7 +131,7 @@ export const fetchPostFromCategory = async (
   const cacheKey = `topic-${topicId}`
 
   var RSSFeed = await fetchFromRSSWithCache<RSSItem>(url, cacheKey)
-  var RSSItem = RSSFeed?.items?.at(0) ?? null
+  var RSSItem = RSSFeed?.items?.at(RSSFeed?.items.length - 1) ?? null
 
   if (
     RSSItem === null ||
