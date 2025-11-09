@@ -4,8 +4,17 @@ import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead } from '@/components/text'
+import { NextEvent } from '@/data/upcoming-event'
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
+
+const UpcomingEvent = dynamic(
+  () => import('@/components/event-promo').then((mod) => mod.EventPromo),
+  {
+    ssr: true,
+  },
+)
 
 export const metadata: Metadata = createPageMetadata({
   title: undefined,
@@ -18,14 +27,7 @@ function Hero() {
   return (
     <div className="mx-2 rounded-4xl bg-indigo-800 selection:bg-pink-400 selection:text-indigo-800">
       <Container className="relative">
-        <Navbar
-          banner={{
-            text: 'Join us for our 2025 Policy Platform',
-            href: 'https://forum.bettertransportqueensland.org/t/notice-of-general-special-general-and-policy-meetings-april-6th-2025/346',
-            expiry: new Date('2025-04-06T17:00:00+10:00'),
-          }}
-          filled
-        />
+        <Navbar filled />
         <div className="pt-12 pb-24 sm:pt-16 sm:pb-32 md:pt-24 md:pb-48">
           <h1 className="font-display text-4xl/[0.9] font-medium tracking-tight text-balance text-gray-200 sm:text-6xl/[0.8] md:text-7xl/[0.8]">
             Better Transport Queensland
@@ -87,34 +89,6 @@ function PolicyPlatform() {
     </div>
   )
 }
-
-// function UpcomingEvents() {
-//   const endDate = new Date('2025-04-06T17:00:00+10:00')
-
-//   if (Date.now() > endDate.getTime()) {
-//     return
-//   }
-
-//   return (
-//     <div>
-//       <Container>
-//         <Heading as="h1">2025 Policy Platform - April 6th</Heading>
-//         <Lead className="mt-6 max-w-3xl">
-//           Join us for our inaugural policy platform on April 6th at Kenmore
-//           Library! This is your opportunity to shape the future of transport in
-//           Queensland and make your voice heard.
-//         </Lead>
-//         <Button
-//           className="mt-6"
-//           variant="primary"
-//           href="https://forum.bettertransportqueensland.org/t/notice-of-general-special-general-and-policy-meetings-april-6th-2025/346"
-//         >
-//           Learn more here
-//         </Button>
-//       </Container>
-//     </div>
-//   )
-// }
 
 function FeatureSection() {
   return (
@@ -284,6 +258,14 @@ export default function Home() {
       <Hero />
       <main>
         <div className="space-y-32 pt-32 pb-24">
+          {NextEvent && (
+            <UpcomingEvent
+              title={NextEvent.title}
+              description={NextEvent.description}
+              date={NextEvent.date}
+              href={NextEvent.href}
+            />
+          )}
           <PolicyPlatform />
           <FeatureSection />
         </div>

@@ -2,10 +2,11 @@
 
 import { Link } from '@/components/link'
 import { Logo } from '@/components/logo'
+import { NextEvent } from '@/data/upcoming-event'
 import { Disclosure } from '@headlessui/react'
-import { ChevronRightIcon } from '@heroicons/react/16/solid'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import { AnimatePresence, motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 const links = [
@@ -119,34 +120,37 @@ function MobileNav({
   )
 }
 
-export function Navbar({
-  banner,
-  filled,
-}: {
-  banner?: { text: string; href: string; expiry?: Date }
+const Banner = dynamic(
+  () => import('@/components/banner').then((mod) => mod.Banner),
+  { ssr: true },
+)
+
+type NavbarProps = {
   filled?: true
-}) {
+}
+
+export function Navbar({ filled }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <Disclosure as="header" className="mt-2 py-8 sm:py-12 dark:text-white">
       <header className="flex items-center justify-between gap-6">
         <div className="flex items-center gap-6">
-          <div className="flex items-center py-3">
+          <div className="flex shrink-0 items-center py-3 md:shrink">
             <Link href="/" title="Home">
               <Logo className="h-9 text-white" filled={filled} />
             </Link>
           </div>
-          {banner &&
-            (banner.expiry ? Date.now() < banner.expiry.getTime() : true) && (
-              <Link
-                href={banner.href}
-                className="lg:text-md flex items-center gap-1 rounded-2xl bg-indigo-500 py-0.5 pr-3 pl-4 text-xs/5 font-medium text-white transition duration-200 ease-out data-[hover]:bg-indigo-600 md:text-sm/6"
-              >
-                {banner.text}
-                <ChevronRightIcon className="size-4" />
-              </Link>
-            )}
+          {NextEvent && (
+            <span className="hidden min-w-48 shrink-8 sm:inline lg:hidden xl:inline">
+              <Banner
+                filled={filled}
+                text={NextEvent.bannerText}
+                expiry={NextEvent.date}
+                href={NextEvent.href}
+              />
+            </span>
+          )}
         </div>
         <DesktopNav filled={filled} />
         <MobileNavButton

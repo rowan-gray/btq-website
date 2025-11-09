@@ -88,12 +88,14 @@ function renderWithTailwind(html: string) {
             const isApproximately16by9 = aspectRatio < 5 / 4
             // handle other images
             node.attribs.class ||= ''
-            node.attribs.class += `${isApproximately16by9 ? 'w-fit' : 'aspect-[16/9] w-full  object-cover'}`
+            node.attribs.class += `${isApproximately16by9 ? 'w-auto' : 'aspect-[16/9] w-full object-cover'}`
 
             if (node.attribs?.alt) {
               return (
-                <div className={`${isApproximately16by9 ? 'w-fit' : 'w-full'}`}>
-                  <div className={`overflow-hidden rounded-md shadow-md`}>
+                <div>
+                  <div
+                    className={`${isApproximately16by9 ? 'w-fit' : 'w-full'} overflow-hidden rounded-md shadow-md`}
+                  >
                     {parser.domToReact([node])}
                   </div>
                   <p className="mt-2 mb-4 text-sm text-gray-500">
@@ -172,7 +174,7 @@ export default async function EmbeddedTopic(params: {
           </span>
         )}
       </Lead>
-      <div>{renderWithTailwind(cleanHtml)}</div>
+      <div className="px-12 pt-4">{renderWithTailwind(cleanHtml)}</div>
       <div className="mt-8 rounded-4xl bg-indigo-800 p-12 text-white selection:bg-pink-400 selection:text-indigo-800">
         <Subheading as="h2" dark className="text-2xl">
           {params.linkToTopic
