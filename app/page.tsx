@@ -1,11 +1,20 @@
 import { createPageMetadata } from '@/app/layout'
-import { Button } from '@/components/button'
-import { Container } from '@/components/container'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
-import { Heading, Lead } from '@/components/text'
+import { Button } from '@/components/core/button'
+import { Container } from '@/components/core/container'
+import { Heading, Lead } from '@/components/core/text'
+import { Footer } from '@/components/footer/footer'
+import { Navbar } from '@/components/navbar/navbar'
+import { NextEvent } from '@/data/upcoming-event'
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
+
+const UpcomingEvent = dynamic(
+  () => import('@/components/event-promo').then((mod) => mod.EventPromo),
+  {
+    ssr: true,
+  },
+)
 
 export const metadata: Metadata = createPageMetadata({
   title: undefined,
@@ -18,14 +27,7 @@ function Hero() {
   return (
     <div className="mx-2 rounded-4xl bg-indigo-800 selection:bg-pink-400 selection:text-indigo-800">
       <Container className="relative">
-        <Navbar
-          banner={{
-            text: 'Join us for our 2025 Policy Platform',
-            href: 'https://forum.bettertransportqueensland.org/t/notice-of-general-special-general-and-policy-meetings-april-6th-2025/346',
-            expiry: new Date('2025-04-06T17:00:00+10:00'),
-          }}
-          filled
-        />
+        <Navbar filled />
         <div className="pt-12 pb-24 sm:pt-16 sm:pb-32 md:pt-24 md:pb-48">
           <h1 className="font-display text-4xl/[0.9] font-medium tracking-tight text-balance text-gray-200 sm:text-6xl/[0.8] md:text-7xl/[0.8]">
             Better Transport Queensland
@@ -36,12 +38,13 @@ function Hero() {
           </p>
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
             <Button
+              size="large"
               variant="primary"
               href="https://forum.bettertransportqueensland.org"
             >
               Join the Conversation
             </Button>
-            <Button variant="secondary" href="/member">
+            <Button size="large" variant="secondary" href="/member">
               Become a member
             </Button>
           </div>
@@ -87,34 +90,6 @@ function PolicyPlatform() {
   )
 }
 
-// function UpcomingEvents() {
-//   const endDate = new Date('2025-04-06T17:00:00+10:00')
-
-//   if (Date.now() > endDate.getTime()) {
-//     return
-//   }
-
-//   return (
-//     <div>
-//       <Container>
-//         <Heading as="h1">2025 Policy Platform - April 6th</Heading>
-//         <Lead className="mt-6 max-w-3xl">
-//           Join us for our inaugural policy platform on April 6th at Kenmore
-//           Library! This is your opportunity to shape the future of transport in
-//           Queensland and make your voice heard.
-//         </Lead>
-//         <Button
-//           className="mt-6"
-//           variant="primary"
-//           href="https://forum.bettertransportqueensland.org/t/notice-of-general-special-general-and-policy-meetings-april-6th-2025/346"
-//         >
-//           Learn more here
-//         </Button>
-//       </Container>
-//     </div>
-//   )
-// }
-
 function FeatureSection() {
   return (
     <div>
@@ -127,7 +102,7 @@ function FeatureSection() {
           advocate for public and active transport as well as regional transport
           and freight rail.
         </Lead>
-        <section className="mt-16 grid grid-cols-1 lg:grid-cols-2">
+        <section className="mt-8 grid grid-cols-1 lg:grid-cols-2">
           <div className="space-y-6 lg:mr-6">
             {/* Who are we? */}
             <div className="rounded-lg bg-white p-6 shadow-md">
@@ -170,9 +145,7 @@ function FeatureSection() {
               <div className="space-y-4">
                 {/* Congestion */}
                 <div>
-                  <h3 className="mt-4 text-lg font-semibold text-indigo-800">
-                    Congestion
-                  </h3>
+                  <h3 className="mt-4 text-lg font-semibold">Congestion</h3>
                   <p className="text-md/6 mt-2 text-gray-600">
                     Public and active transport are vital for reducing urban
                     congestion. The current approach of widening roads and
@@ -186,7 +159,7 @@ function FeatureSection() {
 
                 {/* Environmental Impact */}
                 <div>
-                  <h3 className="mt-4 text-lg font-semibold text-indigo-800">
+                  <h3 className="mt-4 text-lg font-semibold">
                     Environmental Impact
                   </h3>
                   <p className="text-md/6 mt-2 text-gray-600">
@@ -201,7 +174,7 @@ function FeatureSection() {
 
                 {/* Social Benefits */}
                 <div>
-                  <h3 className="mt-4 text-lg font-semibold text-indigo-800">
+                  <h3 className="mt-4 text-lg font-semibold">
                     Social Benefits
                   </h3>
                   <p className="text-md/6 mt-2 text-gray-600">
@@ -210,6 +183,19 @@ function FeatureSection() {
                     ownership. Improved transportation options empower
                     individuals to access employment, education, and social
                     activities, fostering inclusivity and stronger communities.
+                  </p>
+                </div>
+
+                {/* Economic Benefits */}
+                <div>
+                  <h3 className="mt-4 text-lg font-semibold">
+                    Economic Benefits
+                  </h3>
+                  <p className="text-md/6 mt-2 text-gray-600">
+                    Expanding public transport avoids or delays the costs of
+                    road widening or other road projects, and is often more
+                    efficient than accommodating additional trip demand on
+                    expanded (low-capacity) roads.
                   </p>
                 </div>
               </div>
@@ -254,7 +240,7 @@ function FeatureSection() {
                 />
               </div>
             </div>
-            <div className="pt-12">
+            <div className="pt-24">
               <Heading as="h2">Join the conversation on the BTQ Forum!</Heading>
               <Lead className="mt-6 max-w-3xl">
                 Stay up-to-date with the latest insights directly from the
@@ -283,6 +269,14 @@ export default function Home() {
       <Hero />
       <main>
         <div className="space-y-32 pt-32 pb-24">
+          {NextEvent && (
+            <UpcomingEvent
+              title={NextEvent.title}
+              description={NextEvent.description}
+              date={NextEvent.date}
+              href={NextEvent.href}
+            />
+          )}
           <PolicyPlatform />
           <FeatureSection />
         </div>

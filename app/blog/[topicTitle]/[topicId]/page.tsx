@@ -1,9 +1,9 @@
-import { Container } from '@/components/container'
+import { Container } from '@/components/core/container'
+import { Footer } from '@/components/footer/footer'
+import { Navbar } from '@/components/navbar/navbar'
 import EmbeddedTopic, {
   generateMetadataFromTopic,
-} from '@/components/embedded-topic'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
+} from '@/components/topics/embedded-topic'
 import type { Metadata } from 'next'
 
 type Params = Promise<{ topicTitle: string; topicId: string }>
@@ -35,7 +35,7 @@ export default async function Page({ params: Params }: { params: Params }) {
       <Container>
         <Navbar />
       </Container>
-      <Container className="mt-16 mb-16">
+      <Container className="mb-16">
         <EmbeddedTopic
           topicTitle={topicTitle}
           topicId={topicId}
