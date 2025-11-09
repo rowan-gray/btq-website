@@ -5,7 +5,6 @@ import { Navbar } from '@/components/navbar/navbar'
 import EmbeddedTopic from '@/components/topics/embedded-topic'
 import type { Metadata } from 'next'
 
-type Params = Promise<{ topicTitle: string; topicId: string }>
 const description =
   "Learn about Better Transport Queensland's 2025 Annual general Meeting."
 const topicTitle = 'annual-general-meeting-2025'
