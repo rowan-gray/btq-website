@@ -13,8 +13,8 @@ export type Event = {
     href: string
 }
   
-export const NextEvent: Event | null = {
-    date: new Date('2025-11-09T14:00:00+10:00'),
+export const NextEvent: Event = {
+    date: new Date('2025-11-23T14:00:00+10:00'),
     title: "Annual General Meeting",
     bannerText: "Join us for our AGM",
     description: "Join us for our annual general meeting at Carindale Library! This is your opportunity to shape the future of the association.",
