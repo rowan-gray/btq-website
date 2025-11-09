@@ -107,7 +107,7 @@ export async function Snippets(params: {
             )
           }
         >
-          <div className="flex flex-col items-center gap-4 lg:grid lg:grid-cols-[16rem_1fr]">
+          <div className="flex flex-col items-start gap-4 lg:grid lg:grid-cols-[16rem_1fr]">
             {/* Image Section */}
             <div className="flex w-full items-center justify-center lg:w-64">
               {TryGetDomWithDataWrapId(
