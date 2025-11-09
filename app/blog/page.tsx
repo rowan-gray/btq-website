@@ -1,5 +1,7 @@
-import { createPageMetadata } from '@/app/layout'
+// Only here to indicate to next.js that this page relies on non-static content
+export const dynamic = 'force-dynamic'
 
+import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Heading, Lead } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
@@ -13,9 +15,6 @@ export const metadata: Metadata = createPageMetadata({
     'Explore diverse perspectives from passionate community members on the Better Transport Queensland (BTQ) blog. Dive into personal opinions, creative ideas, and vibrant discussions about public, active, and sustainable transport—directly from the voices that care the most!',
   slug: 'blog',
 })
-
-// Only here to indicate to next.js that this page relies on non-static content
-export const dynamic = 'force-dynamic'
 
 export default function Page() {
   return (

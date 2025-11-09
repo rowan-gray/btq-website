@@ -1,3 +1,6 @@
+// Only here to indicate to next.js that this page relies on non-static content
+export const dynamic = 'force-dynamic'
+
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Heading, Lead } from '@/components/core/text'
@@ -12,9 +15,6 @@ export const metadata: Metadata = createPageMetadata({
     'Stay informed with the latest official media releases from Better Transport Queensland—covering public, active, and sustainable transport updates fresh from the source!',
   slug: 'releases',
 })
-
-// Only here to indicate to next.js that this page relies on non-static content
-export const dynamic = 'force-dynamic'
 
 export default function Page() {
   return (

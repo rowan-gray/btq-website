@@ -1,3 +1,6 @@
+// Only here to indicate to next.js that this page relies on non-static content
+export const dynamic = 'force-dynamic'
+
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Footer } from '@/components/footer/footer'
