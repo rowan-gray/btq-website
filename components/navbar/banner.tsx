@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from '@heroicons/react/16/solid'
-import { Link } from './link'
+import { Link } from '@/components/core/link'
 
 export type BannerProps = {
   filled?: boolean

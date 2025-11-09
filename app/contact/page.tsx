@@ -1,9 +1,9 @@
 import { createPageMetadata } from '@/app/layout'
-import { Card } from '@/components/card'
-import { Container } from '@/components/container'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
-import { Heading, Lead } from '@/components/text'
+import { Card } from '@/components/core/card'
+import { Container } from '@/components/core/container'
+import { Heading, Lead } from '@/components/core/text'
+import { Footer } from '@/components/footer/footer'
+import { Navbar } from '@/components/navbar/navbar'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({

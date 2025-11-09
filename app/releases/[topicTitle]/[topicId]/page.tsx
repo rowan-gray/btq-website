@@ -1,9 +1,9 @@
-import { Container } from '@/components/container'
+import { Container } from '@/components/core/container'
+import { Footer } from '@/components/footer/footer'
+import { Navbar } from '@/components/navbar/navbar'
 import EmbeddedTopic, {
   generateMetadataFromTopic,
-} from '@/components/embedded-topic'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
+} from '@/components/topics/embedded-topic'
 import type { Metadata } from 'next'
 
 type Params = Promise<{ topicTitle: string; topicId: string }>

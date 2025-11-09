@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { Button } from './button'
-import { Container } from './container'
-import { Heading, Lead } from './text'
+import { Button } from '@/components/core/button'
+import { Container } from '@/components/core/container'
+import { Heading, Lead } from '@/components/core/text'
 
 function formatWithOrdinal(date: Date) {
   const day = date.getDate()

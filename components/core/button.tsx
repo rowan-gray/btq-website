@@ -1,4 +1,4 @@
-import { Link } from '@/components/link'
+import { Link } from '@/components/core/link'
 import * as Headless from '@headlessui/react'
 import { clsx } from 'clsx'
 

@@ -1,7 +1,7 @@
-import { Button } from '@/components/button'
-import { Container } from '@/components/container'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
+import { Button } from '@/components/core/button'
+import { Container } from '@/components/core/container'
+import { Footer } from '@/components/footer/footer'
+import { Navbar } from '@/components/navbar/navbar'
 import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 

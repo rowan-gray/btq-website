@@ -1,8 +1,8 @@
 import { createPageMetadata } from '@/app/layout'
-import { Container } from '@/components/container'
-import EmbeddedTopic from '@/components/embedded-topic'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
+import { Container } from '@/components/core/container'
+import { Footer } from '@/components/footer/footer'
+import { Navbar } from '@/components/navbar/navbar'
+import EmbeddedTopic from '@/components/topics/embedded-topic'
 import type { Metadata } from 'next'
 
 type Params = Promise<{ topicTitle: string; topicId: string }>

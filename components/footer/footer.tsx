@@ -1,5 +1,5 @@
-import { Container } from '@/components/container'
-import { Link } from '@/components/link'
+import { Container } from '@/components/core/container'
+import { Link } from '@/components/core/link'
 
 function SocialIconBluesky(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (

@@ -1,9 +1,9 @@
 import { createPageMetadata } from '@/app/layout'
-import { Container } from '@/components/container'
-import { Snippets } from '@/components/feed-snippets'
-import { Footer } from '@/components/footer'
-import { Navbar } from '@/components/navbar'
-import { Heading, Lead } from '@/components/text'
+import { Container } from '@/components/core/container'
+import { Heading, Lead } from '@/components/core/text'
+import { Footer } from '@/components/footer/footer'
+import { Navbar } from '@/components/navbar/navbar'
+import { Snippets } from '@/components/topics/feed-snippets'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({
