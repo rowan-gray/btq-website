@@ -47,6 +47,7 @@ export function Navbar({ filled }: NavbarProps) {
         <DesktopNavbar filled={filled} />
         <MobileNavbar
           filled={filled}
+          isOpen={isOpen}
           onClick={() => setIsOpen((prev: boolean) => !prev)}
         />
       </header>

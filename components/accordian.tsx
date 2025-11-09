@@ -32,8 +32,10 @@ export function Accordion({
       <div className="flex w-full cursor-pointer items-center justify-between py-4 text-left text-lg font-semibold">
         {question}
         <motion.div
-          animate={{ rotate: isOpen ? 180 : 360 }}
-          transition={{ duration: 0.25 }}
+          key={`accordian-chevron ${question}`}
+          initial={{ rotate: 0 }}
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
         >
           <ChevronDownIcon className="size-5 text-gray-600" />
         </motion.div>
@@ -41,6 +43,7 @@ export function Accordion({
 
       {/* Animated Body */}
       <motion.div
+        key={`accordian ${question}`}
         initial={{ height: 0, opacity: 0 }}
         animate={
           isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }
