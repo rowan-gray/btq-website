@@ -174,7 +174,7 @@ export default async function EmbeddedTopic(params: {
           </span>
         )}
       </Lead>
-      <div className="px-12 pt-4">{renderWithTailwind(cleanHtml)}</div>
+      <div className="pt-4 sm:px-12">{renderWithTailwind(cleanHtml)}</div>
       <div className="mt-8 rounded-4xl bg-indigo-800 p-12 text-white selection:bg-pink-400 selection:text-indigo-800">
         <Subheading as="h2" dark className="text-2xl">
           {params.linkToTopic

@@ -24,7 +24,7 @@ export default function Page() {
       </Container>
 
       <div className="flex-grow">
-        <Container className="mt-16 mb-24">
+        <Container className="mb-24">
           <Heading as="h1">Policy Platform</Heading>
 
           <Lead className="mt-6 max-w-3xl">
