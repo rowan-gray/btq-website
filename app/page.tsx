@@ -145,9 +145,7 @@ function FeatureSection() {
               <div className="space-y-4">
                 {/* Congestion */}
                 <div>
-                  <h3 className="mt-4 text-lg font-semibold text-indigo-800">
-                    Congestion
-                  </h3>
+                  <h3 className="mt-4 text-lg font-semibold">Congestion</h3>
                   <p className="text-md/6 mt-2 text-gray-600">
                     Public and active transport are vital for reducing urban
                     congestion. The current approach of widening roads and
@@ -161,7 +159,7 @@ function FeatureSection() {
 
                 {/* Environmental Impact */}
                 <div>
-                  <h3 className="mt-4 text-lg font-semibold text-indigo-800">
+                  <h3 className="mt-4 text-lg font-semibold">
                     Environmental Impact
                   </h3>
                   <p className="text-md/6 mt-2 text-gray-600">
@@ -176,7 +174,7 @@ function FeatureSection() {
 
                 {/* Social Benefits */}
                 <div>
-                  <h3 className="mt-4 text-lg font-semibold text-indigo-800">
+                  <h3 className="mt-4 text-lg font-semibold">
                     Social Benefits
                   </h3>
                   <p className="text-md/6 mt-2 text-gray-600">
@@ -185,6 +183,19 @@ function FeatureSection() {
                     ownership. Improved transportation options empower
                     individuals to access employment, education, and social
                     activities, fostering inclusivity and stronger communities.
+                  </p>
+                </div>
+
+                {/* Economic Benefits */}
+                <div>
+                  <h3 className="mt-4 text-lg font-semibold">
+                    Economic Benefits
+                  </h3>
+                  <p className="text-md/6 mt-2 text-gray-600">
+                    Expanding public transport avoids or delays the costs of
+                    road widening or other road projects, and is often more
+                    efficient than accommodating additional trip demand on
+                    expanded (low-capacity) roads.
                   </p>
                 </div>
               </div>
@@ -229,7 +240,7 @@ function FeatureSection() {
                 />
               </div>
             </div>
-            <div className="pt-12">
+            <div className="pt-24">
               <Heading as="h2">Join the conversation on the BTQ Forum!</Heading>
               <Lead className="mt-6 max-w-3xl">
                 Stay up-to-date with the latest insights directly from the
