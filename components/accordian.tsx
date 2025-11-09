@@ -17,7 +17,6 @@ export function Accordion({
     <div
       className="border-b border-gray-300"
       // Make the whole block clickable
-      onClick={() => setIsOpen(!isOpen)}
       role="button"
       aria-expanded={isOpen}
       tabIndex={0}
@@ -29,7 +28,10 @@ export function Accordion({
       }}
     >
       {/* Header */}
-      <div className="flex w-full cursor-pointer items-center justify-between py-4 text-left text-lg font-semibold">
+      <div
+        className="flex w-full cursor-pointer items-center justify-between py-4 text-left text-lg font-semibold"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {question}
         <motion.div
           key={`accordian-chevron ${question}`}
