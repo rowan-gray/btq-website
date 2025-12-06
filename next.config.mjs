@@ -3,6 +3,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  output: 'standalone',   // ensures Next.js builds a self-contained server bundle
 };
 
 export default nextConfig;
