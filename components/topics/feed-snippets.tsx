@@ -52,15 +52,15 @@ function stripBoldingAndEmphasis(node: React.ReactNode): React.ReactNode {
 
 function TryGetDomWithDataWrapId(
   content: string,
-  id: string,
+  dataWrapId: string,
   htmlReactParserOptions?: parser.HTMLReactParserOptions,
   sanitisation?: (match: string) => string,
 ): ReactNode {
   const sanitizedContent = DOMPurify.sanitize(content || '')
 
-  // Dynamically replace "summary" with the value of `id`
+  // Dynamically replace "summary" with the value of `dataWrapId`
   const regex = new RegExp(
-    `<([a-zA-Z0-9]+)([^>]*\\bdata-wrap\\s*=\\s*"${id}"[^>]*)>((?:(?!<\\/\\1>)[\\s\\S])*)<\\/\\1>`,
+    `<([a-zA-Z0-9]+)([^>]*\\bdata-wrap\\s*=\\s*"${dataWrapId}"[^>]*)>((?:(?!<\\/\\1>)[\\s\\S])*)<\\/\\1>`,
     'i',
   )
 
@@ -68,7 +68,7 @@ function TryGetDomWithDataWrapId(
 
   // Return the parsed DOM or null if no match is found
   if (match === null) {
-    console.warn(`Unable to find content with data-wrap ${id}.`)
+    console.warn(`Unable to find content with data-wrap ${dataWrapId}.`)
     return null
   }
 

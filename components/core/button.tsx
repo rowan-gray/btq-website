@@ -6,21 +6,21 @@ const variants = {
   primary: clsx(
     'inline-flex items-center justify-center border border-transparent shadow-md',
     'text-base font-bold whitespace-nowrap text-white',
-    'bg-pink-400 data-[hover]:bg-pink-500',
+    'bg-pink-400 hover:bg-pink-500',
     'selection:bg-indigo-800 selection:text-pink-500',
     'transition duration-200 ease-in-out',
   ),
   secondary: clsx(
     'inline-flex items-center justify-center border border-transparent shadow-md',
     'text-base font-bold whitespace-nowrap text-white',
-    'bg-indigo-500 data-[hover]:bg-indigo-600',
+    'bg-indigo-500 hover:bg-indigo-600',
     'selection:bg-pink-500 selection:text-indigo-800',
     'transition duration-200 ease-in-out',
   ),
   outline: clsx(
     'inline-flex items-center justify-center border border-transparent shadow ring-1 ring-black/10',
     'font-medium whitespace-nowrap text-gray-950',
-    'data-[disabled]:bg-transparent data-[disabled]:opacity-40 data-[hover]:bg-gray-50',
+    'disabled:bg-transparent disabled:opacity-40 hover:bg-gray-50',
     'transition duration-200 ease-in-out',
   ),
 }

@@ -26,7 +26,7 @@ export function MobileNavbar({ filled, isOpen, onClick }: MobileNavbarProps) {
 
   return (
     <motion.button
-      className="relative flex size-12 items-center justify-center self-center rounded-lg data-[hover]:bg-black/5 lg:hidden"
+      className="relative flex size-12 items-center justify-center self-center rounded-lg hover:bg-black/5 lg:hidden"
       aria-label="Toggle main menu"
       onClick={onClick}
       whileTap={{ scale: 0.9 }}

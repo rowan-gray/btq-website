@@ -50,6 +50,7 @@ const tiers: Tier[] = [
       { description: 'Voting rights at general meetings' },
       { description: "Access to the Member's Area of the forum" },
       { description: 'Priority for site visits and events' },
+      { description: 'Participation in the annual policy platform workshop' },
     ],
     requirements: [
       { description: 'Be 18 years of age or older' },
@@ -73,6 +74,7 @@ const tiers: Tier[] = [
       { description: 'Voting rights at general meetings' },
       { description: "Access to the Member's Area of the forum" },
       { description: 'Priority for site visits and events' },
+      { description: 'Participation in the annual policy platform workshop' },
     ],
     requirements: [
       { description: 'Be 18 years of age or older' },

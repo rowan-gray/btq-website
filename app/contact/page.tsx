@@ -54,8 +54,15 @@ const committeeMembers: CommitteeMember[] = [
     role: 'Web Master',
     email: 'webmaster@btq.org.au',
   },
-  { name: 'Peter V', role: 'Non-Governing Director' },
-  { name: 'Alex D', role: 'Non-Governing Director' },
+  {
+    name: 'Ari Bowe',
+    role: 'Media Director',
+    email: 'media.director@btq.org.au',
+  },
+  {
+    name: '#Metro',
+    role: 'Non-Governing Director' 
+  },
 ]
 
 function GeneralContacts() {
