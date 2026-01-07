@@ -1,8 +1,10 @@
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
-import { Heading } from '@/components/core/text'
+import { Heading, Lead } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
+import ContactForm from '@/components/forms/contact-form'
 import { HeroBanner } from '@/components/hero-banner'
+import { isContactFormConfigured } from '@/lib/discourse-config'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({
@@ -148,9 +150,32 @@ function ManagementCommittee() {
   )
 }
 
+function ContactFormSection() {
+  const formConfigured = isContactFormConfigured()
+
+  if (!formConfigured) {
+    return null
+  }
+
+  return (
+    <section>
+      <Heading as="h1">Send us a message</Heading>
+      <Lead className="mt-6 max-w-3xl">
+        Have a question, idea, or suggestion? Use the form below to reach out to
+        Better Transport Queensland directly.
+      </Lead>
+
+      <div className="mt-8">
+        <ContactForm />
+      </div>
+    </section>
+  )
+}
+
 function Contacts() {
   return (
     <Container className="space-y-24">
+      <ContactFormSection />
       <GeneralContacts />
       <ManagementCommittee />
     </Container>

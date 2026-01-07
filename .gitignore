@@ -43,3 +43,5 @@ next-env.d.ts
 # ides
 /.vscode/
 /.zed/
+
+.env
