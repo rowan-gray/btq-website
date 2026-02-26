@@ -1,0 +1,606 @@
+'use client'
+
+import {
+  LAYER_COLORS,
+  LAYER_CSS_COLORS,
+  LAYER_ID_MAP,
+  LAYER_LABELS,
+  type LayerKey,
+  staticRoutes,
+} from '@/data/transport-routes'
+import maplibregl from 'maplibre-gl'
+import 'maplibre-gl/dist/maplibre-gl.css'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+const CURRENT_LAYERS: LayerKey[] = [
+  'currentRail',
+  'currentBus',
+  'currentFerry',
+  'currentTram',
+  'currentRegionalRail',
+  'currentFreight',
+]
+
+const PROPOSED_LAYERS: LayerKey[] = [
+  'proposedRail',
+  'proposedBus',
+  'proposedFerry',
+  'proposedRegionalRail',
+  'highSpeedRail',
+]
+
+const SPECIAL_LAYERS: LayerKey[] = ['olympicFixes', 'problemAreas']
+
+type LayerVisibility = Record<LayerKey, boolean>
+
+const DEFAULT_VISIBILITY: LayerVisibility = {
+  currentRail: true,
+  currentBus: true,
+  currentFerry: true,
+  currentTram: true,
+  currentRegionalRail: true,
+  currentFreight: true,
+  proposedRail: true,
+  proposedBus: true,
+  proposedFerry: true,
+  proposedRegionalRail: true,
+  olympicFixes: true,
+  problemAreas: true,
+  highSpeedRail: true,
+}
+
+function modeLabel(mode: string): string {
+  const labels: Record<string, string> = {
+    rail: 'Suburban Rail',
+    bus: 'Bus Route',
+    ferry: 'Ferry',
+    tram: 'Light Rail / Tram',
+    'regional-rail': 'Regional Passenger Rail',
+    freight: 'Freight Corridor',
+    'proposed-rail': 'Proposed Rail',
+    'proposed-bus': 'Proposed Busway / BRT',
+    'proposed-ferry': 'Proposed Ferry',
+    'proposed-regional-rail': 'Proposed Regional Rail',
+    'olympic-fix': 'Olympic Fix (2032)',
+    'problem-area': 'Problem Area',
+    'high-speed-rail': 'High Speed Rail',
+  }
+  return labels[mode] ?? mode
+}
+
+function severityColor(severity?: string): string {
+  switch (severity) {
+    case 'critical':
+      return 'bg-red-600 text-white'
+    case 'high':
+      return 'bg-orange-500 text-white'
+    case 'medium':
+      return 'bg-yellow-500 text-gray-900'
+    default:
+      return 'bg-gray-400 text-white'
+  }
+}
+
+export function TransportMap() {
+  const mapContainer = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<maplibregl.Map | null>(null)
+  const [loaded, setLoaded] = useState(false)
+  const [dataLoading, setDataLoading] = useState(true)
+  const [selectedFeature, setSelectedFeature] = useState<{
+    name: string
+    description: string
+    mode: string
+    severity?: string
+    category?: string
+  } | null>(null)
+  const [layers, setLayers] = useState<LayerVisibility>(DEFAULT_VISIBILITY)
+
+  const addLayers = useCallback(
+    (
+      map: maplibregl.Map,
+      gtfsData: GeoJSON.FeatureCollection,
+      proposedData: GeoJSON.FeatureCollection,
+    ) => {
+      // --- sources ---
+      map.addSource('gtfs-routes', { type: 'geojson', data: gtfsData })
+      map.addSource('static-routes', { type: 'geojson', data: staticRoutes })
+      map.addSource('proposed-routes', { type: 'geojson', data: proposedData })
+
+      // GTFS layers
+      map.addLayer({
+        id: 'current-rail',
+        type: 'line',
+        source: 'gtfs-routes',
+        filter: ['==', ['get', 'mode'], 'rail'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS.rail,
+          'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1, 12, 3],
+          'line-opacity': 0.85,
+        },
+      })
+
+      map.addLayer({
+        id: 'current-bus',
+        type: 'line',
+        source: 'gtfs-routes',
+        filter: ['==', ['get', 'mode'], 'bus'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS.bus,
+          'line-width': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8,
+            0.5,
+            14,
+            2.5,
+          ],
+          'line-opacity': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8,
+            0.4,
+            13,
+            0.75,
+          ],
+        },
+      })
+
+      map.addLayer({
+        id: 'current-ferry',
+        type: 'line',
+        source: 'gtfs-routes',
+        filter: ['==', ['get', 'mode'], 'ferry'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS.ferry,
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1, 13, 3],
+          'line-opacity': 0.85,
+          'line-dasharray': [2, 2],
+        },
+      })
+
+      map.addLayer({
+        id: 'current-tram',
+        type: 'line',
+        source: 'gtfs-routes',
+        filter: ['==', ['get', 'mode'], 'tram'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS.tram,
+          'line-width': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            8,
+            1.5,
+            13,
+            3.5,
+          ],
+          'line-opacity': 0.85,
+        },
+      })
+
+      // ===== static current layers (regional-rail, freight) =====
+      map.addLayer({
+        id: 'current-regional-rail',
+        type: 'line',
+        source: 'static-routes',
+        filter: ['==', ['get', 'mode'], 'regional-rail'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS['regional-rail'],
+          'line-width': 2.5,
+          'line-opacity': 0.75,
+        },
+      })
+
+      map.addLayer({
+        id: 'current-freight',
+        type: 'line',
+        source: 'static-routes',
+        filter: ['==', ['get', 'mode'], 'freight'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS.freight,
+          'line-width': 2,
+          'line-opacity': 0.6,
+          'line-dasharray': [6, 3],
+        },
+      })
+
+      // Proposed
+      map.addLayer({
+        id: 'proposed-rail',
+        type: 'line',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'proposed-rail'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS['proposed-rail'],
+          'line-width': 4,
+          'line-opacity': 0.85,
+          'line-dasharray': [4, 3],
+        },
+      })
+
+      map.addLayer({
+        id: 'proposed-bus',
+        type: 'line',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'proposed-bus'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS['proposed-bus'],
+          'line-width': 4,
+          'line-opacity': 0.85,
+          'line-dasharray': [4, 3],
+        },
+      })
+
+      map.addLayer({
+        id: 'proposed-ferry',
+        type: 'line',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'proposed-ferry'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS['proposed-ferry'],
+          'line-width': 4,
+          'line-opacity': 0.85,
+          'line-dasharray': [4, 3],
+        },
+      })
+
+      map.addLayer({
+        id: 'proposed-regional-rail',
+        type: 'line',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'proposed-regional-rail'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS['proposed-regional-rail'],
+          'line-width': 3.5,
+          'line-opacity': 0.8,
+          'line-dasharray': [4, 3],
+        },
+      })
+
+      // HS (Just for demo really)
+      map.addLayer({
+        id: 'high-speed-rail',
+        type: 'line',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'high-speed-rail'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS['high-speed-rail'],
+          'line-width': 5,
+          'line-opacity': 0.9,
+          'line-dasharray': [6, 2, 2, 2],
+        },
+      })
+
+      // Olympics
+      map.addLayer({
+        id: 'olympic-fix',
+        type: 'line',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'olympic-fix'],
+        layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: {
+          'line-color': LAYER_COLORS['olympic-fix'],
+          'line-width': 4.5,
+          'line-opacity': 0.9,
+          'line-dasharray': [3, 2],
+        },
+      })
+
+      // Problem areas
+      map.addLayer({
+        id: 'problem-area',
+        type: 'circle',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'problem-area'],
+        paint: {
+          'circle-radius': [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            6,
+            5,
+            12,
+            10,
+            16,
+            14,
+          ],
+          'circle-color': [
+            'match',
+            ['get', 'severity'],
+            'critical',
+            '#dc2626',
+            'high',
+            '#f97316',
+            'medium',
+            '#eab308',
+            '#9ca3af',
+          ],
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2,
+          'circle-opacity': 0.9,
+        },
+      })
+
+      // Labels for Problem areas
+      map.addLayer({
+        id: 'problem-area-labels',
+        type: 'symbol',
+        source: 'proposed-routes',
+        filter: ['==', ['get', 'mode'], 'problem-area'],
+        layout: {
+          'text-field': ['get', 'name'],
+          'text-size': ['interpolate', ['linear'], ['zoom'], 8, 9, 14, 13],
+          'text-offset': [0, 1.8],
+          'text-anchor': 'top',
+          'text-max-width': 12,
+          'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+        },
+        paint: {
+          'text-color': '#991b1b',
+          'text-halo-color': '#ffffff',
+          'text-halo-width': 1.5,
+        },
+      })
+
+      const clickableLayers: string[] = Object.values(LAYER_ID_MAP)
+
+      clickableLayers.forEach((layerId: string) => {
+        map.on('click', layerId, (e) => {
+          if (e.features && e.features.length > 0) {
+            const props = e.features[0].properties
+            const name =
+              props?.name ??
+              props?.longName ??
+              props?.shortName ??
+              'Unknown'
+            const description =
+              props?.description ??
+              (props?.longName
+                ? `Route ${props?.shortName ?? ''} — ${props.longName}`
+                : '')
+            setSelectedFeature({
+              name,
+              description,
+              mode: props?.mode ?? '',
+              severity: props?.severity ?? undefined,
+              category: props?.category ?? undefined,
+            })
+          }
+        })
+        map.on('mouseenter', layerId, () => {
+          map.getCanvas().style.cursor = 'pointer'
+        })
+        map.on('mouseleave', layerId, () => {
+          map.getCanvas().style.cursor = ''
+        })
+      })
+
+      map.on('click', 'problem-area-labels', (e) => {
+        if (e.features && e.features.length > 0) {
+          const props = e.features[0].properties
+          setSelectedFeature({
+            name: props?.name ?? 'Unknown',
+            description: props?.description ?? '',
+            mode: props?.mode ?? '',
+            severity: props?.severity ?? undefined,
+            category: props?.category ?? undefined,
+          })
+        }
+      })
+      map.on('mouseenter', 'problem-area-labels', () => {
+        map.getCanvas().style.cursor = 'pointer'
+      })
+      map.on('mouseleave', 'problem-area-labels', () => {
+        map.getCanvas().style.cursor = ''
+      })
+
+      setLoaded(true)
+    },
+    [],
+  )
+
+  // Init
+  useEffect(() => {
+    if (!mapContainer.current || mapRef.current) return
+
+    const map = new maplibregl.Map({
+      container: mapContainer.current,
+      style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+      center: [153.025, -27.47],
+      zoom: 9,
+      minZoom: 4,
+      maxZoom: 16,
+    })
+
+    map.addControl(new maplibregl.NavigationControl(), 'top-right')
+
+    map.on('load', async () => {
+      try {
+        const [gtfsRes, proposedRes] = await Promise.all([
+          fetch('/gtfs-routes.json'),
+          fetch('/proposed-routes.json'),
+        ])
+        const gtfsData =
+          (await gtfsRes.json()) as GeoJSON.FeatureCollection
+        const proposedData =
+          (await proposedRes.json()) as GeoJSON.FeatureCollection
+        addLayers(map, gtfsData, proposedData)
+      } catch (err) {
+        console.error('Failed to load route data:', err)
+        const empty: GeoJSON.FeatureCollection = {
+          type: 'FeatureCollection',
+          features: [],
+        }
+        addLayers(map, empty, empty)
+      } finally {
+        setDataLoading(false)
+      }
+    })
+
+    mapRef.current = map
+    return () => {
+      map.remove()
+      mapRef.current = null
+    }
+  }, [addLayers])
+
+  useEffect(() => {
+    if (!mapRef.current || !loaded) return
+    const map = mapRef.current
+    for (const [key, layerId] of Object.entries(LAYER_ID_MAP) as [string, string][]) {
+      if (map.getLayer(layerId)) {
+        map.setLayoutProperty(
+          layerId,
+          'visibility',
+          layers[key as LayerKey] ? 'visible' : 'none',
+        )
+      }
+    }
+
+    if (map.getLayer('problem-area-labels')) {
+      map.setLayoutProperty(
+        'problem-area-labels',
+        'visibility',
+        layers.problemAreas ? 'visible' : 'none',
+      )
+    }
+  }, [layers, loaded])
+
+  const toggleLayer = (key: LayerKey) =>
+    setLayers((prev) => ({ ...prev, [key]: !prev[key] }))
+
+  return (
+    <div className="relative h-full w-full">
+      <div ref={mapContainer} className="h-full w-full" />
+
+      {dataLoading && (
+        <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white/90 px-6 py-3 shadow-lg backdrop-blur-sm">
+          <p className="text-sm font-medium text-gray-700">
+            Loading transport routes…
+          </p>
+        </div>
+      )}
+
+      <div className="absolute top-4 left-4 z-10 max-h-[calc(100%-2rem)] overflow-y-auto rounded-xl bg-white/95 p-4 shadow-lg backdrop-blur-sm">
+        <h3 className="mb-3 text-sm font-bold tracking-tight text-gray-900">
+          Map Layers
+        </h3>
+
+        <p className="mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase">
+          Current Network
+        </p>
+        {CURRENT_LAYERS.map((key) => (
+          <label
+            key={key}
+            className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100"
+          >
+            <input
+              type="checkbox"
+              checked={layers[key]}
+              onChange={() => toggleLayer(key)}
+              className="accent-indigo-600"
+            />
+            <span
+              className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
+            />
+            <span className="text-sm text-gray-700">{LAYER_LABELS[key]}</span>
+          </label>
+        ))}
+
+        <p className="mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase">
+          Proposed Changes
+        </p>
+        {PROPOSED_LAYERS.map((key) => (
+          <label
+            key={key}
+            className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100"
+          >
+            <input
+              type="checkbox"
+              checked={layers[key]}
+              onChange={() => toggleLayer(key)}
+              className="accent-indigo-600"
+            />
+            <span
+              className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
+            />
+            <span className="text-sm text-gray-700">{LAYER_LABELS[key]}</span>
+          </label>
+        ))}
+
+        <p className="mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase">
+          Analysis
+        </p>
+        {SPECIAL_LAYERS.map((key) => (
+          <label
+            key={key}
+            className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100"
+          >
+            <input
+              type="checkbox"
+              checked={layers[key]}
+              onChange={() => toggleLayer(key)}
+              className="accent-indigo-600"
+            />
+            <span
+              className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
+            />
+            <span className="text-sm text-gray-700">{LAYER_LABELS[key]}</span>
+          </label>
+        ))}
+      </div>
+
+      {selectedFeature && (
+        <div className="absolute right-4 bottom-4 z-10 max-w-sm rounded-xl bg-white/95 p-4 shadow-lg backdrop-blur-sm">
+          <div className="mb-1 flex items-start justify-between gap-2">
+            <h3 className="text-sm font-bold text-gray-900">
+              {selectedFeature.name}
+            </h3>
+            <button
+              onClick={() => setSelectedFeature(null)}
+              className="shrink-0 cursor-pointer text-gray-400 hover:text-gray-600"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="mb-2 flex flex-wrap gap-1.5">
+            <span className="inline-block rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-800">
+              {modeLabel(selectedFeature.mode)}
+            </span>
+            {selectedFeature.severity && (
+              <span
+                className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${severityColor(selectedFeature.severity)}`}
+              >
+                {selectedFeature.severity}
+              </span>
+            )}
+            {selectedFeature.category && (
+              <span className="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">
+                {selectedFeature.category}
+              </span>
+            )}
+          </div>
+          {selectedFeature.description && (
+            <p className="text-sm leading-relaxed text-gray-600">
+              {selectedFeature.description}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}

@@ -8,6 +8,7 @@ export const NavLinks: Link[] = [
     { href: '/member', label: 'Membership' },
     { href: '/releases', label: 'Media Releases' },
     { href: '/blog', label: 'Blog' },
+    { href: '/map', label: 'Map' },
     { href: '/policy-platform', label: 'Policy Platform' },
     { href: '/contact', label: 'Contact' },
 ]
