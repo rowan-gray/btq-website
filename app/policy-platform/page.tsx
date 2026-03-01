@@ -103,10 +103,10 @@ export default function Page() {
         {/* Key pillars */}
         <Container className="mt-16 mb-16">
           <div className="text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-3xl">
+            <h2 className="text-2xl font-bold tracking-tight text-heading sm:text-3xl">
               Key Policy Pillars
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base text-gray-600 dark:text-gray-400">
+            <p className="mx-auto mt-3 max-w-2xl text-base text-body">
               The platform is built around six interconnected priorities that
               together deliver a world-class transport system for Queensland.
             </p>
@@ -121,10 +121,10 @@ export default function Page() {
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 transition group-hover:bg-indigo-100 dark:bg-indigo-900/50 dark:text-indigo-400 dark:group-hover:bg-indigo-900/70">
                   {pillar.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-950 dark:text-white">
+                <h3 className="text-lg font-semibold text-heading">
                   {pillar.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                <p className="mt-2 text-sm leading-relaxed text-body">
                   {pillar.description}
                 </p>
               </div>
@@ -136,10 +136,10 @@ export default function Page() {
         <div className="border-t border-gray-200 bg-gray-50/50 dark:border-gray-800 dark:bg-gray-900/50">
           <Container className="py-16">
             <div className="text-center">
-              <h2 className="text-2xl font-bold tracking-tight text-gray-950 dark:text-white">
+              <h2 className="text-2xl font-bold tracking-tight text-heading">
                 Read the Full Document
               </h2>
-              <p className="mx-auto mt-3 max-w-xl text-base text-gray-600 dark:text-gray-400">
+              <p className="mx-auto mt-3 max-w-xl text-base text-body">
                 Browse the complete policy platform below, or download the PDF
                 to read offline.
               </p>
@@ -157,7 +157,7 @@ export default function Page() {
 
             {/* Mobile fallback */}
             <div className="mt-8 text-center lg:hidden">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-muted">
                 The embedded PDF viewer is available on larger screens.
               </p>
               <Button

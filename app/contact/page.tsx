@@ -27,8 +27,8 @@ function CommitteeMemberCard({ name, role, email }: CommitteeMember) {
           .map((n) => n[0])
           .join('')}
       </div>
-      <h3 className="text-lg font-semibold text-gray-950 dark:text-white">{name}</h3>
-      <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{role}</p>
+      <h3 className="text-lg font-semibold text-heading">{name}</h3>
+      <p className="mt-1 text-sm text-muted">{role}</p>
       {email && (
         <a
           href={`mailto:${email}`}
@@ -69,7 +69,7 @@ function GeneralContacts() {
   return (
     <section>
       <Heading as="h2">Get in touch</Heading>
-      <p className="mt-4 max-w-3xl text-gray-600 dark:text-gray-400">
+      <p className="mt-4 max-w-3xl text-body">
         We&apos;re always happy to take part in interviews on any topic relating
         to Queensland&apos;s transport system, such as policy, infrastructure,
         accessibility, and community impacts.
@@ -81,10 +81,10 @@ function GeneralContacts() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-gray-950 dark:text-white">
+          <h3 className="text-lg font-semibold text-heading">
             General Enquiries
           </h3>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-sm text-body">
             For any general enquiries or questions, please contact us at{' '}
             <a
               href="mailto:enquiries@btq.org.au"
@@ -100,10 +100,10 @@ function GeneralContacts() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-gray-950 dark:text-white">
+          <h3 className="text-lg font-semibold text-heading">
             Media Enquiries
           </h3>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-2 text-sm text-body">
             For any media enquiries or questions, please contact us at{' '}
             <a
               href="mailto:media@btq.org.au"
@@ -122,14 +122,14 @@ function ManagementCommittee() {
   return (
     <section>
       <Heading as="h2">Management Committee</Heading>
-      <p className="mt-6 max-w-3xl text-gray-600 dark:text-gray-400">
+      <p className="mt-6 max-w-3xl text-body">
         Our Management Committee is made up of dedicated volunteers who guide
         Better Transport Queensland&apos;s strategy, governance, and advocacy
         work. Each member brings unique expertise and a shared commitment to
         improving transport outcomes across the state.
       </p>
 
-      <p className="mt-4 max-w-3xl text-gray-600 dark:text-gray-400">
+      <p className="mt-4 max-w-3xl text-body">
         For the quickest response, please direct your general and media
         enquiries to the email addresses listed in the section above.
       </p>

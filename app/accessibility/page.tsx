@@ -101,10 +101,10 @@ function StatusBadge({ value, label }: { value: boolean | string; label: string 
     // lifts: yes/partial/no
     const colour =
       value === 'yes'
-        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+        ? 'badge-success'
         : value === 'partial'
-          ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
-          : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
+          ? 'badge-warning'
+          : 'badge-danger'
     return (
       <span className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium ${colour}`}>
         {value === 'yes' ? '✓' : value === 'partial' ? '~' : '✗'} {label}
@@ -116,8 +116,8 @@ function StatusBadge({ value, label }: { value: boolean | string; label: string 
     <span
       className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium ${
         value
-          ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
-          : 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
+          ? 'badge-success'
+          : 'badge-danger'
       }`}
     >
       {value ? '✓' : '✗'} {label}
@@ -144,7 +144,7 @@ function Overview() {
   return (
     <Container>
       <div className="text-center">
-        <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+        <p className="section-label">
           At a Glance
         </p>
         <Heading as="h2" className="mx-auto mt-2 max-w-3xl">
@@ -163,7 +163,7 @@ function Overview() {
             key={stat.label}
             className="flex flex-col items-center justify-center bg-white px-4 py-8 text-center dark:bg-gray-800"
           >
-            <span className="text-3xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
+            <span className="text-3xl font-bold tracking-tight text-accent">
               {stat.value}
             </span>
             <span className="mt-2 text-xs font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
@@ -181,7 +181,7 @@ function StationTracker() {
     <div className="bg-gray-50 py-20 dark:bg-gray-900">
       <Container>
         <div>
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             Station by Station
           </p>
           <Subheading className="mt-2">Accessibility Tracker</Subheading>
@@ -212,10 +212,10 @@ function StationTracker() {
             <tbody className="divide-y divide-gray-100 bg-white dark:divide-gray-800 dark:bg-gray-900">
               {stations.map((s) => (
                 <tr key={s.name}>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                  <td className="px-4 py-3 text-sm font-medium text-heading">
                     {s.name}
                   </td>
-                  <td className="hidden px-4 py-3 text-sm text-gray-500 dark:text-gray-400 sm:table-cell">
+                  <td className="hidden px-4 py-3 text-sm text-muted sm:table-cell">
                     {s.line}
                   </td>
                   <td className="px-4 py-3">
@@ -248,7 +248,7 @@ function KnownIssues() {
   return (
     <Container>
       <div>
-        <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+        <p className="section-label">
           Progress &amp; Challenges
         </p>
         <Subheading className="mt-2">Known Accessibility Issues</Subheading>
@@ -265,7 +265,7 @@ function KnownIssues() {
           loading="lazy"
           className="w-full object-cover"
         />
-        <figcaption className="mt-2 text-center text-xs text-gray-500 dark:text-gray-400">
+        <figcaption className="mt-2 text-center text-xs text-muted">
           Inside an NGR train after the disability accessibility retrofit — new
           priority seating and improved signage.{' '}
           <a
@@ -290,19 +290,19 @@ function KnownIssues() {
               <span
                 className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-semibold uppercase ${
                   issue.severity === 'critical'
-                    ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
+                    ? 'badge-danger'
                     : issue.severity === 'moderate'
-                      ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
-                      : 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+                      ? 'badge-warning'
+                      : 'badge-success'
                 }`}
               >
                 {issue.severity}
               </span>
             </div>
-            <h3 className="mt-3 text-lg font-bold text-gray-900 dark:text-white">
+            <h3 className="mt-3 text-lg font-bold text-heading">
               {issue.title}
             </h3>
-            <p className="mt-2 text-sm/6 text-gray-600 dark:text-gray-400">
+            <p className="mt-2 text-sm/6 text-body">
               {issue.description}
             </p>
           </div>
@@ -326,7 +326,7 @@ function WhatWeCampaignFor() {
     <div className="bg-gray-50 py-20 dark:bg-gray-900">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             Our Position
           </p>
           <Subheading className="mt-2">
@@ -345,7 +345,7 @@ function WhatWeCampaignFor() {
               className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white px-5 py-4 dark:border-gray-800 dark:bg-gray-800"
             >
               <svg
-                className="mt-0.5 h-5 w-5 shrink-0 text-indigo-600 dark:text-indigo-400"
+                className="mt-0.5 h-5 w-5 shrink-0 text-accent"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}

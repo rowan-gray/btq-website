@@ -163,20 +163,20 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
     <div className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+          <h3 className="text-lg font-bold text-heading">
             {vehicle.name}
           </h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-muted">
             {vehicle.type}
           </p>
         </div>
         <span
           className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-medium ${
             vehicle.status.toLowerCase().includes('retired') || vehicle.status.toLowerCase().includes('being')
-              ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
+              ? 'badge-warning'
               : vehicle.status.toLowerCase().includes('trial')
-                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'
-                : 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+                ? 'badge-info'
+                : 'badge-success'
           }`}
         >
           {vehicle.status}
@@ -187,7 +187,7 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
       </p>
       <ul className="mt-4 space-y-1.5">
         {vehicle.details.map((d, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <li key={i} className="flex items-start gap-2 text-sm text-body">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500 dark:bg-indigo-400" />
             {d}
           </li>
@@ -213,7 +213,7 @@ function FleetSection({
   return (
     <Container>
       <div>
-        <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+        <p className="section-label">
           {label}
         </p>
         <Subheading className="mt-2">{title}</Subheading>
@@ -227,7 +227,7 @@ function FleetSection({
             loading="lazy"
             className="w-full object-cover"
           />
-          <figcaption className="mt-2 text-center text-xs text-gray-500 dark:text-gray-400">
+          <figcaption className="mt-2 text-center text-xs text-muted">
             {image.caption}{' '}
             <a
               href={image.href}
@@ -278,7 +278,7 @@ function KeyLines() {
     <div className="bg-gray-50 py-20 dark:bg-gray-900">
       <Container>
         <div>
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             Rail Network
           </p>
           <Subheading className="mt-2">SEQ Rail Lines</Subheading>
@@ -306,14 +306,14 @@ function KeyLines() {
             <tbody className="divide-y divide-gray-100 bg-white dark:divide-gray-800 dark:bg-gray-900">
               {keyLines.map((line) => (
                 <tr key={line.name}>
-                  <td className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                  <td className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-heading">
                     <span className={`inline-block h-3 w-3 shrink-0 rounded-full ${line.colour}`} />
                     {line.name}
                   </td>
-                  <td className="hidden px-4 py-3 text-sm text-gray-500 dark:text-gray-400 sm:table-cell">
+                  <td className="hidden px-4 py-3 text-sm text-muted sm:table-cell">
                     {line.route}
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                  <td className="px-4 py-3 text-sm text-muted">
                     {line.frequency}
                   </td>
                 </tr>

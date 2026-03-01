@@ -39,7 +39,7 @@ export function Accordion({
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          <ChevronDownIcon className="size-5 text-gray-600 dark:text-gray-400" />
+          <ChevronDownIcon className="size-5 text-body" />
         </motion.div>
       </div>
 
