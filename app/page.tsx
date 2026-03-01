@@ -67,7 +67,7 @@ function PolicyPlatform() {
       <div className="flex flex-col gap-12 lg:flex-row lg:items-center">
         {/* Text */}
         <div className="order-2 flex-1 lg:order-1">
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             Featured
           </p>
           <Heading as="h2" className="mt-2">
@@ -146,7 +146,7 @@ function Pillars() {
     <div className="relative">
       <Container>
         <div className="text-center">
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             Our Mission
           </p>
           <Heading as="h2" className="mx-auto mt-2 max-w-2xl">
@@ -164,11 +164,11 @@ function Pillars() {
               key={p.title}
               className="rounded-lg border border-gray-200 bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
             >
-              <span className="text-indigo-600 dark:text-indigo-400">{p.icon}</span>
-              <h3 className="mt-4 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+              <span className="text-accent">{p.icon}</span>
+              <h3 className="mt-4 text-lg font-bold tracking-tight text-heading">
                 {p.title}
               </h3>
-              <p className="mt-2 text-sm/6 text-gray-600 dark:text-gray-400">{p.body}</p>
+              <p className="mt-2 text-sm/6 text-body">{p.body}</p>
             </div>
           ))}
         </div>
@@ -206,7 +206,7 @@ function CommunitySection() {
 
         {/* Text + CTA */}
         <div className="flex-1 lg:pt-12">
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             Community
           </p>
           <Subheading className="mt-2">

@@ -101,7 +101,7 @@ function Timeline() {
   return (
     <Container>
       <div className="text-center">
-        <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+        <p className="section-label">
           Through the Decades
         </p>
         <Heading as="h2" className="mx-auto mt-2 max-w-2xl">
@@ -132,13 +132,13 @@ function Timeline() {
 
               {/* Content */}
               <div className={`ml-12 w-full sm:ml-0 sm:w-1/2 ${i % 2 === 0 ? 'sm:pr-12' : 'sm:pl-12'}`}>
-                <span className="text-sm font-bold text-indigo-600 dark:text-indigo-400">
+                <span className="text-sm font-bold text-accent">
                   {entry.year}
                 </span>
-                <h3 className="mt-1 text-lg font-bold text-gray-900 dark:text-white">
+                <h3 className="mt-1 text-lg font-bold text-heading">
                   {entry.title}
                 </h3>
-                <p className="mt-2 text-sm/6 text-gray-600 dark:text-gray-400">
+                <p className="mt-2 text-sm/6 text-body">
                   {entry.body}
                 </p>
               </div>
@@ -155,7 +155,7 @@ function TramLegacy() {
     <div className="bg-gray-50 py-20 dark:bg-gray-900">
       <Container>
         <div className="mx-auto max-w-3xl">
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             The Trams We Lost
           </p>
           <Subheading className="mt-2">
@@ -169,7 +169,7 @@ function TramLegacy() {
               loading="lazy"
               className="w-full object-cover"
             />
-            <figcaption className="mt-2 text-center text-xs text-gray-500 dark:text-gray-400">
+            <figcaption className="mt-2 text-center text-xs text-muted">
               An early electric tram at Victoria Bridge, Brisbane, c.&nbsp;1906.{' '}
               <a
                 href="https://commons.wikimedia.org/wiki/File:BrisbaneCombinationTramVictoriaBridge1906.jpg"
@@ -198,7 +198,7 @@ function TramLegacy() {
                 loading="lazy"
                 className="w-full object-cover"
               />
-              <figcaption className="mt-2 text-center text-xs text-gray-500 dark:text-gray-400">
+              <figcaption className="mt-2 text-center text-xs text-muted">
                 Dreadnought trams in Queen Street, Brisbane, 1947.{' '}
                 <a
                   href="https://commons.wikimedia.org/wiki/File:BrisbaneQueenStreet1947.jpg"
@@ -226,7 +226,7 @@ function TramLegacy() {
               the best urban transport in the world.
             </p>
             <p>
-              <strong className="text-gray-900 dark:text-white">
+              <strong className="text-heading">
                 Brisbane&apos;s trams are a reminder:
               </strong>{' '}
               once you tear out public transport infrastructure, getting it back
@@ -244,7 +244,7 @@ function LookingForward() {
   return (
     <Container>
       <div className="mx-auto max-w-3xl text-center">
-        <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+        <p className="section-label">
           The Future
         </p>
         <Subheading className="mt-2">

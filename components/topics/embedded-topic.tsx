@@ -92,17 +92,17 @@ function renderWithTailwind(html: string) {
           case 'h1':
             node.attribs.class ||= ''
             node.attribs.class +=
-              ' mt-10 mb-3 text-3xl font-bold tracking-tight text-gray-950 dark:text-white'
+              ' mt-10 mb-3 text-3xl font-bold tracking-tight text-heading'
             break
           case 'h2':
             node.attribs.class ||= ''
             node.attribs.class +=
-              ' mt-8 mb-3 text-2xl font-bold tracking-tight text-gray-950 dark:text-white'
+              ' mt-8 mb-3 text-2xl font-bold tracking-tight text-heading'
             break
           case 'h3':
             node.attribs.class ||= ''
             node.attribs.class +=
-              ' mt-6 mb-2 text-xl font-semibold text-gray-950 dark:text-white'
+              ' mt-6 mb-2 text-xl font-semibold text-heading'
             break
           case 'p':
             if (node.childNodes.length == 0) {
@@ -133,7 +133,7 @@ function renderWithTailwind(html: string) {
               isFirstVisibleParagraph = false
               node.attribs.class ||= ''
               node.attribs.class +=
-                ' mb-6 text-xl font-semibold leading-8 text-gray-950 dark:text-white border-l-4 border-indigo-500 pl-4'
+                ' mb-6 text-xl font-semibold leading-8 text-heading border-l-4 border-indigo-500 pl-4'
               break
             }
 
@@ -169,7 +169,7 @@ function renderWithTailwind(html: string) {
                   >
                     {parser.domToReact([node])}
                   </div>
-                  <figcaption className="mt-2 text-center text-sm italic text-gray-500 dark:text-gray-400">
+                  <figcaption className="mt-2 text-center text-sm italic text-muted">
                     {node.attribs.alt}
                   </figcaption>
                 </figure>
@@ -216,7 +216,7 @@ function renderWithTailwind(html: string) {
           case 'strong':
           case 'b':
             node.attribs.class ||= ''
-            node.attribs.class += ' font-semibold text-gray-950 dark:text-white'
+            node.attribs.class += ' font-semibold text-heading'
             break
         }
       }
@@ -262,7 +262,7 @@ export default async function EmbeddedTopic(params: {
 
       {/* Title & meta */}
       <Heading as="h1">{post.title}</Heading>
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-gray-200 pb-6 text-sm text-gray-500 dark:border-gray-800 dark:text-gray-400">
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-gray-200 pb-6 text-sm text-muted dark:border-gray-800">
         {post.creator && (
           <span>
             {params.showAuthor ? <>@{post.creator} &middot; </> : null}

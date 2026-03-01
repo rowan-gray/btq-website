@@ -104,7 +104,7 @@ function WhyItMatters() {
   return (
     <Container>
       <div className="text-center">
-        <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+        <p className="section-label">
           The Big Picture
         </p>
         <Heading as="h2" className="mx-auto mt-2 max-w-3xl">
@@ -122,11 +122,11 @@ function WhyItMatters() {
             key={b.title}
             className="rounded-lg border border-gray-200 bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
           >
-            <span className="text-indigo-600 dark:text-indigo-400">{b.icon}</span>
-            <h3 className="mt-4 text-lg font-bold tracking-tight text-gray-900 dark:text-white">
+            <span className="text-accent">{b.icon}</span>
+            <h3 className="mt-4 text-lg font-bold tracking-tight text-heading">
               {b.title}
             </h3>
-            <p className="mt-2 text-sm/6 text-gray-600 dark:text-gray-400">
+            <p className="mt-2 text-sm/6 text-body">
               {b.body}
             </p>
           </div>
@@ -141,7 +141,7 @@ function EnvironmentImpact() {
     <div className="bg-gray-50 py-20 dark:bg-gray-900">
       <Container>
         <div className="text-center">
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             Environmental Impact
           </p>
           <Subheading className="mx-auto mt-2 max-w-2xl">
@@ -159,7 +159,7 @@ function EnvironmentImpact() {
               key={stat.label}
               className="flex flex-col items-center justify-center bg-white px-4 py-8 text-center dark:bg-gray-800"
             >
-              <span className="text-3xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
+              <span className="text-3xl font-bold tracking-tight text-accent">
                 {stat.value}
               </span>
               <span className="mt-2 text-xs font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
@@ -177,7 +177,7 @@ function GettingStarted() {
   return (
     <Container>
       <div className="text-center">
-        <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+        <p className="section-label">
           New to PT?
         </p>
         <Heading as="h2" className="mx-auto mt-2 max-w-2xl">
@@ -196,10 +196,10 @@ function GettingStarted() {
               {s.step}
             </div>
             <div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+              <h3 className="text-lg font-bold text-heading">
                 {s.title}
               </h3>
-              <p className="mt-1 text-sm/6 text-gray-600 dark:text-gray-400">
+              <p className="mt-1 text-sm/6 text-body">
                 {s.body}
               </p>
             </div>
@@ -224,7 +224,7 @@ function DriversSection() {
     <div className="bg-gray-50 py-20 dark:bg-gray-900">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400">
+          <p className="section-label">
             For Drivers
           </p>
           <Subheading className="mt-2">
@@ -253,7 +253,7 @@ function DriversSection() {
             gives you a genuine backup plan.
           </p>
           <p>
-            <strong className="text-gray-900 dark:text-white">Everyone benefits when public transport works.</strong>{' '}
+            <strong className="text-heading">Everyone benefits when public transport works.</strong>{' '}
             Whether you ride it daily, occasionally, or never — investment
             in PT makes Queensland a better place to live.
           </p>
@@ -286,7 +286,7 @@ export default function WhyPublicTransport() {
               loading="lazy"
               className="w-full object-cover"
             />
-            <figcaption className="mt-2 text-center text-xs text-gray-500 dark:text-gray-400">
+            <figcaption className="mt-2 text-center text-xs text-muted">
               Brisbane once had a world-class tram network. An electric tram
               crosses Victoria Bridge, c.&nbsp;1906.{' '}
               <a

@@ -13,6 +13,46 @@
   }
 }
 
+@layer components {
+  .text-accent {
+    @apply text-indigo-600 dark:text-indigo-400;
+  }
+
+  .text-heading {
+    @apply text-gray-900 dark:text-white;
+  }
+
+  .text-body {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+
+  .text-muted {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+
+  /* Section label */
+  .section-label {
+    @apply text-sm font-semibold tracking-widest uppercase text-indigo-600 dark:text-indigo-400;
+  }
+
+  /* Badge variants */
+  .badge-success {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300;
+  }
+
+  .badge-danger {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300;
+  }
+
+  .badge-warning {
+    @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300;
+  }
+
+  .badge-info {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300;
+  }
+}
+
 @layer utilities {
   .scrollbar-gutter-stable {
     scrollbar-gutter: stable;
