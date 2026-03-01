@@ -1,8 +1,6 @@
 import { createPageMetadata } from '@/app/layout'
-import { Container } from '@/components/core/container'
-import { Heading, Lead } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
-import { Navbar } from '@/components/navbar/navbar'
+import { HeroBanner } from '@/components/hero-banner'
 import { TransportMap } from '@/components/transport-map'
 import type { Metadata } from 'next'
 
@@ -16,24 +14,17 @@ export const metadata: Metadata = createPageMetadata({
 export default function MapPage() {
   return (
     <div className="overflow-hidden">
-      <Container>
-        <Navbar />
-      </Container>
-      <Container className="mt-16 mb-10">
-        <Heading as="h1">Queensland Transport Map</Heading>
-        <Lead className="mt-6 max-w-3xl">
-          Explore South East Queensland&apos;s public transport network
-          alongside our proposed improvements. Toggle layers to compare suburban
-          rail, bus routes, ferries, regional passenger rail, and freight
-          corridors with what we believe would create a better connected,
-          more&nbsp;sustainable transport future.
-        </Lead>
-        <p className="mt-4 text-sm text-gray-500">
+      <HeroBanner
+        title="Queensland Transport Map"
+        lead="Explore South East Queensland's public transport network alongside our proposed improvements. Toggle layers to compare the current network with what we believe would create a better connected, more sustainable future."
+      >
+        <p className="mt-4 text-sm text-indigo-200/70">
           Click on any route for more details. Dashed lines indicate proposed
           improvements.
         </p>
-      </Container>
-      <div className="mx-2 mb-16 h-[70vh] overflow-hidden rounded-2xl border border-gray-200 shadow-lg">
+      </HeroBanner>
+
+      <div className="mx-auto mt-8 mb-16 h-[75vh] max-w-7xl overflow-hidden rounded-lg px-6 shadow-sm ring-1 ring-gray-200 lg:px-8 dark:ring-gray-800">
         <TransportMap />
       </div>
       <Footer />

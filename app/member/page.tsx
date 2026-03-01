@@ -6,7 +6,7 @@ import { Gradient } from '@/components/core/gradient'
 import { Link } from '@/components/core/link'
 import { Heading, Lead, Subheading } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
-import { Navbar } from '@/components/navbar/navbar'
+import { HeroBanner } from '@/components/hero-banner'
 import { MinusIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
 
@@ -85,26 +85,10 @@ const tiers: Tier[] = [
   },
 ]
 
-function Header() {
-  return (
-    <Container>
-      <Heading as="h1">
-        Influence change to improve transport throughout Queensland!
-      </Heading>
-      <Lead className="mt-6 max-w-3xl">
-        Better Transport Queensland is a not-for-profit organisation that
-        advocates for public and active transport as well as regional transport
-        and freight rail. We are a community of people who are passionate about
-        improving transport throughout Queensland.
-      </Lead>
-    </Container>
-  )
-}
-
 function PricingCards() {
   return (
     <div className="relative py-24">
-      <Gradient className="absolute inset-x-2 top-48 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Gradient className="absolute inset-x-0 top-48 bottom-0 rounded-lg" />
       <Container className="relative">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {tiers.map((tier, tierIndex) => (
@@ -118,20 +102,20 @@ function PricingCards() {
 
 function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
   return (
-    <div className="relative rounded-3xl bg-white p-10 pb-9 shadow-2xl ring-1 ring-black/5">
+    <div className="relative rounded-lg border border-gray-200 bg-white p-10 pb-9 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <Subheading>{tier.name}</Subheading>
-      <p className="mt-2 text-sm/6 text-gray-950/75">{tier.description}</p>
+      <p className="mt-2 text-sm/6 text-gray-950/75 dark:text-gray-300">{tier.description}</p>
       <div className="mt-8 flex items-center gap-4">
-        <div className="text-5xl font-medium text-gray-950">
+        <div className="text-5xl font-medium text-gray-950 dark:text-white">
           ${tier.priceMonthly}
         </div>
-        <div className="text-sm/5 text-gray-950/75">
+        <div className="text-sm/5 text-gray-950/75 dark:text-gray-300">
           <p>AUD</p>
           <p>per year</p>
         </div>
       </div>
       <div className="mt-8 mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950">Benefits</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">Benefits</h3>
         <ul className="mt-3 space-y-3">
           {tier.highlights?.map((props, featureIndex) => (
             <FeatureItem key={featureIndex} {...props} />
@@ -139,7 +123,7 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </ul>
       </div>
       <div className="mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950">Requirements</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">Requirements</h3>
         <ul className="mt-3 space-y-1">
           {tier.requirements?.map((requirement, featureIndex) => (
             <RequirementItem key={featureIndex} requirement={requirement} />
@@ -163,7 +147,7 @@ function FeatureItem({
   return (
     <li
       data-disabled={disabled ? true : undefined}
-      className="flex items-start gap-4 text-sm/6 text-gray-950/75 data-[disabled]:text-gray-950/25"
+      className="flex items-start gap-4 text-sm/6 text-gray-950/75 data-[disabled]:text-gray-950/25 dark:text-gray-300 dark:data-[disabled]:text-gray-600"
     >
       <span className="inline-flex h-6 items-center">
         <PlusIcon className="size-[0.9375rem] shrink-0 fill-gray-950/25" />
@@ -176,7 +160,7 @@ function FeatureItem({
 
 function RequirementItem({ requirement }: { requirement: Requirement }) {
   return (
-    <li className="flex flex-col gap-1 text-sm text-gray-950/75">
+    <li className="flex flex-col gap-1 text-sm text-gray-950/75 dark:text-gray-300">
       <div className="flex items-start gap-3">
         <span className="inline-flex h-6 items-center">
           <MinusIcon className="h-3.5 w-3.5 shrink-0 fill-gray-950/30" />
@@ -279,7 +263,7 @@ function FrequentlyAskedQuestions() {
             committee at{' '}
             <a
               href="mailto:management@btq.org.au"
-              className="text-pink-500 hover:underline"
+              className="text-indigo-600 hover:underline dark:text-indigo-400"
             >
               management@btq.org.au
             </a>{' '}
@@ -316,10 +300,11 @@ function FrequentlyAskedQuestions() {
 export default function Pricing() {
   return (
     <main className="overflow-hidden">
-      <Container>
-        <Navbar />
-      </Container>
-      <Header />
+      <HeroBanner
+        title="Influence change to improve transport throughout Queensland!"
+        lead="Better Transport Queensland is a not-for-profit organisation that advocates for public and active transport as well as regional transport and freight rail. We are a community of people who are passionate about improving transport throughout Queensland."
+      />
+
       <PricingCards />
       <FrequentlyAskedQuestions />
       <Footer />
