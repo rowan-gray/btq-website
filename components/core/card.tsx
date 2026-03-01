@@ -12,8 +12,8 @@ export function Card({
     return (
       <Link href={link} passHref>
         <div
-          className="rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-shadow duration-300 hover:cursor-pointer hover:shadow-lg"
-          rel="noopener noreferrer" // Security measure
+          className="rounded-lg border border-gray-200 bg-white p-6 transition-shadow duration-300 hover:cursor-pointer hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
+          rel="noopener noreferrer"
         >
           {children}
         </div>
@@ -22,7 +22,7 @@ export function Card({
   }
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+    <div className="rounded-lg border border-gray-200 bg-white p-6 transition-shadow duration-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-900">
       {children}
     </div>
   )

@@ -15,7 +15,7 @@ export function Accordion({
 
   return (
     <div
-      className="border-b border-gray-300"
+      className="border-b border-gray-200 dark:border-gray-800"
       // Make the whole block clickable
       role="button"
       aria-expanded={isOpen}
@@ -39,7 +39,7 @@ export function Accordion({
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          <ChevronDownIcon className="size-5 text-gray-600" />
+          <ChevronDownIcon className="size-5 text-gray-600 dark:text-gray-400" />
         </motion.div>
       </div>
 

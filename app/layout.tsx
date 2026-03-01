@@ -1,4 +1,5 @@
 import '@/styles/tailwind.css'
+import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import { Fira_Sans } from 'next/font/google'
 
@@ -77,11 +78,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scrollbar-gutter-stable">
+    <html lang="en" className="scrollbar-gutter-stable" suppressHydrationWarning>
       <body
-        className={`bg-[#f1f1f1] ${firaSans.className} text-gray-950 antialiased`}
+        className={`${firaSans.className} min-h-screen bg-white text-gray-950 antialiased transition-colors duration-200 dark:bg-gray-950 dark:text-gray-100`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )
