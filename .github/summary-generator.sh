@@ -43,6 +43,7 @@ convert_semgrep() {
     | sed 's/[[:space:]]*│[[:space:]]*$//' \
     | awk 'NF' \
     | awk '
+      { gsub(/^[[:space:]]+/, "") }
       # Summary line: "N Code Findings"
       /^[0-9]+ [A-Za-z].*[Ff]inding/ {
         print "**" $0 "**"; print ""; next
