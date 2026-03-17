@@ -72,7 +72,6 @@ convert_semgrep() {
       }
       # Description text and everything else
       {
-        if (in_code) { print "```"; in_code=0; print "" }
         print
       }
       END { if (in_code) print "```" }
