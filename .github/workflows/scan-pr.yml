@@ -1,25 +1,23 @@
 name: PR Scan
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - main
     types: [opened, synchronize, reopened]
 
 permissions:
-  pull-requests: write
   contents: read
 
 jobs:
   scan:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout PR code
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-          # Use the default GITHUB_TOKEN which has the permissions you set above
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Trivy scan
         uses: aquasecurity/trivy-action@master
@@ -34,12 +32,10 @@ jobs:
       - name: Run Semgrep
         run: semgrep scan --config=auto --output=semgrep-results.txt
 
-      - name: Generate PR summary
-        run: |
-          chmod +x .github/summary-generator.sh
-          .github/summary-generator.sh
-
-      - name: Post PR Comment
-        uses: marocchino/sticky-pull-request-comment@v2
+      - name: Upload raw scan results
+        uses: actions/upload-artifact@v4
         with:
-          path: summary.md
+          name: pr-scan-raw
+          path: |
+            trivy-results.txt
+            semgrep-results.txt
