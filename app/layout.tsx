@@ -1,4 +1,5 @@
 import '@/styles/tailwind.css'
+import { AlertStripServer } from '@/components/alert-strip-server'
 import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import { Fira_Sans } from 'next/font/google'
@@ -82,7 +83,10 @@ export default function RootLayout({
       <body
         className={`${firaSans.className} min-h-screen bg-white text-gray-950 antialiased transition-colors duration-200 dark:bg-gray-950 dark:text-gray-100`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+            <AlertStripServer />
+            {children}
+          </ThemeProvider>
       </body>
     </html>
   )

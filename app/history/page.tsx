@@ -117,7 +117,7 @@ function Timeline() {
           {timeline.map((entry, i) => (
             <div
               key={entry.year}
-              className={`relative flex flex-col sm:flex-row ${i % 2 === 0 ? 'sm:flex-row-reverse' : ''}`}
+              className={`relative flex flex-col sm:flex-row ${i % 2 === 0 ? 'pl-8 sm:flex-row-reverse' : ''}`}
             >
               {/* Dot */}
               <div className="absolute left-5 z-10 -ml-2.5 mt-1.5 sm:left-1/2">

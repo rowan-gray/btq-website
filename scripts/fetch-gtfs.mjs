@@ -188,7 +188,87 @@ async function main() {
 
   writeFileSync(OUTPUT_PATH, JSON.stringify(geojson), 'utf-8')
   const sizeMB = (Buffer.byteLength(JSON.stringify(geojson)) / 1024 / 1024).toFixed(2)
-  console.log(`[GTFS] Done — ${features.length} routes written to data/gtfs-routes.json (${sizeMB} MB) in ${((Date.now() - t0) / 1000).toFixed(1)}s`)
+  console.log(`[GTFS]   ${features.length} routes written (${sizeMB} MB)`)
+
+  const stopsEntry = zip.getEntry('stops.txt')
+  const stopsFullData = {}
+  if (stopsEntry) {
+    console.log('[GTFS] Parsing stops…')
+    const stopsRows = parseCSV(stopsEntry.getData().toString('utf-8'))
+    const stopsMap = {}
+    for (const s of stopsRows) {
+      if (!s.stop_id || !s.stop_name) continue
+      stopsMap[s.stop_id] = s.stop_name
+      stopsFullData[s.stop_id] = {
+        name: s.stop_name,
+        lat: parseFloat(s.stop_lat),
+        lon: parseFloat(s.stop_lon),
+        parentStation: s.parent_station ?? '',
+      }
+    }
+    const stopsPath = resolve(__dirname, '..', 'public', 'gtfs-stops.json')
+    writeFileSync(stopsPath, JSON.stringify(stopsMap), 'utf-8')
+    console.log(`[GTFS]   ${Object.keys(stopsMap).length} stops written`)
+  }
+
+  const stopTimesEntry = zip.getEntry('stop_times.txt')
+  if (stopTimesEntry && Object.keys(stopsFullData).length > 0) {
+    console.log('[GTFS] Building rail station map data…')
+
+    const railRouteIds = new Set(
+      routeRows.filter((r) => r.route_type === '2').map((r) => r.route_id),
+    )
+    const railTripIds = new Set(
+      tripRows.filter((t) => railRouteIds.has(t.route_id)).map((t) => t.trip_id),
+    )
+
+    const stText = stopTimesEntry.getData().toString('utf-8')
+    const stLines = stText.split(/\r?\n/)
+    const stHdr = stLines[0].split(',').map((h) => h.trim().replace(/"/g, ''))
+    const iTripId = stHdr.indexOf('trip_id')
+    const iStopId = stHdr.indexOf('stop_id')
+
+    const railPlatformIds = new Set()
+    for (let i = 1; i < stLines.length; i++) {
+      if (!stLines[i].trim()) continue
+      const parts = stLines[i].split(',')
+      const tripId = parts[iTripId]?.trim().replace(/"/g, '')
+      const stopId = parts[iStopId]?.trim().replace(/"/g, '')
+      if (tripId && stopId && railTripIds.has(tripId)) railPlatformIds.add(stopId)
+    }
+
+    const seen = new Set()
+    const railStationFeatures = []
+    for (const platformId of railPlatformIds) {
+      const platform = stopsFullData[platformId]
+      if (!platform) continue
+      const stationId = platform.parentStation || platformId
+      if (seen.has(stationId)) continue
+      seen.add(stationId)
+      const station = stopsFullData[stationId] ?? platform
+      if (isNaN(station.lat) || isNaN(station.lon)) continue
+
+      const cleanName = station.name.replace(/,\s*platform\s+\S+/i, '').trim()
+      railStationFeatures.push({
+        type: 'Feature',
+        properties: { id: stationId, name: cleanName },
+        geometry: { type: 'Point', coordinates: [
+          Math.round(station.lon * 1e5) / 1e5,
+          Math.round(station.lat * 1e5) / 1e5,
+        ]},
+      })
+    }
+
+    const railStopsPath = resolve(__dirname, '..', 'public', 'gtfs-rail-stops.json')
+    writeFileSync(
+      railStopsPath,
+      JSON.stringify({ type: 'FeatureCollection', features: railStationFeatures }),
+      'utf-8',
+    )
+    console.log(`[GTFS]   ${railStationFeatures.length} rail stations written`)
+  }
+
+  console.log(`[GTFS] Done in ${((Date.now() - t0) / 1000).toFixed(1)}s`)
 }
 
 main().catch((err) => { console.error(err); process.exit(1) })
