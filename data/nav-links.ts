@@ -35,6 +35,13 @@ export const NavItems: NavItem[] = [
     ],
   },
   {
+    label: 'Services',
+    links: [
+      { href: '/live-trains', label: 'Live Train Positions' },
+      { href: '/service-alerts', label: 'Service Alerts' },
+    ],
+  },
+  {
     label: 'News',
     links: [
       { href: '/releases', label: 'Media Releases' },

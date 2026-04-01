@@ -21,6 +21,7 @@
     "dayjs": "^1.11.19",
     "feed": "^5.1.0",
     "framer-motion": "^12.8.0",
+    "gtfs-realtime-bindings": "^1.1.1",
     "html-react-parser": "^5.2.10",
     "isomorphic-dompurify": "^2.33.0",
     "maplibre-gl": "^5.19.0",
