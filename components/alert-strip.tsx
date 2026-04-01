@@ -1,6 +1,9 @@
 'use client'
 
-import type { AlertSeverity, TranslinkAlert } from '@/helpers/translinkAlertsHelper'
+import type {
+  AlertSeverity,
+  TranslinkAlert,
+} from '@/helpers/translinkAlertsHelper'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -23,7 +26,10 @@ export function AlertStrip({ alerts }: { alerts: TranslinkAlert[] }) {
   const [paused, setPaused] = useState(false)
   const total = alerts.length
 
-  const prev = useCallback(() => setIndex((i) => (i - 1 + total) % total), [total])
+  const prev = useCallback(
+    () => setIndex((i) => (i - 1 + total) % total),
+    [total],
+  )
   const next = useCallback(() => setIndex((i) => (i + 1) % total), [total])
 
   useEffect(() => {
@@ -49,10 +55,20 @@ export function AlertStrip({ alerts }: { alerts: TranslinkAlert[] }) {
           <button
             onClick={prev}
             aria-label="Previous alert"
-            className="shrink-0 rounded p-0.5 text-white/70 transition hover:text-white hover:cursor-pointer"
+            className="shrink-0 rounded p-0.5 text-white/70 transition hover:cursor-pointer hover:text-white"
           >
-            <svg className="size-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            <svg
+              className="size-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              />
             </svg>
           </button>
         )}
@@ -64,11 +80,11 @@ export function AlertStrip({ alerts }: { alerts: TranslinkAlert[] }) {
           rel="noopener noreferrer"
           className="flex min-w-0 flex-1 items-center justify-center gap-2 text-center"
         >
-          <span className="shrink-0 rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+          <span className="shrink-0 rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase">
             {SEVERITY_LABEL[alert.severity]}
           </span>
           {alert.mode && (
-            <span className="hidden shrink-0 rounded bg-white/15 px-1.5 py-0.5 text-[10px] font-medium capitalize text-white/90 sm:inline">
+            <span className="hidden shrink-0 rounded bg-white/15 px-1.5 py-0.5 text-[10px] font-medium text-white/90 capitalize sm:inline">
               {alert.mode}
             </span>
           )}
@@ -88,14 +104,18 @@ export function AlertStrip({ alerts }: { alerts: TranslinkAlert[] }) {
             stroke="currentColor"
             aria-hidden="true"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+            />
           </svg>
         </Link>
 
         {/* Counter + Next */}
         <div className="flex shrink-0 items-center gap-1">
           {total > 1 && (
-            <span className="text-[10px] tabular-nums text-white/60">
+            <span className="text-[10px] text-white/60 tabular-nums">
               {index + 1}/{total}
             </span>
           )}
@@ -103,10 +123,20 @@ export function AlertStrip({ alerts }: { alerts: TranslinkAlert[] }) {
             <button
               onClick={next}
               aria-label="Next alert"
-              className="rounded p-0.5 text-white/70 transition hover:text-white hover:cursor-pointer"
+              className="rounded p-0.5 text-white/70 transition hover:cursor-pointer hover:text-white"
             >
-              <svg className="size-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              <svg
+                className="size-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                />
               </svg>
             </button>
           )}

@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 type MobileNavbarProps = {
   filled: true | undefined
   isOpen: boolean
-  onClick: () => void
+  onClickAction: () => void
 }
 
 const iconVariants = {
@@ -21,12 +21,16 @@ const xVariants = {
   open: { opacity: 1, rotate: 0, scale: 1 },
 }
 
-export function MobileNavbar({ filled, isOpen, onClick }: MobileNavbarProps) {
+export function MobileNavbar({
+  filled,
+  isOpen,
+  onClickAction: onClick,
+}: MobileNavbarProps) {
   const color = !filled ? 'text-black dark:text-white' : ''
 
   return (
     <motion.button
-      className="relative flex size-12 items-center justify-center self-center rounded-lg hover:bg-black/5 dark:hover:bg-white/10 lg:hidden"
+      className="relative flex size-12 items-center justify-center self-center rounded-lg hover:bg-black/5 lg:hidden dark:hover:bg-white/10"
       aria-label="Toggle main menu"
       onClick={onClick}
       whileTap={{ scale: 0.9 }}
@@ -58,8 +62,13 @@ export function MobileNavbar({ filled, isOpen, onClick }: MobileNavbarProps) {
 
 // Flatten NavItems into a list of links with optional group headers
 function getFlatNavItems() {
-  const items: { type: 'link'; href: string; label: string }[] | { type: 'header'; label: string }[] = []
-  const flat: ({ type: 'link'; href: string; label: string } | { type: 'header'; label: string })[] = []
+  const items:
+    | { type: 'link'; href: string; label: string }[]
+    | { type: 'header'; label: string }[] = []
+  const flat: (
+    | { type: 'link'; href: string; label: string }
+    | { type: 'header'; label: string }
+  )[] = []
 
   for (const item of NavItems) {
     if (isNavGroup(item)) {
@@ -97,7 +106,7 @@ export function MobileNavbarMenu({
           }`}
         >
           <div className="relative flex flex-col py-4 text-center">
-            <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-700" />
+            <div className="h-px bg-linear-to-r from-transparent via-gray-300 to-transparent dark:via-gray-700" />
 
             {flatItems.map((item, i) =>
               item.type === 'header' ? (
@@ -140,7 +149,7 @@ export function MobileNavbarMenu({
                     <p className="py-3 text-xl">{item.label}</p>
                   </Link>
                   <div className="absolute inset-x-0 bottom-0 translate-y-1/2">
-                    <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-700" />
+                    <div className="h-px bg-linear-to-r from-transparent via-gray-300 to-transparent dark:via-gray-700" />
                   </div>
                 </motion.div>
               ),

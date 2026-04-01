@@ -1,14 +1,14 @@
-import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
-import { Heading, Lead, Subheading } from '@/components/core/text'
+import { Lead, Subheading } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Rolling Stock & Fleet',
   description:
-    'Learn about the trains, buses, ferries, and light rail vehicles that make up Queensland\'s public transport fleet.',
+    "Learn about the trains, buses, ferries, and light rail vehicles that make up Queensland's public transport fleet.",
   slug: 'fleet',
 })
 
@@ -105,7 +105,7 @@ const buses: Vehicle[] = [
     introduced: '2024–present',
     status: 'Trial / early rollout',
     details: [
-      'Part of Queensland\'s zero-emission bus transition',
+      "Part of Queensland's zero-emission bus transition",
       'Target: fully zero-emission fleet by 2040s',
       'Operating from select depots initially',
       'Quieter, smoother ride with zero tailpipe emissions',
@@ -123,7 +123,7 @@ const ferries: Vehicle[] = [
       'Capacity of approximately 162 passengers',
       'Operates on the Brisbane River from UQ to Northshore Hamilton',
       'Newer vessels (KittyCats) are smaller for lower-demand stops',
-      'Fast, frequent, and one of Brisbane\'s most popular services',
+      "Fast, frequent, and one of Brisbane's most popular services",
     ],
   },
   {
@@ -163,16 +163,13 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
     <div className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="text-lg font-bold text-heading">
-            {vehicle.name}
-          </h3>
-          <p className="text-sm text-muted">
-            {vehicle.type}
-          </p>
+          <h3 className="text-heading text-lg font-bold">{vehicle.name}</h3>
+          <p className="text-muted text-sm">{vehicle.type}</p>
         </div>
         <span
           className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-medium ${
-            vehicle.status.toLowerCase().includes('retired') || vehicle.status.toLowerCase().includes('being')
+            vehicle.status.toLowerCase().includes('retired') ||
+            vehicle.status.toLowerCase().includes('being')
               ? 'badge-warning'
               : vehicle.status.toLowerCase().includes('trial')
                 ? 'badge-info'
@@ -187,7 +184,7 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
       </p>
       <ul className="mt-4 space-y-1.5">
         {vehicle.details.map((d, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-body">
+          <li key={i} className="text-body flex items-start gap-2 text-sm">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500 dark:bg-indigo-400" />
             {d}
           </li>
@@ -208,14 +205,18 @@ function FleetSection({
   title: string
   description: string
   vehicles: Vehicle[]
-  image?: { src: string; alt: string; caption: string; href: string; license: string }
+  image?: {
+    src: string
+    alt: string
+    caption: string
+    href: string
+    license: string
+  }
 }) {
   return (
     <Container>
       <div>
-        <p className="section-label">
-          {label}
-        </p>
+        <p className="section-label">{label}</p>
         <Subheading className="mt-2">{title}</Subheading>
         <Lead className="mt-4 max-w-2xl">{description}</Lead>
       </div>
@@ -227,7 +228,7 @@ function FleetSection({
             loading="lazy"
             className="w-full object-cover"
           />
-          <figcaption className="mt-2 text-center text-xs text-muted">
+          <figcaption className="text-muted mt-2 text-center text-xs">
             {image.caption}{' '}
             <a
               href={image.href}
@@ -261,16 +262,66 @@ type RailLine = {
 }
 
 const keyLines: RailLine[] = [
-  { name: 'Beenleigh Line', colour: 'bg-yellow-500', route: 'City → Kuraby → Beenleigh', frequency: 'Every 15 min peak' },
-  { name: 'Gold Coast Line', colour: 'bg-yellow-400', route: 'City → Beenleigh → Varsity Lakes', frequency: 'Every 30 min' },
-  { name: 'Cleveland Line', colour: 'bg-amber-600', route: 'City → Manly → Cleveland', frequency: 'Every 15 min peak' },
-  { name: 'Ferny Grove Line', colour: 'bg-blue-600', route: 'City → Newmarket → Ferny Grove', frequency: 'Every 15 min peak' },
-  { name: 'Caboolture/Sunshine Coast', colour: 'bg-red-600', route: 'City → Caboolture → Nambour/Gympie', frequency: 'Every 15–30 min' },
-  { name: 'Ipswich/Rosewood Line', colour: 'bg-gray-600', route: 'City → Ipswich → Rosewood', frequency: 'Every 15 min peak' },
-  { name: 'Springfield Line', colour: 'bg-lime-600', route: 'City → Richlands → Springfield Central', frequency: 'Every 15 min peak' },
-  { name: 'Airport Line', colour: 'bg-sky-500', route: 'City → Airport (Domestic & International)', frequency: 'Every 15–30 min' },
-  { name: 'Redcliffe Peninsula', colour: 'bg-purple-600', route: 'City → Petrie → Kippa-Ring', frequency: 'Every 15 min peak' },
-  { name: 'Doomben Line', colour: 'bg-emerald-600', route: 'City → Ascot → Doomben', frequency: 'Limited service' },
+  {
+    name: 'Beenleigh Line',
+    colour: 'bg-yellow-500',
+    route: 'City → Kuraby → Beenleigh',
+    frequency: 'Every 15 min peak',
+  },
+  {
+    name: 'Gold Coast Line',
+    colour: 'bg-yellow-400',
+    route: 'City → Beenleigh → Varsity Lakes',
+    frequency: 'Every 30 min',
+  },
+  {
+    name: 'Cleveland Line',
+    colour: 'bg-amber-600',
+    route: 'City → Manly → Cleveland',
+    frequency: 'Every 15 min peak',
+  },
+  {
+    name: 'Ferny Grove Line',
+    colour: 'bg-blue-600',
+    route: 'City → Newmarket → Ferny Grove',
+    frequency: 'Every 15 min peak',
+  },
+  {
+    name: 'Caboolture/Sunshine Coast',
+    colour: 'bg-red-600',
+    route: 'City → Caboolture → Nambour/Gympie',
+    frequency: 'Every 15–30 min',
+  },
+  {
+    name: 'Ipswich/Rosewood Line',
+    colour: 'bg-gray-600',
+    route: 'City → Ipswich → Rosewood',
+    frequency: 'Every 15 min peak',
+  },
+  {
+    name: 'Springfield Line',
+    colour: 'bg-lime-600',
+    route: 'City → Richlands → Springfield Central',
+    frequency: 'Every 15 min peak',
+  },
+  {
+    name: 'Airport Line',
+    colour: 'bg-sky-500',
+    route: 'City → Airport (Domestic & International)',
+    frequency: 'Every 15–30 min',
+  },
+  {
+    name: 'Redcliffe Peninsula',
+    colour: 'bg-purple-600',
+    route: 'City → Petrie → Kippa-Ring',
+    frequency: 'Every 15 min peak',
+  },
+  {
+    name: 'Doomben Line',
+    colour: 'bg-emerald-600',
+    route: 'City → Ascot → Doomben',
+    frequency: 'Limited service',
+  },
 ]
 
 function KeyLines() {
@@ -278,9 +329,7 @@ function KeyLines() {
     <div className="bg-gray-50 py-20 dark:bg-gray-900">
       <Container>
         <div>
-          <p className="section-label">
-            Rail Network
-          </p>
+          <p className="section-label">Rail Network</p>
           <Subheading className="mt-2">SEQ Rail Lines</Subheading>
           <Lead className="mt-4 max-w-2xl">
             The suburban rail network is the backbone of South East
@@ -295,7 +344,7 @@ function KeyLines() {
                 <th className="px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase dark:text-gray-300">
                   Line
                 </th>
-                <th className="hidden px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase dark:text-gray-300 sm:table-cell">
+                <th className="hidden px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase sm:table-cell dark:text-gray-300">
                   Route
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase dark:text-gray-300">
@@ -306,14 +355,16 @@ function KeyLines() {
             <tbody className="divide-y divide-gray-100 bg-white dark:divide-gray-800 dark:bg-gray-900">
               {keyLines.map((line) => (
                 <tr key={line.name}>
-                  <td className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-heading">
-                    <span className={`inline-block h-3 w-3 shrink-0 rounded-full ${line.colour}`} />
+                  <td className="text-heading flex items-center gap-2 px-4 py-3 text-sm font-medium">
+                    <span
+                      className={`inline-block h-3 w-3 shrink-0 rounded-full ${line.colour}`}
+                    />
                     {line.name}
                   </td>
-                  <td className="hidden px-4 py-3 text-sm text-muted sm:table-cell">
+                  <td className="text-muted hidden px-4 py-3 text-sm sm:table-cell">
                     {line.route}
                   </td>
-                  <td className="px-4 py-3 text-sm text-muted">
+                  <td className="text-muted px-4 py-3 text-sm">
                     {line.frequency}
                   </td>
                 </tr>

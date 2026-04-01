@@ -91,7 +91,7 @@ export async function Snippets(params: {
 
   // Conditional rendering based on the existence of posts
   return posts.length === 0 ? (
-    <p className="mt-3 text-muted">
+    <p className="text-muted mt-3">
       No posts available at the moment. Please try again later.
     </p>
   ) : (
@@ -135,7 +135,7 @@ export async function Snippets(params: {
                   )
                 },
               ) ?? (
-                <div className="relative aspect-[16/9] w-full lg:w-64">
+                <div className="relative aspect-video w-full lg:w-64">
                   <Image
                     alt="Better Transport Queensland logo with airport train on viaduct in the background."
                     src="/banner.png"

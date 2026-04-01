@@ -1,13 +1,11 @@
-import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { LiveTrainsMap } from '@/components/live-trains-map'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import {
   fetchTranslinkAlerts,
-  isStartedWithinDays,
-  isStillRelevant,
-  scoreAlert,
+  filterForAlertsActiveWithinDays,
 } from '@/helpers/translinkAlertsHelper'
 import type { Metadata } from 'next'
 
@@ -20,10 +18,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default async function LiveTrainsPage() {
   const all = await fetchTranslinkAlerts('all')
-  const alerts = all
-    .filter((a) => isStartedWithinDays(a.startDate, 3) && isStillRelevant(a))
-    .sort((a, b) => scoreAlert(b) - scoreAlert(a))
-
+  const alerts = filterForAlertsActiveWithinDays(all, 3)
   return (
     <div>
       <HeroBanner

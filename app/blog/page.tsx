@@ -1,11 +1,11 @@
 // Only here to indicate to next.js that this page relies on non-static content
 export const dynamic = 'force-dynamic'
 
-import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { Snippets } from '@/components/topics/feed-snippets'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({
@@ -23,7 +23,7 @@ export default function Page() {
         lead="Perspectives, ideas, and discussions from our passionate community — covering everything from rail policy to active transport."
       />
 
-      <div className="flex-grow">
+      <div className="grow">
         <Container className="mt-12 mb-16">
           <Snippets categoryId="57" redirectRoute="blog" showAuthor />
         </Container>

@@ -20,7 +20,7 @@ export function ShareSocialImage({
   const ogUrl = `/api/og?${new URLSearchParams({ title, category, ...(date ? { date } : {}), ...(imageUrl ? { image: imageUrl } : {}) }).toString()}`
 
   const handleCopyLink = () => {
-    const fullUrl = `${window.location.origin}${ogUrl}`
+    const fullUrl = `${window.location.origin}${window.location.pathname}`
     navigator.clipboard.writeText(fullUrl).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)

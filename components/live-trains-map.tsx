@@ -6,6 +6,7 @@ import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { LocalTime } from './localised/local-time'
 
 const SEQ_CENTER: [number, number] = [153.025, -27.47]
 const POLL_INTERVAL_MS = 25000
@@ -80,7 +81,8 @@ const SEVERITY_BADGE: Record<string, string> = {
 }
 
 const MODE_BADGE: Record<string, string> = {
-  train: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
+  train:
+    'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
   bus: 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300',
   ferry: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300',
   tram: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300',
@@ -93,7 +95,9 @@ const MODE_ICONS: Record<string, string> = {
   tram: '🚊',
 }
 
-function buildTrainGeoJSON(positions: TrainPosition[]): GeoJSON.FeatureCollection {
+function buildTrainGeoJSON(
+  positions: TrainPosition[],
+): GeoJSON.FeatureCollection {
   return {
     type: 'FeatureCollection',
     features: positions.map((p) => ({
@@ -118,7 +122,11 @@ function buildTrainGeoJSON(positions: TrainPosition[]): GeoJSON.FeatureCollectio
   }
 }
 
-export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert[] }) {
+export function LiveTrainsMap({
+  initialAlerts,
+}: {
+  initialAlerts: TranslinkAlert[]
+}) {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const popupRef = useRef<maplibregl.Popup | null>(null)
@@ -134,14 +142,17 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
       const positions: TrainPosition[] = await res.json()
       const geojson = buildTrainGeoJSON(positions)
 
-      const src = map.getSource('trains') as maplibregl.GeoJSONSource | undefined
+      const src = map.getSource('trains') as
+        | maplibregl.GeoJSONSource
+        | undefined
       if (src) {
         src.setData(geojson)
       } else {
         // On first load, add rail-line geometries under the train dots
         try {
           const routesRes = await fetch('/gtfs-routes.json')
-          const routesData = (await routesRes.json()) as GeoJSON.FeatureCollection
+          const routesData =
+            (await routesRes.json()) as GeoJSON.FeatureCollection
           const railFeatures = routesData.features
             .filter((f) => f.properties?.mode === 'rail')
             .map((f) => ({
@@ -161,12 +172,19 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
             source: 'rail-lines',
             paint: {
               'line-color': ['get', 'lineColor'],
-              'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.5, 14, 4],
+              'line-width': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                8,
+                1.5,
+                14,
+                4,
+              ],
               'line-opacity': 0.55,
             },
           })
-        } catch {
-        }
+        } catch {}
 
         try {
           const stopsRes = await fetch('/gtfs-rail-stops.json')
@@ -178,9 +196,25 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
             source: 'rail-stops',
             minzoom: 9,
             paint: {
-              'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 2.5, 13, 5],
+              'circle-radius': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                9,
+                2.5,
+                13,
+                5,
+              ],
               'circle-color': '#ffffff',
-              'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 9, 1, 13, 2],
+              'circle-stroke-width': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                9,
+                1,
+                13,
+                2,
+              ],
               'circle-stroke-color': '#555555',
               'circle-opacity': 0.85,
             },
@@ -208,15 +242,28 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
             const feature = e.features?.[0]
             if (!feature) return
             const name = String(feature.properties?.name ?? '')
-            const coords = (feature.geometry as GeoJSON.Point).coordinates as [number, number]
+            const coords = (feature.geometry as GeoJSON.Point).coordinates as [
+              number,
+              number,
+            ]
             popupRef.current?.remove()
-            popupRef.current = new maplibregl.Popup({ closeButton: false, maxWidth: '200px', offset: 8 })
+            popupRef.current = new maplibregl.Popup({
+              closeButton: false,
+              maxWidth: '200px',
+              offset: 8,
+            })
               .setLngLat(coords)
-              .setHTML(`<div style="font-family:sans-serif;font-size:13px;font-weight:600;color:#f1f5f9;padding:2px 4px">${name}</div>`)
+              .setHTML(
+                `<div style="font-family:sans-serif;font-size:13px;font-weight:600;color:#f1f5f9;padding:2px 4px">${name}</div>`,
+              )
               .addTo(map)
           })
-          map.on('mouseenter', 'rail-station-dots', () => { map.getCanvas().style.cursor = 'pointer' })
-          map.on('mouseleave', 'rail-station-dots', () => { map.getCanvas().style.cursor = '' })
+          map.on('mouseenter', 'rail-station-dots', () => {
+            map.getCanvas().style.cursor = 'pointer'
+          })
+          map.on('mouseleave', 'rail-station-dots', () => {
+            map.getCanvas().style.cursor = ''
+          })
         } catch {
           // station dots are decorative – don't block train display
         }
@@ -227,12 +274,30 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
           type: 'circle',
           source: 'trains',
           paint: {
-            'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 5, 14, 10],
+            'circle-radius': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              8,
+              5,
+              14,
+              10,
+            ],
             'circle-color': ['get', 'lineColor'],
             'circle-color-transition': { duration: 400 },
             'circle-stroke-width': 2,
-            'circle-stroke-color': ['case', ['boolean', ['get', 'inService'], true], '#fff', '#6b7280'],
-            'circle-opacity': ['case', ['boolean', ['get', 'inService'], true], 0.92, 0.55],
+            'circle-stroke-color': [
+              'case',
+              ['boolean', ['get', 'inService'], true],
+              '#fff',
+              '#6b7280',
+            ],
+            'circle-opacity': [
+              'case',
+              ['boolean', ['get', 'inService'], true],
+              0.92,
+              0.55,
+            ],
           },
         })
         map.addLayer({
@@ -261,7 +326,10 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
           const routeId = props.routeId ? String(props.routeId) : null
           const lineColor = String(props.lineColor ?? '#7c3aed')
           const inSvc = props.inService === true || props.inService === 'true'
-          const coords = (feature.geometry as GeoJSON.Point).coordinates as [number, number]
+          const coords = (feature.geometry as GeoJSON.Point).coordinates as [
+            number,
+            number,
+          ]
 
           // MapLibre serialises null properties as the string "null"
           const s = (v: unknown) => (v && v !== 'null' ? String(v) : null)
@@ -279,12 +347,19 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
           const dest = routeId?.substring(2, 4) ?? null
           const origName = orig ? (DEST_NAMES[orig] ?? null) : null
           const destName = dest ? (DEST_NAMES[dest] ?? null) : null
-          const lineName = (dest !== 'BR' ? destName : origName) ?? destName ?? origName ?? null
-          const route = origName && destName ? `${origName} - ${destName}` : null
+          const lineName =
+            (dest !== 'BR' ? destName : origName) ??
+            destName ??
+            origName ??
+            null
+          const route =
+            origName && destName ? `${origName} - ${destName}` : null
 
           const fmtTime = (ts: number) =>
             new Date(ts * 1000).toLocaleTimeString('en-AU', {
-              hour: 'numeric', minute: '2-digit', hour12: true,
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
               timeZone: 'Australia/Brisbane',
             })
 
@@ -348,7 +423,10 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
 
           const dotStyle = `display:inline-block;width:10px;height:10px;border-radius:50%;background:${lineColor};margin-right:6px;vertical-align:middle;border:1.5px solid rgba(255,255,255,0.25);flex-shrink:0;`
           popupRef.current?.remove()
-          popupRef.current = new maplibregl.Popup({ closeButton: true, maxWidth: '280px' })
+          popupRef.current = new maplibregl.Popup({
+            closeButton: true,
+            maxWidth: '280px',
+          })
             .setLngLat(coords)
             .setHTML(
               `<div style="font-family:sans-serif;padding:3px 0">
@@ -414,16 +492,18 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
       <div className="relative flex-1 overflow-hidden rounded-xl ring-1 ring-gray-200 dark:ring-gray-800">
         <div ref={mapContainer} className="h-[60vh] w-full lg:h-[75vh]" />
         {/* Status bar */}
-        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between bg-black/60 px-3 py-1.5 text-xs text-white/80 backdrop-blur-sm">
+        <div className="absolute right-0 bottom-0 left-0 flex items-center justify-between bg-black/60 px-3 py-1.5 text-xs text-white/80 backdrop-blur-sm">
           <span>
             {error ? (
-              <span className="text-red-300">Unable to load live positions</span>
+              <span className="text-red-300">
+                Unable to load live positions
+              </span>
             ) : (
               <>
-                <span className="inline-block size-2 rounded-full bg-white/70 mr-1.5 align-middle" />
+                <span className="mr-1.5 inline-block size-2 rounded-full bg-white/70 align-middle" />
                 {trainCount - outOfServiceCount} in service
                 {outOfServiceCount > 0 && (
-                  <span className="text-white/40 ml-1">
+                  <span className="ml-1 text-white/40">
                     · {outOfServiceCount} light engine
                   </span>
                 )}
@@ -432,14 +512,18 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
           </span>
           {lastUpdated && (
             <span className="text-white/50">
-              Updated {lastUpdated.toLocaleTimeString('en-AU', { timeStyle: 'short', timeZone: 'Australia/Brisbane' })}
+              Updated{' '}
+              {lastUpdated.toLocaleTimeString('en-AU', {
+                timeStyle: 'short',
+                timeZone: 'Australia/Brisbane',
+              })}
             </span>
           )}
         </div>
       </div>
 
       {/* Alert sidebar */}
-      <div className="flex w-full flex-col gap-3 lg:w-80 lg:overflow-y-auto lg:max-h-[75vh]">
+      <div className="flex w-full flex-col gap-3 lg:max-h-[75vh] lg:w-80 lg:overflow-y-auto">
         <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
           Recent alerts
         </h2>
@@ -456,7 +540,7 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
               rel="noopener noreferrer"
               className="group rounded-xl border border-gray-200 bg-white p-3 transition hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
             >
-              <div className="flex flex-wrap items-center gap-1.5 mb-1">
+              <div className="mb-1 flex flex-wrap items-center gap-1.5">
                 <span
                   className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${SEVERITY_BADGE[alert.severity]}`}
                 >
@@ -485,8 +569,20 @@ export function LiveTrainsMap({ initialAlerts }: { initialAlerts: TranslinkAlert
               )}
               {alert.startDate && (
                 <p className="mt-1 text-[10px] text-gray-400 dark:text-gray-600">
-                  From {alert.startDate}
-                  {alert.endDate && ` → ${alert.endDate}`}
+                  From{' '}
+                  <LocalTime
+                    date={alert.startDate}
+                    displayTz="Australia/Brisbane"
+                  />
+                  {alert.endDate && (
+                    <>
+                      {' → '}
+                      <LocalTime
+                        date={alert.endDate}
+                        displayTz="Australia/Brisbane"
+                      />
+                    </>
+                  )}
                 </p>
               )}
             </Link>

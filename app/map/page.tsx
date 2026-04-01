@@ -1,7 +1,7 @@
-import { createPageMetadata } from '@/app/layout'
 import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { TransportMap } from '@/components/transport-map'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({

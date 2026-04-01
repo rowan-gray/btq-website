@@ -31,7 +31,7 @@ function DropdownMenu({
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className={`flex h-[2rem] items-center gap-1 rounded-lg px-4 text-sm font-semibold whitespace-nowrap transition-all duration-200 ease-in-out ${filled ? 'text-indigo-100 hover:bg-white/15 hover:text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white'}`}
+        className={`flex h-8 items-center gap-1 rounded-lg px-4 text-sm font-semibold whitespace-nowrap transition-all duration-200 ease-in-out ${filled ? 'text-indigo-100 hover:bg-white/15 hover:text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white'}`}
       >
         {label}
         <ChevronDownIcon
@@ -39,9 +39,7 @@ function DropdownMenu({
         />
       </button>
       {open && (
-        <div
-          className="absolute right-0 z-50 mt-2 min-w-[12rem] overflow-hidden rounded-lg border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-900"
-        >
+        <div className="absolute right-0 z-50 mt-2 min-w-48 overflow-hidden rounded-lg border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-900">
           {links.map(({ href, label: linkLabel }) => (
             <Link
               key={href}
@@ -72,7 +70,7 @@ export function DesktopNavbar({ filled }: { filled: true | undefined }) {
         ) : (
           <Link
             href={item.href}
-            className={`flex h-[2rem] items-center rounded-lg px-4 text-sm font-semibold whitespace-nowrap transition-all duration-200 ease-in-out ${filled ? 'text-indigo-100 hover:bg-white/15 hover:text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white'}`}
+            className={`flex h-8 items-center rounded-lg px-4 text-sm font-semibold whitespace-nowrap transition-all duration-200 ease-in-out ${filled ? 'text-indigo-100 hover:bg-white/15 hover:text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white'}`}
             key={item.href}
           >
             {item.label}

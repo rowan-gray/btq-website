@@ -1,12 +1,12 @@
-import { createPageMetadata } from '@/app/layout'
 import { Accordion } from '@/components/accordian'
 import { Button } from '@/components/core/button'
 import { Container } from '@/components/core/container'
 import { Gradient } from '@/components/core/gradient'
 import { Link } from '@/components/core/link'
-import { Heading, Lead, Subheading } from '@/components/core/text'
+import { Heading, Subheading } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import { MinusIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
 
@@ -104,7 +104,9 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
   return (
     <div className="relative rounded-lg border border-gray-200 bg-white p-10 pb-9 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <Subheading>{tier.name}</Subheading>
-      <p className="mt-2 text-sm/6 text-gray-950/75 dark:text-gray-300">{tier.description}</p>
+      <p className="mt-2 text-sm/6 text-gray-950/75 dark:text-gray-300">
+        {tier.description}
+      </p>
       <div className="mt-8 flex items-center gap-4">
         <div className="text-5xl font-medium text-gray-950 dark:text-white">
           ${tier.priceMonthly}
@@ -115,7 +117,9 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </div>
       </div>
       <div className="mt-8 mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">Benefits</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">
+          Benefits
+        </h3>
         <ul className="mt-3 space-y-3">
           {tier.highlights?.map((props, featureIndex) => (
             <FeatureItem key={featureIndex} {...props} />
@@ -123,7 +127,9 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </ul>
       </div>
       <div className="mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">Requirements</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">
+          Requirements
+        </h3>
         <ul className="mt-3 space-y-1">
           {tier.requirements?.map((requirement, featureIndex) => (
             <RequirementItem key={featureIndex} requirement={requirement} />
@@ -147,10 +153,10 @@ function FeatureItem({
   return (
     <li
       data-disabled={disabled ? true : undefined}
-      className="flex items-start gap-4 text-sm/6 text-gray-950/75 data-[disabled]:text-gray-950/25 dark:text-gray-300 dark:data-[disabled]:text-gray-600"
+      className="flex items-start gap-4 text-sm/6 text-gray-950/75 data-disabled:text-gray-950/25 dark:text-gray-300 dark:data-disabled:text-gray-600"
     >
       <span className="inline-flex h-6 items-center">
-        <PlusIcon className="size-[0.9375rem] shrink-0 fill-gray-950/25" />
+        <PlusIcon className="size-3.75 shrink-0 fill-gray-950/75 dark:fill-gray-300" />
       </span>
       {disabled && <span className="sr-only">Not included:</span>}
       {description}
@@ -161,19 +167,19 @@ function FeatureItem({
 function RequirementItem({ requirement }: { requirement: Requirement }) {
   return (
     <li className="flex flex-col gap-1 text-sm text-gray-950/75 dark:text-gray-300">
-      <div className="flex items-start gap-3">
+      <div className="flex items-center gap-3">
         <span className="inline-flex h-6 items-center">
-          <MinusIcon className="h-3.5 w-3.5 shrink-0 fill-gray-950/30" />
+          <MinusIcon className="size-3.75 shrink-0" />
         </span>
         <span>{requirement.description}</span>
       </div>
 
       {requirement.options && (
-        <ol className="mt-1 ml-7 space-y-1 text-xs text-gray-700">
+        <ol className="mt-1 ml-7 space-y-1 text-xs">
           {requirement.options.map((option, index) => (
             <li key={index} className="flex items-start gap-2">
-              <span className="inline-flex h-4 items-center pt-[0.125rem]">
-                <MinusIcon className="h-2.5 w-2.5 shrink-0 fill-gray-700/30" />
+              <span className="inline-flex h-4 items-center">
+                <MinusIcon className="size-3 shrink-0" />
               </span>
               <span>{option}</span>
             </li>
@@ -283,7 +289,7 @@ function FrequentlyAskedQuestions() {
         <Heading as="div" className="mt-2 text-center">
           Your questions answered.
         </Heading>
-        <div className="mx-auto mt-16 mb-32 max-w-[48rem]">
+        <div className="mx-auto mt-16 mb-32 max-w-3xl">
           {faqs.map((faq, index) => (
             <Accordion
               key={index}

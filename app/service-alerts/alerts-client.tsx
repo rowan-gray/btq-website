@@ -1,6 +1,12 @@
 'use client'
 
-import { parseTranslinkDate, type TranslinkAlert } from '@/helpers/translinkAlertsHelper'
+import { MultiSelect } from '@/components/core/multiSelect'
+import { LocalTime } from '@/components/localised/local-time'
+import {
+  AlertSeverityLevel,
+  filterForAlertsActiveWithinDays,
+  type TranslinkAlert,
+} from '@/helpers/translinkAlertsHelper'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
@@ -16,8 +22,8 @@ type ModeId = (typeof MODES)[number]['id']
 
 const TIME_RANGES = [
   { id: '1', label: 'Today' },
-  { id: '3', label: 'Last 3 days' },
-  { id: '7', label: 'Last 7 days' },
+  { id: '3', label: 'Next 3 days' },
+  { id: '7', label: 'Next 7 days' },
   { id: 'all', label: 'All time' },
 ] as const
 
@@ -28,13 +34,14 @@ const SEVERITY_BADGE: Record<string, string> = {
   minor: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
   info: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
 }
-const SEVERITY_LABEL: Record<string, string> = {
-  major: 'Major',
-  minor: 'Minor',
-  info: 'Info',
+export const SEVERITY_LABEL: Record<AlertSeverityLevel, string> = {
+  [AlertSeverityLevel.Major]: 'Major',
+  [AlertSeverityLevel.Minor]: 'Minor',
+  [AlertSeverityLevel.Info]: 'Info',
 }
 const MODE_BADGE: Record<string, string> = {
-  train: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
+  train:
+    'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
   bus: 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300',
   ferry: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300',
   tram: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300',
@@ -83,7 +90,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+      className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
     >
       {children}
     </select>
@@ -98,7 +105,7 @@ function AlertCard({ alert }: { alert: TranslinkAlert }) {
       rel="noopener noreferrer"
       className="group flex flex-col rounded-xl border border-gray-200 bg-white p-4 transition hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
     >
-      <div className="flex flex-wrap items-center gap-1.5 mb-2">
+      <div className="mb-2 flex flex-wrap items-center gap-1.5">
         <span
           className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${SEVERITY_BADGE[alert.severity]}`}
         >
@@ -118,20 +125,30 @@ function AlertCard({ alert }: { alert: TranslinkAlert }) {
         )}
       </div>
 
-      <p className="text-sm font-semibold text-gray-900 group-hover:underline dark:text-white leading-snug">
+      <p className="text-sm leading-snug font-semibold text-gray-900 group-hover:underline dark:text-white">
         {alert.title}
       </p>
 
       {/* Services */}
       {alert.services && (
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+        <p className="mt-1 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
           {alert.services}
         </p>
       )}
 
       <div className="mt-2 flex flex-wrap gap-3 text-[11px] text-gray-400 dark:text-gray-500">
-        {alert.startDate && <span>From {alert.startDate}</span>}
-        {alert.endDate && <span>Until {alert.endDate}</span>}
+        {alert.startDate && (
+          <span>
+            From{' '}
+            <LocalTime date={alert.startDate} displayTz="Australia/Brisbane" />
+          </span>
+        )}
+        {alert.endDate && (
+          <span>
+            Until{' '}
+            <LocalTime date={alert.endDate} displayTz="Australia/Brisbane" />
+          </span> // TODO client hydration
+        )}
       </div>
     </Link>
   )
@@ -145,23 +162,33 @@ export function AlertsClient({
   areas: string[]
 }) {
   const [mode, setMode] = useState<ModeId>('all')
+  const [severities, setSeverities] = useState<AlertSeverityLevel[]>([
+    AlertSeverityLevel.Major,
+    AlertSeverityLevel.Minor,
+    AlertSeverityLevel.Info,
+  ])
   const [area, setArea] = useState('all')
   const [timeRange, setTimeRange] = useState<TimeRangeId>('3')
 
-  const filtered = useMemo(() => {
-    const cutoffDays = timeRange === 'all' ? null : parseInt(timeRange, 10)
-    const cutoff = cutoffDays ? new Date(Date.now() - cutoffDays * 24 * 60 * 60 * 1000) : null
+  // Do the expensive filtering first and store as memo so we can reuse
+  // it if other less expensive filters change
+  const partialFilterByTimeRange = useMemo(() => {
+    if (timeRange === 'all') return alerts
 
-    return alerts.filter((a) => {
+    const cutoffDays = parseInt(timeRange, 10)
+
+    return filterForAlertsActiveWithinDays(alerts, cutoffDays)
+  }, [alerts, timeRange])
+
+  const filtered = useMemo(() => {
+    return partialFilterByTimeRange.filter((a) => {
       if (mode !== 'all' && a.mode !== mode) return false
       if (area !== 'all' && a.area !== area) return false
-      if (cutoff && a.startDate) {
-        const d = parseTranslinkDate(a.startDate)
-        if (d && d < cutoff) return false
-      }
+      if (severities.length !== 0 && !severities.includes(a.severity))
+        return false
       return true
     })
-  }, [alerts, mode, area, timeRange])
+  }, [partialFilterByTimeRange, mode, area, severities])
 
   return (
     <>
@@ -174,9 +201,17 @@ export function AlertsClient({
           ))}
         </div>
 
-        <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block" />
+        <div className="hidden h-6 w-px bg-gray-200 sm:block dark:bg-gray-700" />
 
         <div className="flex flex-wrap gap-2">
+          <MultiSelect
+            values={severities}
+            options={SEVERITY_LABEL}
+            onChange={setSeverities}
+            allSelectedText={'All severities'}
+            noneSelectedText={'All severities'}
+          />
+
           <Select value={area} onChange={setArea}>
             <option value="all">All locations</option>
             {areas.map((a) => (

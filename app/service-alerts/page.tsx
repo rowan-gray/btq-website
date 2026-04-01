@@ -1,8 +1,8 @@
-import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
-import { fetchTranslinkAlerts, scoreAlert } from '@/helpers/translinkAlertsHelper'
+import { createPageMetadata } from '@/helpers/metadataHelper'
+import { fetchTranslinkAlerts } from '@/helpers/translinkAlertsHelper'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { AlertsClient } from './alerts-client'
@@ -16,7 +16,6 @@ export const metadata: Metadata = createPageMetadata({
 
 export default async function ServiceAlertsPage() {
   const alerts = await fetchTranslinkAlerts('all')
-  alerts.sort((a, b) => scoreAlert(b) - scoreAlert(a))
 
   const areas = Array.from(
     new Set(alerts.map((a) => a.area).filter(Boolean) as string[]),
@@ -42,7 +41,8 @@ export default async function ServiceAlertsPage() {
           >
             Translink open data feed
           </Link>{' '}
-          under the Creative Commons (CC-BY) licence. Updates may be delayed by a few minutes.
+          under the Creative Commons (CC-BY) licence. Updates may be delayed by
+          a few minutes.
         </p>
       </Container>
 

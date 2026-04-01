@@ -1,9 +1,9 @@
-import { createPageMetadata } from '@/app/layout'
 import { Button } from '@/components/core/button'
 import { Heading, Lead, Subheading } from '@/components/core/text'
 import { LocalTime } from '@/components/localised/local-time'
 import { ShareSocialImage } from '@/components/topics/share-social-image'
 import { fetchPostFromCategory } from '@/helpers/discourseTopicHelper'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import parse, * as parser from 'html-react-parser'
 import DOMPurify from 'isomorphic-dompurify'
 import type { Metadata } from 'next'
@@ -18,10 +18,7 @@ function extractFirstImageUrl(html: string): string | null {
   while ((match = imgRegex.exec(html)) !== null) {
     const src = match[1]
     // Skip emoji images
-    if (
-      !src.includes('/images/emoji') &&
-      !src.includes('emoji')
-    ) {
+    if (!src.includes('/images/emoji') && !src.includes('emoji')) {
       return src
     }
   }
@@ -169,7 +166,7 @@ function renderWithTailwind(html: string) {
                   >
                     {parser.domToReact([node])}
                   </div>
-                  <figcaption className="mt-2 text-center text-sm italic text-muted">
+                  <figcaption className="text-muted mt-2 text-center text-sm italic">
                     {node.attribs.alt}
                   </figcaption>
                 </figure>
@@ -262,7 +259,7 @@ export default async function EmbeddedTopic(params: {
 
       {/* Title & meta */}
       <Heading as="h1">{post.title}</Heading>
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-gray-200 pb-6 text-sm text-muted dark:border-gray-800">
+      <div className="text-muted mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-gray-200 pb-6 text-sm dark:border-gray-800">
         {post.creator && (
           <span>
             {params.showAuthor ? <>@{post.creator} &middot; </> : null}
@@ -274,7 +271,15 @@ export default async function EmbeddedTopic(params: {
           topicId={params.topicId}
           category={params.categoryTitle}
           imageUrl={heroImageUrl ?? undefined}
-          date={post.pubDate ? new Date(post.pubDate).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) : undefined}
+          date={
+            post.pubDate
+              ? new Date(post.pubDate).toLocaleDateString('en-AU', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric',
+                })
+              : undefined
+          }
         />
       </div>
 
@@ -284,7 +289,7 @@ export default async function EmbeddedTopic(params: {
       </div>
 
       {/* Forum CTA */}
-      <div className="mt-12 rounded-lg bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 p-8 text-white sm:p-12">
+      <div className="mt-12 rounded-lg bg-linear-to-br from-indigo-900 via-indigo-800 to-purple-900 p-8 text-white sm:p-12">
         <Subheading as="h2" dark className="text-2xl">
           {params.linkToTopic
             ? 'See what others are saying about this post!'

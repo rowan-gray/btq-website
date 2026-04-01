@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -53,7 +53,7 @@
 
   /* Section label */
   .section-label {
-    @apply text-sm font-semibold tracking-widest uppercase text-indigo-600 dark:text-indigo-400;
+    @apply text-sm font-semibold tracking-widest text-indigo-600 uppercase dark:text-indigo-400;
   }
 
   /* Badge variants */
@@ -89,5 +89,164 @@
 
   .animation-delay-300 {
     animation-delay: 300ms;
+  }
+}
+
+@layer position-area {
+  /* Default */
+  .position-area-none {
+    position-area: none;
+  }
+
+  /* === 3×3 physical grid tiles === */
+  .position-area-top-left {
+    position-area: top left;
+  }
+  .position-area-top-center {
+    position-area: top center;
+  }
+  .position-area-top-right {
+    position-area: top right;
+  }
+
+  .position-area-center-left {
+    position-area: center left;
+  }
+  .position-area-center-center {
+    position-area: center center;
+  }
+  .position-area-center-right {
+    position-area: center right;
+  }
+
+  .position-area-bottom-left {
+    position-area: bottom left;
+  }
+  .position-area-bottom-center {
+    position-area: bottom center;
+  }
+  .position-area-bottom-right {
+    position-area: bottom right;
+  }
+
+  /* === Spanning two tiles (horizontal spans) === */
+  .position-area-top-span-left {
+    position-area: top span-left;
+  }
+  .position-area-top-span-center {
+    position-area: top span-center;
+  }
+  .position-area-top-span-right {
+    position-area: top span-right;
+  }
+
+  .position-area-center-span-left {
+    position-area: center span-left;
+  }
+  .position-area-center-span-center {
+    position-area: center span-center;
+  }
+  .position-area-center-span-right {
+    position-area: center span-right;
+  }
+
+  .position-area-bottom-span-left {
+    position-area: bottom span-left;
+  }
+  .position-area-bottom-span-center {
+    position-area: bottom span-center;
+  }
+  .position-area-bottom-span-right {
+    position-area: bottom span-right;
+  }
+
+  /* === Spanning two tiles (vertical spans) === */
+  .position-area-span-top-left {
+    position-area: span-top left;
+  }
+  .position-area-span-center-left {
+    position-area: span-center left;
+  }
+  .position-area-span-bottom-left {
+    position-area: span-bottom left;
+  }
+
+  .position-area-span-top-center {
+    position-area: span-top center;
+  }
+  .position-area-span-center-center {
+    position-area: span-center center;
+  }
+  .position-area-span-bottom-center {
+    position-area: span-bottom center;
+  }
+
+  .position-area-span-top-right {
+    position-area: span-top right;
+  }
+  .position-area-span-center-right {
+    position-area: span-center right;
+  }
+  .position-area-span-bottom-right {
+    position-area: span-bottom right;
+  }
+
+  /* === Spanning all tiles === */
+  .position-area-top-span-all {
+    position-area: top span-all;
+  }
+  .position-area-center-span-all {
+    position-area: center span-all;
+  }
+  .position-area-bottom-span-all {
+    position-area: bottom span-all;
+  }
+
+  .position-area-span-all-left {
+    position-area: span-all left;
+  }
+  .position-area-span-all-center {
+    position-area: span-all center;
+  }
+  .position-area-span-all-right {
+    position-area: span-all right;
+  }
+
+  .position-area-span-all {
+    position-area: span-all;
+  }
+
+  /* === Single-keyword physical values === */
+  .position-area-top {
+    position-area: top;
+  }
+  .position-area-center {
+    position-area: center;
+  }
+  .position-area-bottom {
+    position-area: bottom;
+  }
+  .position-area-left {
+    position-area: left;
+  }
+  .position-area-right {
+    position-area: right;
+  }
+
+  /* === Global values === */
+  .position-area-inherit {
+    position-area: inherit;
+  }
+  .position-area-initial {
+    position-area: initial;
+  }
+  .position-area-revert {
+    position-area: revert;
+  }
+  .position-area-revert-layer {
+    position-area: revert-layer;
+  }
+  .position-area-unset {
+    position-area: unset;
   }
 }

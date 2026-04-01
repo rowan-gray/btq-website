@@ -1,10 +1,10 @@
-import { createPageMetadata } from '@/app/layout'
 import { Button } from '@/components/core/button'
 import { Container } from '@/components/core/container'
 import { Heading, Lead, Subheading } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
 import { Navbar } from '@/components/navbar/navbar'
 import { NextEvent } from '@/data/upcoming-event'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -28,7 +28,7 @@ export const metadata: Metadata = createPageMetadata({
 /* ------------------------------------------------------------------ */
 function Hero() {
   return (
-    <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+    <div className="bg-linear-to-br from-indigo-900 via-indigo-800 to-purple-900">
       <Container className="relative">
         <Navbar filled />
         <div className="pt-16 pb-28 sm:pt-20 sm:pb-40 md:pt-28 md:pb-52">
@@ -67,9 +67,7 @@ function PolicyPlatform() {
       <div className="flex flex-col gap-12 lg:flex-row lg:items-center">
         {/* Text */}
         <div className="order-2 flex-1 lg:order-1">
-          <p className="section-label">
-            Featured
-          </p>
+          <p className="section-label">Featured</p>
           <Heading as="h2" className="mt-2">
             The 2025 Policy Platform
           </Heading>
@@ -104,8 +102,18 @@ function PolicyPlatform() {
 const pillars = [
   {
     icon: (
-      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+      <svg
+        className="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+        />
       </svg>
     ),
     title: 'Public Transport',
@@ -113,9 +121,23 @@ const pillars = [
   },
   {
     icon: (
-      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+      <svg
+        className="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+        />
       </svg>
     ),
     title: 'Active Transport',
@@ -123,8 +145,18 @@ const pillars = [
   },
   {
     icon: (
-      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+      <svg
+        className="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+        />
       </svg>
     ),
     title: 'Freight Rail',
@@ -132,8 +164,18 @@ const pillars = [
   },
   {
     icon: (
-      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+      <svg
+        className="h-8 w-8"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+        />
       </svg>
     ),
     title: 'Accessibility',
@@ -146,9 +188,7 @@ function Pillars() {
     <div className="relative">
       <Container>
         <div className="text-center">
-          <p className="section-label">
-            Our Mission
-          </p>
+          <p className="section-label">Our Mission</p>
           <Heading as="h2" className="mx-auto mt-2 max-w-2xl">
             Why We Exist
           </Heading>
@@ -165,10 +205,10 @@ function Pillars() {
               className="rounded-lg border border-gray-200 bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
             >
               <span className="text-accent">{p.icon}</span>
-              <h3 className="mt-4 text-lg font-bold tracking-tight text-heading">
+              <h3 className="text-heading mt-4 text-lg font-bold tracking-tight">
                 {p.title}
               </h3>
-              <p className="mt-2 text-sm/6 text-body">{p.body}</p>
+              <p className="text-body mt-2 text-sm/6">{p.body}</p>
             </div>
           ))}
         </div>
@@ -206,9 +246,7 @@ function CommunitySection() {
 
         {/* Text + CTA */}
         <div className="flex-1 lg:pt-12">
-          <p className="section-label">
-            Community
-          </p>
+          <p className="section-label">Community</p>
           <Subheading className="mt-2">
             Join the Conversation on the BTQ Forum
           </Subheading>
@@ -272,7 +310,7 @@ export default function Home() {
           <CommunitySection />
         </div>
       </main>
-      <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+      <div className="bg-linear-to-br from-indigo-900 via-indigo-800 to-purple-900">
         <MapCTA />
         <Footer bare />
       </div>

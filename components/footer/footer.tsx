@@ -57,7 +57,7 @@ function SocialLinks() {
         href="https://www.facebook.com/profile.php?id=61571105606896"
         target="_blank"
         aria-label="Visit us on Facebook"
-        className="text-white data-[hover]:text-white/80"
+        className="text-white data-hover:text-white/80"
       >
         <SocialIconFacebook className="size-4" />
       </Link>
@@ -65,7 +65,7 @@ function SocialLinks() {
         href="https://www.instagram.com/bettertransportqueensland"
         target="_blank"
         aria-label="Visit us on Instagram"
-        className="text-white data-[hover]:text-white/80"
+        className="text-white data-hover:text-white/80"
       >
         <SocialIconInstagram className="size-4" />
       </Link>
@@ -73,7 +73,7 @@ function SocialLinks() {
         href="https://bsky.app/profile/bettertransportqueensland.org"
         target="_blank"
         aria-label="Visit us on Bluesky"
-        className="text-white data-[hover]:text-white/80"
+        className="text-white data-hover:text-white/80"
       >
         <SocialIconBluesky className="size-4" />
       </Link>
@@ -81,7 +81,7 @@ function SocialLinks() {
         href="https://www.linkedin.com/company/better-transport-queensland"
         target="_blank"
         aria-label="Visit us on LinkedIn"
-        className="text-white data-[hover]:text-white/80"
+        className="text-white data-hover:text-white/80"
       >
         <SocialIconLinkedIn className="size-4" />
       </Link>
@@ -120,7 +120,7 @@ export function Footer({ bare }: { bare?: boolean }) {
 
   return (
     <footer>
-      <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+      <div className="bg-linear-to-br from-indigo-900 via-indigo-800 to-purple-900">
         {content}
       </div>
     </footer>

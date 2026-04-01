@@ -1,11 +1,11 @@
 // Only here to indicate to next.js that this page relies on non-static content
 export const dynamic = 'force-dynamic'
 
-import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Footer } from '@/components/footer/footer'
 import { Navbar } from '@/components/navbar/navbar'
 import EmbeddedTopic from '@/components/topics/embedded-topic'
+import { createPageMetadata } from '@/helpers/metadataHelper'
 import type { Metadata } from 'next'
 
 const description =
