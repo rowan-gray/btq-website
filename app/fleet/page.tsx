@@ -28,7 +28,7 @@ const trains: Vehicle[] = [
     name: 'Electric Multiple Unit (EMU)',
     type: 'Suburban Electric Train',
     introduced: '1979–1994',
-    status: 'Being progressively retired',
+    status: 'Recently Retired',
     details: [
       '3-car sets, typically run as 6-car consists',
       'Built by Walkers Ltd and Asea Brown Boveri',
@@ -52,7 +52,7 @@ const trains: Vehicle[] = [
     name: 'New Generation Rollingstock (NGR)',
     type: 'Suburban Electric Train',
     introduced: '2016–present',
-    status: 'Active — fleet backbone',
+    status: 'Active',
     details: [
       '6-car articulated sets built by Bombardier/Alstom',
       'Capacity of approximately 964 passengers per set',
@@ -61,7 +61,7 @@ const trains: Vehicle[] = [
     ],
   },
   {
-    name: 'Diesel Tilt Trains',
+    name: 'Diesel and Electric Tilt Trains',
     type: 'Long-Distance / Regional',
     introduced: '1998–2003',
     status: 'Active',

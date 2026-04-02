@@ -93,6 +93,64 @@ const knownIssues: AccessibilityIssue[] = [
   },
 ]
 
+type HighPriorityAction = {
+  title: string
+  summary: string
+  whyItMatters: string
+  policyActions: string[]
+}
+
+const highPriorityActions: HighPriorityAction[] = [
+  {
+    title: 'Accelerate Station Accessibility Upgrades',
+    summary:
+      'Bring stations to consistent full-access standards faster, rather than relying on incremental partial works.',
+    whyItMatters:
+      'Full-height, full-length accessible platforms reduce boarding risk and are central to timely DDA-aligned outcomes for passengers with disability, seniors, and pram users.',
+    policyActions: [
+      'Prioritise full-platform accessibility projects across the network as a staged program with published timelines.',
+      'Reduce vertical and horizontal train-platform gaps to improve independent boarding.',
+      'Avoid partial platform raising as a long-term default where full compliance remains unresolved.',
+    ],
+  },
+  {
+    title: 'Improve Bus Stop Infrastructure',
+    summary:
+      'Upgrade stops on high-frequency and high-demand routes to deliver shelter, comfort, and inclusive access in Queensland conditions.',
+    whyItMatters:
+      'Heat, humidity, heavy rain, and strong sun make poor stop design a safety and accessibility problem, not just an amenity issue.',
+    policyActions: [
+      'Deliver weather-protective shelter and shade at priority stops, especially where dwell times are high.',
+      'Require DDA-compliant stop design or relocate non-compliant stops to nearby feasible sites.',
+      'Pair stop upgrades with accessible footpaths and surrounding approaches so users can actually reach the stop safely.',
+    ],
+  },
+  {
+    title: 'Improve Bus Stop Crossing Facilities',
+    summary:
+      'Treat pedestrian access to and from bus stops as core transport infrastructure, not an afterthought.',
+    whyItMatters:
+      'Stops on high-speed roads without safe crossings force dangerous behaviour and can make access impossible for people with disability.',
+    policyActions: [
+      'Set annual assessment targets for stop access safety, including outbound and return walking trips.',
+      'Install safe crossing facilities near priority stops where current access requires detours or unsafe crossing behaviour.',
+      'Use pedestrian safety criteria in stop placement and upgrade sequencing.',
+    ],
+  },
+  {
+    title: 'Increase Density in Local Activity Centres',
+    summary:
+      'Align transport and land-use by prioritising denser, mixed-use local centres with high-frequency public transport.',
+    whyItMatters:
+      'Higher local density in amenity-rich centres supports shorter trips, better service viability, and 15-minute neighbourhood outcomes.',
+    policyActions: [
+      'Identify local centres suitable for uplift based on existing service, amenities, and walkability potential.',
+      'Prioritise frequent bus corridors linking these centres to major destinations.',
+      'Coordinate planning and transport investment so accessibility outcomes are built into growth decisions.',
+    ],
+  },
+]
+
 /* ------------------------------------------------------------------ */
 /*  Components                                                         */
 /* ------------------------------------------------------------------ */
@@ -152,8 +210,8 @@ function Overview() {
         </Heading>
         <Lead className="mx-auto mt-4 max-w-2xl">
           A sample of station accessibility across the SEQ rail network. This
-          is not exhaustive — we&apos;re working to expand the tracker to cover
-          every station.
+          is not exhaustive. We use this tracker to connect on-the-ground
+          conditions with the policy priorities in BTQ&apos;s platform.
         </Lead>
       </div>
 
@@ -314,12 +372,12 @@ function KnownIssues() {
 
 function WhatWeCampaignFor() {
   const demands = [
-    'Lifts at every station — no exceptions',
-    'Level boarding across the entire fleet',
-    'Hearing loops and audio announcements at all stations and stops',
-    'Accessible bus stops with concrete pads, shelters, and tactile indicators',
-    'Real-time accessibility status (e.g. lift outages) in the TransLink app',
-    'Consultation with disability advocacy groups on all new infrastructure',
+    'Time-bound delivery plans for full station accessibility upgrades',
+    'Bus stop standards that include shade, shelter, and DDA-compliant design',
+    'Safe pedestrian crossings included in stop access planning and upgrades',
+    'Relocation of stops that cannot achieve practical DDA compliance in place',
+    'Transport and land-use coordination in local activity centres',
+    'Public reporting against annual accessibility upgrade and access targets',
   ]
 
   return (
@@ -330,11 +388,11 @@ function WhatWeCampaignFor() {
             Our Position
           </p>
           <Subheading className="mt-2">
-            What We&apos;re Campaigning For
+            Accessibility Delivery Priorities
           </Subheading>
           <Lead className="mt-4">
-            Public transport must work for everyone — regardless of age,
-            ability, or mobility.
+            We assess progress by whether policy commitments are converted into
+            measurable delivery on the ground.
           </Lead>
         </div>
 
@@ -364,6 +422,50 @@ function WhatWeCampaignFor() {
   )
 }
 
+function HighPriorityActions() {
+  return (
+    <Container>
+      <div>
+        <p className="section-label">From The Policy Platform</p>
+        <Subheading className="mt-2">High Priority Accessibility Agenda</Subheading>
+        <Lead className="mt-4 max-w-3xl">
+          BTQ&apos;s accessibility priorities focus on closing the gap between
+          policy intent and everyday passenger experience.
+        </Lead>
+      </div>
+
+      <div className="mt-10 space-y-6">
+        {highPriorityActions.map((action) => (
+          <article
+            key={action.title}
+            className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+          >
+            <div className="flex items-center gap-2">
+              <span className="badge-danger inline-flex items-center rounded-md px-2 py-0.5 text-xs font-semibold uppercase">
+                High Priority
+              </span>
+            </div>
+            <h3 className="mt-3 text-lg font-bold text-heading">{action.title}</h3>
+            <p className="mt-2 text-sm/6 text-body">{action.summary}</p>
+            <p className="mt-3 rounded-md bg-gray-50 px-3 py-2 text-sm text-body dark:bg-gray-800">
+              <span className="font-semibold text-heading">Why it matters:</span>{' '}
+              {action.whyItMatters}
+            </p>
+            <ul className="mt-4 space-y-2">
+              {action.policyActions.map((point) => (
+                <li key={point} className="flex items-start gap-3 text-sm/6 text-body">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500 dark:bg-indigo-400" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </Container>
+  )
+}
+
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
@@ -372,13 +474,14 @@ export default function AccessibilityPage() {
     <main className="overflow-hidden">
       <HeroBanner
         title="Accessibility"
-        lead="Tracking progress on making Queensland's public transport network accessible for everyone — and advocating for what still needs to change."
+        lead="A policy-led view of accessibility across Queensland's transport network: where barriers remain, what BTQ is prioritising, and how delivery should accelerate."
       />
 
       <div className="space-y-20 py-20 sm:space-y-28 sm:py-28">
         <Overview />
         <StationTracker />
         <KnownIssues />
+        <HighPriorityActions />
         <WhatWeCampaignFor />
       </div>
 

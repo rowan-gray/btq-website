@@ -147,10 +147,10 @@ function FeatureItem({
   return (
     <li
       data-disabled={disabled ? true : undefined}
-      className="flex items-start gap-4 text-sm/6 text-gray-950/75 data-[disabled]:text-gray-950/25 dark:text-gray-300 dark:data-[disabled]:text-gray-600"
+      className="flex items-start gap-4 text-sm/6 text-gray-950/75 data-disabled:text-gray-950/25 dark:text-gray-300 dark:data-disabled:text-gray-600"
     >
       <span className="inline-flex h-6 items-center">
-        <PlusIcon className="size-[0.9375rem] shrink-0 fill-gray-950/25" />
+        <PlusIcon className="size-3.75 shrink-0 fill-gray-950/25 dark:fill-gray-300/70" />
       </span>
       {disabled && <span className="sr-only">Not included:</span>}
       {description}
@@ -163,17 +163,17 @@ function RequirementItem({ requirement }: { requirement: Requirement }) {
     <li className="flex flex-col gap-1 text-sm text-gray-950/75 dark:text-gray-300">
       <div className="flex items-start gap-3">
         <span className="inline-flex h-6 items-center">
-          <MinusIcon className="h-3.5 w-3.5 shrink-0 fill-gray-950/30" />
+          <MinusIcon className="h-3.5 w-3.5 shrink-0 fill-gray-950/30 dark:fill-gray-300/70" />
         </span>
         <span>{requirement.description}</span>
       </div>
 
       {requirement.options && (
-        <ol className="mt-1 ml-7 space-y-1 text-xs text-gray-700">
+        <ol className="mt-1 ml-7 space-y-1 text-xs text-gray-700 dark:text-gray-300">
           {requirement.options.map((option, index) => (
             <li key={index} className="flex items-start gap-2">
-              <span className="inline-flex h-4 items-center pt-[0.125rem]">
-                <MinusIcon className="h-2.5 w-2.5 shrink-0 fill-gray-700/30" />
+              <span className="inline-flex h-4 items-center pt-0.5">
+                <MinusIcon className="h-2.5 w-2.5 shrink-0 fill-gray-700/30 dark:fill-gray-400/70" />
               </span>
               <span>{option}</span>
             </li>
@@ -283,7 +283,7 @@ function FrequentlyAskedQuestions() {
         <Heading as="div" className="mt-2 text-center">
           Your questions answered.
         </Heading>
-        <div className="mx-auto mt-16 mb-32 max-w-[48rem]">
+        <div className="mx-auto mt-16 mb-32 max-w-3xl">
           {faqs.map((faq, index) => (
             <Accordion
               key={index}

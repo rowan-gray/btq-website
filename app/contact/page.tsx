@@ -62,14 +62,37 @@ const committeeMembers: CommitteeMember[] = [
     email: 'media.director@btq.org.au',
   },
   {
+    name: 'Alexander Lynch',
+    role: 'Non-Executive Director',
+  },
+  {
     name: '#Metro',
     role: 'Non-Executive Director',
+  },
+  {
+    name: 'You?',
+    role: "We're always looking for additional volunteers to fill open roles!",
   },
 ]
 
 function GeneralContacts() {
   return (
     <section>
+      <div className="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-900 dark:border-amber-700/70 dark:bg-amber-950/30 dark:text-amber-200">
+        <p className="text-sm font-semibold uppercase tracking-wide">
+          Important Notice
+        </p>
+        <p className="mt-2 text-sm leading-relaxed">
+          Better Transport Queensland is an independent community organisation.
+          We are <strong>not</strong> the Queensland Government, TransLink,
+          Queensland Rail, or any local council, and we cannot process official
+          complaints, fines, or service requests.
+        </p>
+        <p className="mt-2 text-sm leading-relaxed">
+          For government transport services, please contact the relevant agency
+          directly.
+        </p>
+      </div>
       <Heading as="h2">Get in touch</Heading>
       <p className="mt-4 max-w-3xl text-body">
         We&apos;re always happy to take part in interviews on any topic relating
@@ -136,7 +159,7 @@ function ManagementCommittee() {
         enquiries to the email addresses listed in the section above.
       </p>
 
-      <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {committeeMembers.map((member) => (
           <CommitteeMemberCard
             key={member.name}
@@ -190,7 +213,7 @@ export default function Company() {
         lead="Get in touch with us to learn more about our mission and how you can help us improve transport throughout Queensland."
       />
 
-      <div className="mt-12 mb-16 flex-grow">
+      <div className="mt-12 mb-16 grow">
         <Contacts />
       </div>
       <Footer />

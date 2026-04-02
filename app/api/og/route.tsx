@@ -5,7 +5,7 @@ import { join } from 'path'
 
 export const runtime = 'nodejs'
 
-// Read logo at module level so it's cached
+// Inline the logo once at module load to avoid fetch/network issues in OG rendering.
 const logoPromise = readFile(
   join(process.cwd(), 'public', 'btq_wordmark_light.png'),
 ).then((buf) => `data:image/png;base64,${buf.toString('base64')}`)
@@ -18,7 +18,6 @@ export async function GET(request: NextRequest) {
   const image = searchParams.get('image') ?? ''
 
   const logoSrc = await logoPromise
-
   return new ImageResponse(
     (
       <div

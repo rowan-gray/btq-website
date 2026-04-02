@@ -33,7 +33,7 @@ export function ContactFormFields({
       <div>
         <label
           htmlFor="name"
-          className="block text-base font-semibold text-gray-800"
+          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
         >
           Your name
         </label>
@@ -46,14 +46,14 @@ export function ContactFormFields({
           placeholder="Enter your name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:ring-pink-500"
+          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
         />
       </div>
 
       <div>
         <label
           htmlFor="email"
-          className="block text-base font-semibold text-gray-800"
+          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
         >
           Your email
         </label>
@@ -66,14 +66,14 @@ export function ContactFormFields({
           placeholder="you@example.com"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:ring-pink-500"
+          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
         />
       </div>
 
       <div>
         <label
           htmlFor="purpose"
-          className="block text-base font-semibold text-gray-800"
+          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
         >
           Purpose
         </label>
@@ -94,7 +94,7 @@ export function ContactFormFields({
       <div>
         <label
           htmlFor="subject"
-          className="block text-base font-semibold text-gray-800"
+          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
         >
           Subject
         </label>
@@ -109,14 +109,14 @@ export function ContactFormFields({
           onChange={(e) =>
             setFormData({ ...formData, subject: e.target.value })
           }
-          className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:ring-pink-500"
+          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
         />
       </div>
 
       <div>
         <label
           htmlFor="message"
-          className="block text-base font-semibold text-gray-800"
+          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
         >
           Message
         </label>
@@ -131,13 +131,13 @@ export function ContactFormFields({
           onChange={(e) =>
             setFormData({ ...formData, message: e.target.value })
           }
-          className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-pink-500 focus:ring-pink-500"
+          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
         />
       </div>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         {showError && (
-          <p className="text-sm text-red-600">
+          <p className="text-sm text-red-600 dark:text-red-400">
             {errorMessage} If the problem persists, you can email us directly at
             enquiries@btq.org.au.
           </p>
