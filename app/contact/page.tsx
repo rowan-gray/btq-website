@@ -1,7 +1,6 @@
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Heading, Lead } from '@/components/core/text'
-import { Footer } from '@/components/footer/footer'
 import ContactForm from '@/components/forms/contact-form'
 import { HeroBanner } from '@/components/hero-banner'
 import { isContactFormConfigured } from '@/lib/discourse-config'
@@ -216,7 +215,6 @@ export default function Company() {
       <div className="mt-12 mb-16 grow">
         <Contacts />
       </div>
-      <Footer />
     </main>
   )
 }

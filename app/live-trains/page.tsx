@@ -1,6 +1,5 @@
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { LiveTrainsMap } from '@/components/live-trains-map'
 import {
@@ -48,7 +47,6 @@ export default async function LiveTrainsPage() {
         <LiveTrainsMap initialAlerts={alerts} />
       </Container>
 
-      <Footer />
     </div>
   )
 }

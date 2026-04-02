@@ -1,7 +1,6 @@
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
 import { Heading, Lead, Subheading } from '@/components/core/text'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import type { Metadata } from 'next'
 
@@ -282,7 +281,6 @@ export default function HistoryPage() {
         <LookingForward />
       </div>
 
-      <Footer />
     </main>
   )
 }

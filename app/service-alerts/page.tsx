@@ -1,6 +1,5 @@
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { fetchTranslinkAlerts, scoreAlert } from '@/helpers/translinkAlertsHelper'
 import type { Metadata } from 'next'
@@ -46,7 +45,6 @@ export default async function ServiceAlertsPage() {
         </p>
       </Container>
 
-      <Footer />
     </div>
   )
 }

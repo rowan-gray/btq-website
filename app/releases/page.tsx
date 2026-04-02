@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic'
 
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { Snippets } from '@/components/topics/feed-snippets'
 import type { Metadata } from 'next'
@@ -28,7 +27,6 @@ export default function Page() {
           <Snippets categoryId="11" redirectRoute="releases" />
         </Container>
       </div>
-      <Footer />
     </main>
   )
 }

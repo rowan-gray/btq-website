@@ -5,7 +5,6 @@ import { Container } from '@/components/core/container'
 import { Gradient } from '@/components/core/gradient'
 import { Link } from '@/components/core/link'
 import { Heading, Lead, Subheading } from '@/components/core/text'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { MinusIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
@@ -307,7 +306,6 @@ export default function Pricing() {
 
       <PricingCards />
       <FrequentlyAskedQuestions />
-      <Footer />
     </main>
   )
 }

@@ -106,7 +106,7 @@ export function Footer({ bare }: { bare?: boolean }) {
           <SocialLinks />
         </div>
       </div>
-  <div className="border-t border-indigo-200 py-4 text-center text-xs text-indigo-200">
+      <div className="border-t border-indigo-200 py-4 text-center text-xs text-indigo-200">
         Better Transport Queensland is an independent community organisation. We
         are not affiliated with, endorsed by, or connected to the Queensland
         Government, TransLink, Queensland Rail, or any local council.
@@ -119,7 +119,7 @@ export function Footer({ bare }: { bare?: boolean }) {
   }
 
   return (
-    <footer>
+    <footer className="justify-bottom">
       <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
         {content}
       </div>
