@@ -66,13 +66,16 @@ export function parseTranslinkDate(raw: string): Date | null {
   let h = parseInt(hour, 10)
   if (ampm.toUpperCase() === 'PM' && h !== 12) h += 12
   if (ampm.toUpperCase() === 'AM' && h === 12) h = 0
-  return new Date(
-    parseInt(year, 10),
-    parseInt(month, 10) - 1,
-    parseInt(day, 10),
-    h,
-    parseInt(minute, 10),
-  )
+  const AEST_OFFSET_MS = 10 * 60 * 60 * 1000
+  const utcMs =
+    Date.UTC(
+      parseInt(year, 10),
+      parseInt(month, 10) - 1,
+      parseInt(day, 10),
+      h,
+      parseInt(minute, 10),
+    ) - AEST_OFFSET_MS
+  return new Date(utcMs)
 }
 
 export function isTimeSpecificAlert(title: string): boolean {
@@ -90,8 +93,7 @@ export function detectMode(
   if (/\btrain\b|\brail\b|\bline\b|\bstation\b/.test(text)) return 'train'
   if (/\bferry\b|\bcitycat\b|\bcross river\b/.test(text)) return 'ferry'
   if (/\btram\b|\blight rail\b|\bg:link\b|\bgoldlinq\b/.test(text)) return 'tram'
-  // Bus: 3-digit route numbers, "Route", or explicit keyword
-  if (/\bbus\b|\broute \d|\b\d{3}\b/.test(text)) return 'bus'
+  if (/\bbus\b|\bbusway\b|\broute \d|\b\d{3}\b/.test(text)) return 'bus'
   return null
 }
 
