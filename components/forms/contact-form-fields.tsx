@@ -33,7 +33,7 @@ export function ContactFormFields({
       <div>
         <label
           htmlFor="name"
-          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
+          className="block text-base font-semibold text-heading"
         >
           Your name
         </label>
@@ -53,7 +53,7 @@ export function ContactFormFields({
       <div>
         <label
           htmlFor="email"
-          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
+          className="block text-base font-semibold text-heading"
         >
           Your email
         </label>
@@ -73,7 +73,7 @@ export function ContactFormFields({
       <div>
         <label
           htmlFor="purpose"
-          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
+          className="block text-base font-semibold text-heading"
         >
           Purpose
         </label>
@@ -94,7 +94,7 @@ export function ContactFormFields({
       <div>
         <label
           htmlFor="subject"
-          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
+          className="block text-base font-semibold text-heading"
         >
           Subject
         </label>
@@ -116,7 +116,7 @@ export function ContactFormFields({
       <div>
         <label
           htmlFor="message"
-          className="block text-base font-semibold text-gray-800 dark:text-gray-100"
+          className="block text-base font-semibold text-heading"
         >
           Message
         </label>
@@ -137,7 +137,7 @@ export function ContactFormFields({
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         {showError && (
-          <p className="text-sm text-red-600 dark:text-red-400">
+          <p className="text-sm text-error">
             {errorMessage} If the problem persists, you can email us directly at
             enquiries@btq.org.au.
           </p>

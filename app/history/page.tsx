@@ -108,7 +108,7 @@ function Timeline() {
 
       <div className="relative mx-auto mt-16 max-w-3xl">
         {/* Vertical line */}
-        <div className="absolute top-0 bottom-0 left-5 w-px bg-gray-200 sm:left-1/2 dark:bg-gray-700" />
+        <div className="absolute top-0 bottom-0 left-5 w-px bg-(--surface-card-raised-border) sm:left-1/2" />
 
         <div className="space-y-12">
           {timeline.map((entry, i) => (
@@ -121,8 +121,8 @@ function Timeline() {
                 <div
                   className={`h-5 w-5 rounded-full border-4 ${
                     entry.highlight
-                      ? 'border-indigo-600 bg-indigo-100 dark:border-indigo-400 dark:bg-indigo-900'
-                      : 'border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-800'
+                      ? 'border-(--color-primary) bg-(--icon-well-bg)'
+                      : 'border-(--surface-card-raised-border) bg-(--surface-card-raised-bg)'
                   }`}
                 />
               </div>

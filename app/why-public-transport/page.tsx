@@ -182,16 +182,16 @@ function EnvironmentImpact() {
           </Lead>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-lg bg-gray-200 shadow-sm sm:grid-cols-4 dark:bg-gray-700">
+        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-lg bg-(--surface-card-raised-border) shadow-sm sm:grid-cols-4">
           {environmentStats.map((stat) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center justify-center bg-gray-50 px-4 py-8 text-center dark:bg-gray-800"
+              className="flex flex-col items-center justify-center bg-(--surface-card-raised-bg) px-4 py-8 text-center"
             >
               <span className="text-accent text-3xl font-bold tracking-tight">
                 {stat.value}
               </span>
-              <span className="mt-2 text-xs font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
+              <span className="text-muted mt-2 text-xs font-medium tracking-wide uppercase">
                 {stat.label}
               </span>
             </div>

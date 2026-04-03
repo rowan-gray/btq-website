@@ -39,7 +39,7 @@ export default function Page() {
           </div>
         </HeroBanner>
 
-        <div className="flex-grow">
+        <div className="grow">
           {/* PDF embed section */}
           <div className="border-t border-gray-200 bg-gray-50/50 dark:border-gray-800 dark:bg-gray-900/50">
             <Container className="py-16">
@@ -54,7 +54,7 @@ export default function Page() {
               </div>
 
               <div className="mt-10 hidden justify-center lg:flex">
-                <div className="relative aspect-[1/1.414] w-full max-w-[840px] overflow-hidden rounded-lg border border-gray-200 bg-gray-50 shadow-sm dark:border-gray-800">
+                <div className="border-subtle bg-page relative aspect-[1/1.414] w-full max-w-[840px] overflow-hidden rounded-lg border shadow-sm">
                   <iframe
                     src={policyDocumentPdf}
                     className="absolute inset-0 h-full w-full border-none"

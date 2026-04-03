@@ -22,7 +22,7 @@ export default function Page() {
         lead="Perspectives, ideas, and discussions from our passionate community — covering everything from rail policy to active transport."
       />
 
-      <div className="flex-grow">
+      <div className="grow">
         <Container className="mt-12 mb-16">
           <Snippets categoryId="57" redirectRoute="blog" showAuthor />
         </Container>

@@ -107,7 +107,7 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         {tier.description}
       </p>
       <div className="mt-8 flex items-center gap-4">
-        <div className="text-5xl font-medium text-gray-950 dark:text-white">
+        <div className="text-5xl font-medium text-heading">
           ${tier.priceMonthly}
         </div>
         <div className="text-sm/5 text-gray-950/75 dark:text-gray-300">
@@ -116,7 +116,7 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </div>
       </div>
       <div className="mt-8 mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">
+        <h3 className="text-sm/6 font-medium text-heading">
           Benefits
         </h3>
         <ul className="mt-3 space-y-3">
@@ -126,7 +126,7 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </ul>
       </div>
       <div className="mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">
+        <h3 className="text-sm/6 font-medium text-heading">
           Requirements
         </h3>
         <ul className="mt-3 space-y-1">
@@ -174,7 +174,7 @@ function RequirementItem({ requirement }: { requirement: Requirement }) {
       </div>
 
       {requirement.options && (
-        <ol className="mt-1 ml-7 space-y-1 text-xs text-gray-700 dark:text-gray-300">
+        <ol className="mt-1 ml-7 space-y-1 text-xs text-prose">
           {requirement.options.map((option, index) => (
             <li key={index} className="flex items-start gap-2">
               <span className="inline-flex h-4 items-center pt-0.5">

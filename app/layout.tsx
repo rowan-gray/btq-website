@@ -86,7 +86,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${firaSans.className} flex min-h-screen flex-col bg-gray-50 text-gray-950 antialiased transition-colors duration-200 dark:bg-gray-950 dark:text-gray-100`}
+        className={`${firaSans.className} flex min-h-screen flex-col bg-page text-gray-950 antialiased transition-colors duration-200 dark:text-gray-100`}
       >
         <ThemeProvider>
           <FooterProvider>

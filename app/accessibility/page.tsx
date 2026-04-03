@@ -377,16 +377,16 @@ function Overview() {
         </Lead>
       </div>
 
-      <div className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-lg bg-gray-200 shadow-sm sm:grid-cols-4 dark:bg-gray-700">
+      <div className="mx-auto mt-12 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-lg bg-(--surface-card-raised-border) shadow-sm sm:grid-cols-4">
         {overviewStats.map((stat) => (
           <div
             key={stat.label}
-            className="flex flex-col items-center justify-center bg-gray-50 px-4 py-8 text-center dark:bg-gray-800"
+            className="flex flex-col items-center justify-center bg-(--surface-card-raised-bg) px-4 py-8 text-center"
           >
             <span className="text-accent text-3xl font-bold tracking-tight">
               {stat.value}
             </span>
-            <span className="mt-2 text-xs font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            <span className="text-muted mt-2 text-xs font-medium tracking-wide uppercase">
               {stat.label}
             </span>
           </div>
@@ -409,25 +409,25 @@ function StationTracker() {
           </Lead>
         </div>
 
-        <div className="mt-10 overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-100 dark:bg-gray-800">
+        <div className="border-subtle mt-10 overflow-x-auto rounded-lg border">
+          <table className="border-subtle min-w-full divide-y">
+            <thead className="bg-(--surface-card-raised-bg)">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase dark:text-gray-300">
+                <th className="text-muted px-4 py-3 text-left text-xs font-semibold tracking-wider uppercase">
                   Station
                 </th>
-                <th className="hidden px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase sm:table-cell dark:text-gray-300">
+                <th className="text-muted hidden px-4 py-3 text-left text-xs font-semibold tracking-wider uppercase sm:table-cell">
                   Line
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase dark:text-gray-300">
+                <th className="text-muted px-4 py-3 text-left text-xs font-semibold tracking-wider uppercase">
                   Accessibility
                 </th>
-                <th className="hidden px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase md:table-cell dark:text-gray-300">
+                <th className="text-muted hidden px-4 py-3 text-left text-xs font-semibold tracking-wider uppercase md:table-cell">
                   Notes
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 bg-gray-50 dark:divide-gray-800 dark:bg-gray-900">
+            <tbody className="border-subtle bg-page divide-y">
               {stations.map((s) => (
                 <tr key={s.name}>
                   <td className="text-heading px-4 py-3 text-sm font-medium">
@@ -444,7 +444,7 @@ function StationTracker() {
                       <StatusBadge value={s.hearingLoop} label="Hearing" />
                     </div>
                   </td>
-                  <td className="hidden px-4 py-3 text-xs text-gray-400 md:table-cell dark:text-gray-500">
+                  <td className="text-muted hidden px-4 py-3 text-xs md:table-cell">
                     {s.notes ?? '—'}
                   </td>
                 </tr>
@@ -453,7 +453,7 @@ function StationTracker() {
           </table>
         </div>
 
-        <p className="mt-4 text-center text-xs text-gray-400 dark:text-gray-500">
+        <p className="text-muted mt-4 text-center text-xs">
           Data is indicative and based on publicly available information.
           Stations are a representative sample, not the full network. Please
           contact TransLink for the latest accessibility information before
@@ -563,9 +563,7 @@ function WhatWeCampaignFor() {
                   d="m4.5 12.75 6 6 9-13.5"
                 />
               </svg>
-              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
-                {d}
-              </span>
+              <span className="text-heading text-sm font-medium">{d}</span>
             </Card>
           ))}
         </ul>
@@ -598,7 +596,7 @@ function HighPriorityActions() {
             </div>
             <h3 className="heading-3 mt-3">{action.title}</h3>
             <p className="text-body mt-2 text-sm/6">{action.summary}</p>
-            <p className="text-body mt-3 rounded-md bg-gray-50 px-3 py-2 text-sm dark:bg-gray-800">
+            <p className="text-body mt-3 rounded-md bg-(--surface-card-raised-bg) px-3 py-2 text-sm">
               <span className="text-heading font-semibold">
                 Why it matters:
               </span>{' '}
@@ -610,7 +608,7 @@ function HighPriorityActions() {
                   key={point}
                   className="text-body flex items-start gap-3 text-sm/6"
                 >
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500 dark:bg-indigo-400" />
+                  <span className="bg-accent mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
                   <span>{point}</span>
                 </li>
               ))}

@@ -133,7 +133,7 @@ function renderWithTailwind(html: string) {
               isFirstVisibleParagraph = false
               node.attribs.class ||= ''
               node.attribs.class +=
-                ' mb-6 text-xl font-semibold leading-8 text-heading border-l-4 border-indigo-500 pl-4'
+                ' mb-6 text-xl font-semibold leading-8 text-heading border-l-4 border-accent pl-4'
               break
             }
 
@@ -193,7 +193,7 @@ function renderWithTailwind(html: string) {
             } else {
               node.attribs.class ||= ''
               node.attribs.class +=
-                ' font-medium text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800 hover:decoration-indigo-500 dark:text-indigo-400 dark:decoration-indigo-600 dark:hover:text-indigo-300'
+                ' link-accent font-medium underline underline-offset-2'
             }
             break
           case 'ul':
@@ -211,7 +211,7 @@ function renderWithTailwind(html: string) {
           case 'blockquote':
             node.attribs.class ||= ''
             node.attribs.class +=
-              ' my-6 border-l-4 border-indigo-300 pl-4 italic text-gray-600 dark:border-indigo-700 dark:text-gray-400'
+              ' my-6 border-l-4 border-accent pl-4 italic text-prose'
             break
           case 'strong':
           case 'b':
@@ -254,7 +254,7 @@ export default async function EmbeddedTopic(params: {
       {/* Back link */}
       <a
         href={backRoute}
-        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium link-accent"
       >
         <span aria-hidden="true">&larr;</span>
         All {params.categoryTitle === 'Media Releases' ? 'releases' : 'posts'}
@@ -279,7 +279,7 @@ export default async function EmbeddedTopic(params: {
       </div>
 
       {/* Article body */}
-      <div className="prose-btq mt-8 text-base/7 text-gray-800 dark:text-gray-300">
+      <div className="prose-btq mt-8 text-base/7 text-prose">
         {renderWithTailwind(cleanHtml)}
       </div>
 

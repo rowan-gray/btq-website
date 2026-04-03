@@ -57,7 +57,7 @@ function SocialLinks() {
         href="https://www.facebook.com/profile.php?id=61571105606896"
         target="_blank"
         aria-label="Visit us on Facebook"
-        className="text-white data-[hover]:text-white/80"
+        className="text-white data-hover:text-white/80"
       >
         <SocialIconFacebook className="size-4" />
       </Link>
@@ -65,7 +65,7 @@ function SocialLinks() {
         href="https://www.instagram.com/bettertransportqueensland"
         target="_blank"
         aria-label="Visit us on Instagram"
-        className="text-white data-[hover]:text-white/80"
+        className="text-white data-hover:text-white/80"
       >
         <SocialIconInstagram className="size-4" />
       </Link>
@@ -81,7 +81,7 @@ function SocialLinks() {
         href="https://www.linkedin.com/company/better-transport-queensland"
         target="_blank"
         aria-label="Visit us on LinkedIn"
-        className="text-white data-[hover]:text-white/80"
+        className="text-white data-hover:text-white/80"
       >
         <SocialIconLinkedIn className="size-4" />
       </Link>
@@ -100,13 +100,13 @@ function Copyright() {
 export function Footer({ bare }: { bare?: boolean }) {
   const content = (
     <Container>
-      <div className="flex flex-col items-center justify-between gap-4 py-10 text-on-brand sm:flex-row">
+      <div className="text-on-brand flex flex-col items-center justify-between gap-4 py-10 sm:flex-row">
         <Copyright />
         <div className="flex items-center gap-6">
           <SocialLinks />
         </div>
       </div>
-      <div className="border-t border-indigo-200 py-4 text-center text-xs text-on-brand">
+      <div className="text-on-brand border-t border-indigo-200 py-4 text-center text-xs">
         Better Transport Queensland is an independent community organisation. We
         are not affiliated with, endorsed by, or connected to the Queensland
         Government, TransLink, Queensland Rail, or any local council.
@@ -120,9 +120,7 @@ export function Footer({ bare }: { bare?: boolean }) {
 
   return (
     <footer className="justify-bottom">
-      <div className="bg-brand-gradient">
-        {content}
-      </div>
+      <div className="bg-brand-gradient">{content}</div>
     </footer>
   )
 }

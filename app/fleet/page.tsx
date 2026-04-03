@@ -179,13 +179,13 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
           {vehicle.status}
         </span>
       </div>
-      <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">
+      <p className="text-muted mt-1 text-xs">
         Introduced: {vehicle.introduced}
       </p>
       <ul className="mt-4 space-y-1.5">
         {vehicle.details.map((d, i) => (
           <li key={i} className="text-body flex items-start gap-2 text-sm">
-            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500 dark:bg-indigo-400" />
+            <span className="bg-accent mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
             {d}
           </li>
         ))}
@@ -337,22 +337,22 @@ function KeyLines() {
           </Lead>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
-          <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-100 dark:bg-gray-800">
+        <div className="border-subtle mt-10 overflow-hidden rounded-lg border">
+          <table className="border-subtle min-w-full divide-y">
+            <thead className="bg-(--surface-card-raised-bg)">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase dark:text-gray-300">
+                <th className="text-muted px-4 py-3 text-left text-xs font-semibold tracking-wider uppercase">
                   Line
                 </th>
-                <th className="hidden px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase sm:table-cell dark:text-gray-300">
+                <th className="text-muted hidden px-4 py-3 text-left text-xs font-semibold tracking-wider uppercase sm:table-cell">
                   Route
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold tracking-wider text-gray-600 uppercase dark:text-gray-300">
+                <th className="text-muted px-4 py-3 text-left text-xs font-semibold tracking-wider uppercase">
                   Frequency
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 bg-gray-50 dark:divide-gray-800 dark:bg-gray-900">
+            <tbody className="border-subtle bg-page divide-y">
               {keyLines.map((line) => (
                 <tr key={line.name}>
                   <td className="text-heading flex items-center gap-2 px-4 py-3 text-sm font-medium">

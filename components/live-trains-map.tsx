@@ -523,13 +523,9 @@ export function LiveTrainsMap({
 
       {/* Alert sidebar */}
       <div className="flex w-full flex-col gap-3 lg:max-h-[75vh] lg:w-80 lg:overflow-y-auto">
-        <h2 className="text-sm font-semibold text-gray-900 dark:text-white">
-          Recent alerts
-        </h2>
+        <h2 className="text-heading text-sm font-semibold">Recent alerts</h2>
         {initialAlerts.length === 0 ? (
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            No alerts in the last 3 days.
-          </p>
+          <p className="text-muted text-sm">No alerts in the last 3 days.</p>
         ) : (
           initialAlerts.map((alert) => (
             <Card
@@ -553,21 +549,21 @@ export function LiveTrainsMap({
                   </span>
                 )}
                 {alert.area && alert.area !== 'SEQ' && (
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                  <span className="rounded-full bg-(--surface-card-raised-bg) px-2 py-0.5 text-[10px] font-semibold text-(--text-muted)">
                     {alert.area}
                   </span>
                 )}
               </div>
-              <p className="text-xs font-medium text-gray-900 group-hover:underline dark:text-white">
+              <p className="text-heading text-xs font-medium group-hover:underline">
                 {alert.title}
               </p>
               {alert.services && (
-                <p className="mt-0.5 truncate text-[10px] text-gray-500 dark:text-gray-400">
+                <p className="text-muted mt-0.5 truncate text-[10px]">
                   {alert.services}
                 </p>
               )}
               {alert.startDate && (
-                <p className="mt-1 text-[10px] text-gray-400 dark:text-gray-600">
+                <p className="text-muted mt-1 text-[10px]">
                   From {alert.startDate}
                   {alert.endDate && ` → ${alert.endDate}`}
                 </p>

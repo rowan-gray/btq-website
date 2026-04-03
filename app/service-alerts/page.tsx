@@ -31,7 +31,7 @@ export default async function ServiceAlertsPage() {
       <Container className="mt-10 mb-16">
         <AlertsClient alerts={alerts} areas={areas} />
 
-        <p className="mt-10 text-xs text-gray-400 dark:text-gray-600">
+        <p className="text-muted mt-10 text-xs">
           Data sourced from the{' '}
           <Link
             href="https://translink.com.au/about-translink/open-data"

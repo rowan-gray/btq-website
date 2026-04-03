@@ -66,7 +66,7 @@ function Pill({
       className={
         active
           ? 'rounded-full bg-indigo-700 px-4 py-1.5 text-sm font-medium text-white shadow-sm'
-          : 'rounded-full bg-gray-100 px-4 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+          : 'rounded-full bg-(--surface-card-raised-bg) px-4 py-1.5 text-sm font-medium text-(--nav-text) hover:bg-(--nav-hover-bg) hover:text-(--nav-hover-text)'
       }
     >
       {children}
@@ -87,7 +87,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+      className="input-field rounded-lg px-3 py-1.5 text-sm shadow-sm"
     >
       {children}
     </select>
@@ -116,24 +116,22 @@ function AlertCard({ alert }: { alert: TranslinkAlert }) {
           </span>
         )}
         {alert.area && alert.area !== 'SEQ' && (
-          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+          <span className="rounded-full bg-(--surface-card-raised-bg) px-2 py-0.5 text-[10px] font-semibold text-(--text-muted)">
             {alert.area}
           </span>
         )}
       </div>
 
-      <p className="text-sm leading-snug font-semibold text-gray-900 group-hover:underline dark:text-white">
+      <p className="text-heading text-sm leading-snug font-semibold group-hover:underline">
         {alert.title}
       </p>
 
       {/* Services */}
       {alert.services && (
-        <p className="mt-1 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
-          {alert.services}
-        </p>
+        <p className="text-muted mt-1 line-clamp-2 text-xs">{alert.services}</p>
       )}
 
-      <div className="mt-2 flex flex-wrap gap-3 text-[11px] text-gray-400 dark:text-gray-500">
+      <div className="text-muted mt-2 flex flex-wrap gap-3 text-[11px]">
         {alert.startDate && <span>From {alert.startDate}</span>}
         {alert.endDate && <span>Until {alert.endDate}</span>}
       </div>
@@ -180,7 +178,7 @@ export function AlertsClient({
           ))}
         </div>
 
-        <div className="hidden h-6 w-px bg-gray-200 sm:block dark:bg-gray-700" />
+        <div className="hidden h-6 w-px bg-(--surface-card-raised-border) sm:block" />
 
         <div className="flex flex-wrap gap-2">
           <Select value={area} onChange={setArea}>
@@ -205,10 +203,10 @@ export function AlertsClient({
         </div>
       </div>
 
-      <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+      <p className="text-muted mt-4 text-sm">
         {filtered.length > 0 ? (
           <>
-            <span className="font-semibold text-gray-900 dark:text-white">
+            <span className="text-heading font-semibold">
               {filtered.length}
             </span>{' '}
             alert{filtered.length !== 1 ? 's' : ''}

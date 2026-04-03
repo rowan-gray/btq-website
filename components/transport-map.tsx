@@ -560,7 +560,7 @@ export function TransportMap({
 
         {dataLoading && (
           <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-gray-50/90 px-6 py-3 shadow-lg backdrop-blur-sm dark:bg-gray-900/90">
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
+            <p className="text-body text-sm font-medium">
               Loading transport routes…
             </p>
           </div>
@@ -568,12 +568,12 @@ export function TransportMap({
 
         <div className="absolute top-4 left-4 z-10 max-h-[calc(100%-2rem)] overflow-y-auto rounded-xl bg-gray-50/95 p-4 shadow-lg backdrop-blur-sm dark:bg-gray-900/95">
           <div className="mb-2 flex items-center justify-between gap-2">
-            <h3 className="text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100">
+            <h3 className="text-heading text-sm font-bold tracking-tight">
               Map Layers
             </h3>
             <button
               onClick={() => setIsLayerPanelOpen((prev) => !prev)}
-              className="rounded-md p-1 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+              className="text-muted rounded-md p-1 transition-colors hover:bg-(--nav-hover-bg) hover:text-(--nav-hover-text)"
               aria-label={
                 isLayerPanelOpen ? 'Collapse map layers' : 'Expand map layers'
               }
@@ -618,13 +618,13 @@ export function TransportMap({
 
           {isLayerPanelOpen && (
             <>
-              <p className="mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-300">
+              <p className="text-muted mb-1 text-[0.65rem] font-semibold tracking-wider uppercase">
                 Current Network
               </p>
               {CURRENT_LAYERS.map((key) => (
                 <label
                   key={key}
-                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-(--nav-hover-bg)"
                 >
                   <input
                     type="checkbox"
@@ -635,19 +635,17 @@ export function TransportMap({
                   <span
                     className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-200">
-                    {LAYER_LABELS[key]}
-                  </span>
+                  <span className="text-body text-sm">{LAYER_LABELS[key]}</span>
                 </label>
               ))}
 
-              <p className="mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-300">
+              <p className="text-muted mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider uppercase">
                 Proposed Changes
               </p>
               {PROPOSED_LAYERS.map((key) => (
                 <label
                   key={key}
-                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-(--nav-hover-bg)"
                 >
                   <input
                     type="checkbox"
@@ -658,19 +656,17 @@ export function TransportMap({
                   <span
                     className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-200">
-                    {LAYER_LABELS[key]}
-                  </span>
+                  <span className="text-body text-sm">{LAYER_LABELS[key]}</span>
                 </label>
               ))}
 
-              <p className="mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-300">
+              <p className="text-muted mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider uppercase">
                 Analysis
               </p>
               {SPECIAL_LAYERS.map((key) => (
                 <label
                   key={key}
-                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-(--nav-hover-bg)"
                 >
                   <input
                     type="checkbox"
@@ -681,9 +677,7 @@ export function TransportMap({
                   <span
                     className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
                   />
-                  <span className="text-sm text-gray-700 dark:text-gray-200">
-                    {LAYER_LABELS[key]}
-                  </span>
+                  <span className="text-body text-sm">{LAYER_LABELS[key]}</span>
                 </label>
               ))}
             </>
@@ -693,13 +687,13 @@ export function TransportMap({
         {showExpandButton && (
           <button
             onClick={openModal}
-            className="absolute top-4 right-4 z-10 rounded-lg bg-gray-50/95 p-2 shadow-lg backdrop-blur-sm transition-colors hover:bg-gray-100 dark:bg-gray-900/95 dark:hover:bg-gray-700"
+            className="absolute top-4 right-4 z-10 rounded-lg bg-gray-50/95 p-2 shadow-lg backdrop-blur-sm transition-colors hover:bg-(--nav-hover-bg) dark:bg-gray-900/95"
             aria-label="Expand map"
             title="Expand map"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-700 dark:text-gray-200"
+              className="text-body h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -717,19 +711,19 @@ export function TransportMap({
         {selectedFeature && (
           <div className="absolute right-4 bottom-4 z-10 max-w-sm rounded-xl bg-gray-50/95 p-4 shadow-lg backdrop-blur-sm dark:bg-gray-900/95">
             <div className="mb-1 flex items-start justify-between gap-2">
-              <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100">
+              <h3 className="text-heading text-sm font-bold">
                 {selectedFeature.name}
               </h3>
               <button
                 onClick={() => setSelectedFeature(null)}
-                className="shrink-0 cursor-pointer text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                className="text-muted shrink-0 cursor-pointer hover:text-(--nav-hover-text)"
                 aria-label="Close"
               >
                 ✕
               </button>
             </div>
             <div className="mb-2 flex flex-wrap gap-1.5">
-              <span className="inline-block rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300">
+              <span className="icon-well inline-block rounded-full px-2 py-0.5 text-xs font-medium">
                 {modeLabel(selectedFeature.mode)}
               </span>
               {selectedFeature.severity && (
@@ -740,13 +734,13 @@ export function TransportMap({
                 </span>
               )}
               {selectedFeature.category && (
-                <span className="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                <span className="inline-block rounded-full bg-(--surface-card-raised-bg) px-2 py-0.5 text-xs font-medium text-(--nav-text)">
                   {selectedFeature.category}
                 </span>
               )}
             </div>
             {selectedFeature.description && (
-              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+              <p className="text-body text-sm leading-relaxed">
                 {selectedFeature.description}
               </p>
             )}
@@ -759,14 +753,14 @@ export function TransportMap({
           ref={dialogRef}
           className="map-modal fixed inset-0 m-auto h-[90vh] max-h-none w-[95vw] max-w-360 rounded-xl border-0 p-0 shadow-2xl"
         >
-          <div className="flex h-full flex-col overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-900">
-            <div className="flex shrink-0 items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-700">
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          <div className="bg-page flex h-full flex-col overflow-hidden rounded-xl">
+            <div className="border-subtle flex shrink-0 items-center justify-between border-b px-4 py-3">
+              <h2 className="text-heading text-sm font-semibold">
                 Our Proposed Transport Map
               </h2>
               <button
                 onClick={() => dialogRef.current?.close()}
-                className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                className="text-muted rounded-md p-1.5 transition-colors hover:bg-(--nav-hover-bg) hover:text-(--nav-hover-text)"
                 aria-label="Close"
               >
                 <svg
