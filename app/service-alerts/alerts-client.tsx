@@ -1,7 +1,10 @@
 'use client'
 
-import { parseTranslinkDate, type TranslinkAlert } from '@/helpers/translinkAlertsHelper'
-import Link from 'next/link'
+import { Card } from '@/components/core/card'
+import {
+  parseTranslinkDate,
+  type TranslinkAlert,
+} from '@/helpers/translinkAlertsHelper'
 import { useMemo, useState } from 'react'
 
 const MODES = [
@@ -34,7 +37,8 @@ const SEVERITY_LABEL: Record<string, string> = {
   info: 'Info',
 }
 const MODE_BADGE: Record<string, string> = {
-  train: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
+  train:
+    'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
   bus: 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300',
   ferry: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300',
   tram: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300',
@@ -83,7 +87,7 @@ function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+      className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-1.5 text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
     >
       {children}
     </select>
@@ -92,13 +96,13 @@ function Select({
 
 function AlertCard({ alert }: { alert: TranslinkAlert }) {
   return (
-    <Link
-      href={alert.href}
+    <Card
+      link={alert.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col rounded-xl border border-gray-200 bg-white p-4 transition hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
+      className="group flex flex-col rounded-xl p-4"
     >
-      <div className="flex flex-wrap items-center gap-1.5 mb-2">
+      <div className="mb-2 flex flex-wrap items-center gap-1.5">
         <span
           className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${SEVERITY_BADGE[alert.severity]}`}
         >
@@ -118,13 +122,13 @@ function AlertCard({ alert }: { alert: TranslinkAlert }) {
         )}
       </div>
 
-      <p className="text-sm font-semibold text-gray-900 group-hover:underline dark:text-white leading-snug">
+      <p className="text-sm leading-snug font-semibold text-gray-900 group-hover:underline dark:text-white">
         {alert.title}
       </p>
 
       {/* Services */}
       {alert.services && (
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+        <p className="mt-1 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
           {alert.services}
         </p>
       )}
@@ -133,7 +137,7 @@ function AlertCard({ alert }: { alert: TranslinkAlert }) {
         {alert.startDate && <span>From {alert.startDate}</span>}
         {alert.endDate && <span>Until {alert.endDate}</span>}
       </div>
-    </Link>
+    </Card>
   )
 }
 
@@ -150,7 +154,9 @@ export function AlertsClient({
 
   const filtered = useMemo(() => {
     const cutoffDays = timeRange === 'all' ? null : parseInt(timeRange, 10)
-    const cutoff = cutoffDays ? new Date(Date.now() - cutoffDays * 24 * 60 * 60 * 1000) : null
+    const cutoff = cutoffDays
+      ? new Date(Date.now() - cutoffDays * 24 * 60 * 60 * 1000)
+      : null
 
     return alerts.filter((a) => {
       if (mode !== 'all' && a.mode !== mode) return false
@@ -174,7 +180,7 @@ export function AlertsClient({
           ))}
         </div>
 
-        <div className="h-6 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block" />
+        <div className="hidden h-6 w-px bg-gray-200 sm:block dark:bg-gray-700" />
 
         <div className="flex flex-wrap gap-2">
           <Select value={area} onChange={setArea}>

@@ -25,7 +25,7 @@ const timeline: TimelineEntry[] = [
   {
     year: '1882',
     title: 'Horse-Drawn Trams Begin',
-    body: 'Brisbane\'s first horse-drawn tramway opens along a route from the city to Breakfast Creek, marking the start of organised public transport in Queensland.',
+    body: "Brisbane's first horse-drawn tramway opens along a route from the city to Breakfast Creek, marking the start of organised public transport in Queensland.",
   },
   {
     year: '1897',
@@ -35,12 +35,12 @@ const timeline: TimelineEntry[] = [
   {
     year: '1901',
     title: 'Federation & Rail Expansion',
-    body: 'Queensland\'s rail network expands rapidly to connect regional towns. By Federation, the state has thousands of kilometres of narrow-gauge track linking the coast to the interior.',
+    body: "Queensland's rail network expands rapidly to connect regional towns. By Federation, the state has thousands of kilometres of narrow-gauge track linking the coast to the interior.",
   },
   {
     year: '1930s',
     title: 'The Golden Age of Trams',
-    body: 'Brisbane\'s tram network reaches its peak with over 300 trams carrying tens of millions of passengers a year. Trams are the backbone of the city — fast, frequent, and reliable.',
+    body: "Brisbane's tram network reaches its peak with over 300 trams carrying tens of millions of passengers a year. Trams are the backbone of the city — fast, frequent, and reliable.",
     highlight: true,
   },
   {
@@ -51,7 +51,7 @@ const timeline: TimelineEntry[] = [
   {
     year: '1969',
     title: 'The Last Tram Runs',
-    body: 'Brisbane\'s final tram makes its last journey on 13 April 1969. The entire network is ripped up in favour of buses and cars — a decision many now regard as one of the city\'s greatest planning mistakes.',
+    body: "Brisbane's final tram makes its last journey on 13 April 1969. The entire network is ripped up in favour of buses and cars — a decision many now regard as one of the city's greatest planning mistakes.",
     highlight: true,
   },
   {
@@ -62,7 +62,7 @@ const timeline: TimelineEntry[] = [
   {
     year: '1996',
     title: 'Airtrain Opens',
-    body: 'The Airport rail link connects Brisbane Airport to the suburban network, giving the city one of Australia\'s few direct rail connections to an airport.',
+    body: "The Airport rail link connects Brisbane Airport to the suburban network, giving the city one of Australia's few direct rail connections to an airport.",
   },
   {
     year: '2008',
@@ -77,18 +77,18 @@ const timeline: TimelineEntry[] = [
   {
     year: '2016',
     title: 'New Generation Rollingstock',
-    body: 'The NGR trains enter service on the SEQ network — Queensland\'s first new suburban trains in over a decade, though not without controversy over accessibility issues.',
+    body: "The NGR trains enter service on the SEQ network — Queensland's first new suburban trains in over a decade, though not without controversy over accessibility issues.",
   },
   {
     year: '2024',
     title: 'Cross River Rail Under Construction',
-    body: 'The biggest public transport infrastructure project in Queensland\'s history takes shape. Cross River Rail will add a new underground rail line through the Brisbane CBD with four new stations.',
+    body: "The biggest public transport infrastructure project in Queensland's history takes shape. Cross River Rail will add a new underground rail line through the Brisbane CBD with four new stations.",
     highlight: true,
   },
   {
     year: '2032',
     title: 'Brisbane Olympics & Beyond',
-    body: 'The 2032 Olympic and Paralympic Games provide a once-in-a-generation opportunity to transform SEQ\'s transport network with new rail lines, upgraded stations, and better connectivity.',
+    body: "The 2032 Olympic and Paralympic Games provide a once-in-a-generation opportunity to transform SEQ's transport network with new rail lines, upgraded stations, and better connectivity.",
     highlight: true,
   },
 ]
@@ -100,9 +100,7 @@ function Timeline() {
   return (
     <Container>
       <div className="text-center">
-        <p className="section-label">
-          Through the Decades
-        </p>
+        <p className="section-label">Through the Decades</p>
         <Heading as="h2" className="mx-auto mt-2 max-w-2xl">
           A Timeline of Queensland Transport
         </Heading>
@@ -110,7 +108,7 @@ function Timeline() {
 
       <div className="relative mx-auto mt-16 max-w-3xl">
         {/* Vertical line */}
-        <div className="absolute left-5 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700 sm:left-1/2" />
+        <div className="absolute top-0 bottom-0 left-5 w-px bg-gray-200 sm:left-1/2 dark:bg-gray-700" />
 
         <div className="space-y-12">
           {timeline.map((entry, i) => (
@@ -119,27 +117,25 @@ function Timeline() {
               className={`relative flex flex-col sm:flex-row ${i % 2 === 0 ? 'pl-8 sm:flex-row-reverse' : ''}`}
             >
               {/* Dot */}
-              <div className="absolute left-5 z-10 -ml-2.5 mt-1.5 sm:left-1/2">
+              <div className="absolute left-5 z-10 mt-1.5 -ml-2.5 sm:left-1/2">
                 <div
                   className={`h-5 w-5 rounded-full border-4 ${
                     entry.highlight
                       ? 'border-indigo-600 bg-indigo-100 dark:border-indigo-400 dark:bg-indigo-900'
-                      : 'border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800'
+                      : 'border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-800'
                   }`}
                 />
               </div>
 
               {/* Content */}
-              <div className={`ml-12 w-full sm:ml-0 sm:w-1/2 ${i % 2 === 0 ? 'sm:pr-12' : 'sm:pl-12'}`}>
-                <span className="text-sm font-bold text-accent">
+              <div
+                className={`ml-12 w-full sm:ml-0 sm:w-1/2 ${i % 2 === 0 ? 'sm:pr-12' : 'sm:pl-12'}`}
+              >
+                <span className="text-accent text-sm font-bold">
                   {entry.year}
                 </span>
-                <h3 className="mt-1 text-lg font-bold text-heading">
-                  {entry.title}
-                </h3>
-                <p className="mt-2 text-sm/6 text-body">
-                  {entry.body}
-                </p>
+                <h3 className="heading-3 mt-1">{entry.title}</h3>
+                <p className="text-body mt-2 text-sm/6">{entry.body}</p>
               </div>
             </div>
           ))}
@@ -151,12 +147,10 @@ function Timeline() {
 
 function TramLegacy() {
   return (
-    <div className="bg-gray-50 py-20 dark:bg-gray-900">
+    <div className="bg-subtle py-20">
       <Container>
         <div className="mx-auto max-w-3xl">
-          <p className="section-label">
-            The Trams We Lost
-          </p>
+          <p className="section-label">The Trams We Lost</p>
           <Subheading className="mt-2">
             Brisbane&apos;s Tram Network: A Cautionary Tale
           </Subheading>
@@ -168,7 +162,7 @@ function TramLegacy() {
               loading="lazy"
               className="w-full object-cover"
             />
-            <figcaption className="mt-2 text-center text-xs text-muted">
+            <figcaption className="caption">
               An early electric tram at Victoria Bridge, Brisbane, c.&nbsp;1906.{' '}
               <a
                 href="https://commons.wikimedia.org/wiki/File:BrisbaneCombinationTramVictoriaBridge1906.jpg"
@@ -182,7 +176,7 @@ function TramLegacy() {
             </figcaption>
           </figure>
 
-          <div className="mt-8 space-y-6 text-base/7 text-gray-700 dark:text-gray-300">
+          <div className="text-prose mt-8 space-y-6 text-base/7">
             <p>
               For over 80 years, trams were the lifeblood of Brisbane. At their
               peak in the 1940s, the network carried more than 100 million
@@ -197,7 +191,7 @@ function TramLegacy() {
                 loading="lazy"
                 className="w-full object-cover"
               />
-              <figcaption className="mt-2 text-center text-xs text-muted">
+              <figcaption className="caption">
                 Dreadnought trams in Queen Street, Brisbane, 1947.{' '}
                 <a
                   href="https://commons.wikimedia.org/wiki/File:BrisbaneQueenStreet1947.jpg"
@@ -229,8 +223,8 @@ function TramLegacy() {
                 Brisbane&apos;s trams are a reminder:
               </strong>{' '}
               once you tear out public transport infrastructure, getting it back
-              is phenomenally expensive. The lesson for today is clear —
-              protect and invest in the networks we have.
+              is phenomenally expensive. The lesson for today is clear — protect
+              and invest in the networks we have.
             </p>
           </div>
         </div>
@@ -243,9 +237,7 @@ function LookingForward() {
   return (
     <Container>
       <div className="mx-auto max-w-3xl text-center">
-        <p className="section-label">
-          The Future
-        </p>
+        <p className="section-label">The Future</p>
         <Subheading className="mt-2">
           Learning From the Past, Building for Tomorrow
         </Subheading>
@@ -280,7 +272,6 @@ export default function HistoryPage() {
         <TramLegacy />
         <LookingForward />
       </div>
-
     </main>
   )
 }

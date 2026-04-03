@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 dialog.map-modal::backdrop {
   background-color: rgb(0 0 0 / 0.6);
@@ -87,28 +87,121 @@ dialog.map-modal::backdrop {
 }
 
 @layer components {
+  /* --- Text colour tokens --- */
   .text-accent {
-    @apply text-indigo-600 dark:text-indigo-400;
+    @apply text-indigo-600 transition-colors duration-200 dark:text-indigo-400;
   }
 
   .text-heading {
-    @apply text-gray-900 dark:text-white;
+    @apply text-gray-900 transition-colors duration-200 dark:text-white;
   }
 
   .text-body {
-    @apply text-gray-600 dark:text-gray-400;
+    @apply text-gray-600 transition-colors duration-200 dark:text-gray-400;
   }
 
   .text-muted {
-    @apply text-gray-500 dark:text-gray-400;
+    @apply text-gray-500 transition-colors duration-200 dark:text-gray-400;
   }
 
-  /* Section label */
+  /* Prose body — slightly warmer than text-body, used for long-form text */
+  .text-prose {
+    @apply text-gray-700 transition-colors duration-200 dark:text-gray-300;
+  }
+
+  /* --- Section label --- */
   .section-label {
-    @apply text-sm font-semibold tracking-widest uppercase text-indigo-600 dark:text-indigo-400;
+    @apply text-sm font-semibold tracking-widest text-indigo-600 uppercase transition-colors duration-200 dark:text-indigo-400;
   }
 
-  /* Badge variants */
+  /* --- Typography --- */
+  .heading-3 {
+    @apply text-lg font-bold tracking-tight text-gray-900 transition-colors duration-200 dark:text-white;
+  }
+
+  /* Figcaption / image caption */
+  .caption {
+    @apply mt-2 text-center text-xs text-gray-500 transition-colors duration-200 dark:text-gray-400;
+  }
+
+  /* Inline accent link */
+  .link-accent {
+    @apply text-indigo-600 transition-colors duration-200 hover:underline dark:text-indigo-400;
+  }
+
+  /* --- Surface / background tokens --- */
+
+  /* Standard card: white / gray-900 */
+  .surface-card {
+    @apply rounded-lg border border-gray-200 bg-gray-100 transition duration-200 dark:border-gray-800 dark:bg-gray-900;
+  }
+
+  /* Raised card: one shade lighter in dark mode */
+  .surface-card-raised {
+    @apply rounded-lg border border-gray-300 bg-gray-200 transition-colors duration-200 dark:border-gray-700 dark:bg-gray-800;
+  }
+
+  /* Alternating section stripe */
+  .bg-subtle {
+    @apply bg-gray-50 transition-colors duration-200 dark:bg-gray-900;
+  }
+
+  /* Divider borders */
+  .border-subtle {
+    @apply border-gray-200 transition-colors duration-200 dark:border-gray-800;
+  }
+
+  /* --- Icon wells --- */
+  .icon-well {
+    @apply bg-indigo-50 text-indigo-600 transition-colors duration-200 dark:bg-indigo-900/50 dark:text-indigo-400;
+  }
+
+  .icon-well-solid {
+    @apply bg-indigo-600 text-white transition-colors duration-200 dark:bg-indigo-500;
+  }
+
+  /* --- Form fields --- */
+  .input-field {
+    @apply w-full rounded-md border border-gray-300 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm transition-colors duration-200 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400;
+  }
+
+  /* --- Navbar --- */
+
+  /* Interactive links/buttons on a regular (light/dark) surface */
+  .nav-link {
+    @apply text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white;
+  }
+
+  /* Interactive links/buttons on the brand gradient */
+  .nav-link-filled {
+    @apply text-indigo-100 transition-colors duration-200 hover:bg-gray-50/15 hover:text-white;
+  }
+
+  /* Dropdown panel */
+  .nav-dropdown-panel {
+    @apply rounded-lg border border-gray-200 bg-gray-50 py-1 shadow-lg transition-colors duration-200 dark:border-gray-700 dark:bg-gray-900;
+  }
+
+  /* Dropdown item links */
+  .nav-dropdown-item {
+    @apply text-gray-700 transition-colors duration-200 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white;
+  }
+
+  /* Mobile menu text body */
+  .nav-mobile-content {
+    @apply text-black transition-colors duration-200 dark:text-gray-200;
+  }
+
+  /* Mobile menu section group headers */
+  .nav-section-label {
+    @apply text-gray-400 transition-colors duration-200 dark:text-gray-500;
+  }
+
+  .nav-section-label-filled {
+    @apply text-indigo-300;
+  }
+
+  /* --- Badge variants --- */
   .badge-success {
     @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300;
   }
@@ -141,5 +234,19 @@ dialog.map-modal::backdrop {
 
   .animation-delay-300 {
     animation-delay: 300ms;
+  }
+
+  /* --- Brand gradient --- */
+  .bg-brand-gradient {
+    @apply bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900;
+  }
+
+  /* Text colours for use on bg-brand-gradient backgrounds */
+  .text-on-brand {
+    @apply text-indigo-200;
+  }
+
+  .text-on-brand-subtle {
+    @apply text-indigo-200/70;
   }
 }

@@ -46,7 +46,7 @@ export function ContactFormFields({
           placeholder="Enter your name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
+          className="mt-2 input-field"
         />
       </div>
 
@@ -66,7 +66,7 @@ export function ContactFormFields({
           placeholder="you@example.com"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
+          className="mt-2 input-field"
         />
       </div>
 
@@ -109,7 +109,7 @@ export function ContactFormFields({
           onChange={(e) =>
             setFormData({ ...formData, subject: e.target.value })
           }
-          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
+          className="mt-2 input-field"
         />
       </div>
 
@@ -131,7 +131,7 @@ export function ContactFormFields({
           onChange={(e) =>
             setFormData({ ...formData, message: e.target.value })
           }
-          className="mt-2 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-indigo-400"
+          className="mt-2 input-field"
         />
       </div>
 

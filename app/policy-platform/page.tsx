@@ -54,7 +54,7 @@ export default function Page() {
               </div>
 
               <div className="mt-10 hidden justify-center lg:flex">
-                <div className="relative aspect-[1/1.414] w-full max-w-[840px] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800">
+                <div className="relative aspect-[1/1.414] w-full max-w-[840px] overflow-hidden rounded-lg border border-gray-200 bg-gray-50 shadow-sm dark:border-gray-800">
                   <iframe
                     src={policyDocumentPdf}
                     className="absolute inset-0 h-full w-full border-none"
@@ -84,12 +84,12 @@ export default function Page() {
           {/* CTA band + footer in one gradient */}
         </div>
 
-        <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+        <div className="bg-brand-gradient">
           <Container className="py-16 text-center">
             <h2 className="text-2xl font-bold text-white sm:text-3xl">
               Help shape the next edition
             </h2>
-            <p className="mx-auto mt-3 max-w-xl text-indigo-200">
+            <p className="text-on-brand mx-auto mt-3 max-w-xl">
               Our policy platform is a living document. Join BTQ to contribute
               your expertise, local knowledge, and ideas to the next revision.
             </p>

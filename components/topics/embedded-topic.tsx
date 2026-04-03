@@ -179,7 +179,7 @@ function renderWithTailwind(html: string) {
             break
           case 'hr':
             return (
-              <hr className="my-10 border-t border-gray-200 dark:border-gray-800" />
+              <hr className="my-10 border-t border-subtle" />
             )
           case 'a':
             if (
@@ -262,7 +262,7 @@ export default async function EmbeddedTopic(params: {
 
       {/* Title & meta */}
       <Heading as="h1">{post.title}</Heading>
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-gray-200 pb-6 text-sm text-muted dark:border-gray-800">
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-subtle pb-6 text-sm text-muted">
         {post.creator && (
           <span>
             {params.showAuthor ? <>@{post.creator} &middot; </> : null}
@@ -284,13 +284,13 @@ export default async function EmbeddedTopic(params: {
       </div>
 
       {/* Forum CTA */}
-      <div className="mt-12 rounded-lg bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 p-8 text-white sm:p-12">
+      <div className="mt-12 rounded-lg bg-brand-gradient p-8 text-white sm:p-12">
         <Subheading as="h2" dark className="text-2xl">
           {params.linkToTopic
             ? 'See what others are saying about this post!'
             : 'Join the conversation on the BTQ Forum!'}
         </Subheading>
-        <Lead className="mt-4 max-w-3xl text-indigo-200">
+        <Lead className="mt-4 max-w-3xl text-on-brand">
           Stay up-to-date with the latest insights directly from the Better
           Transport Queensland (BTQ) Forum. Connect with engaged community
           members, share your thoughts, and be part of the conversation—everyone

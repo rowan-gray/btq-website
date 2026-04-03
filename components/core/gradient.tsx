@@ -7,10 +7,7 @@ export function Gradient({
   return (
     <div
       {...props}
-      className={clsx(
-        className,
-        'bg-gray-50 dark:bg-gray-900',
-      )}
+      className={clsx(className, 'bg-subtle')}
     />
   )
 }

@@ -1,10 +1,10 @@
 import { createPageMetadata } from '@/app/layout'
 import { Accordion } from '@/components/accordian'
 import { Button } from '@/components/core/button'
+import { Card } from '@/components/core/card'
 import { Container } from '@/components/core/container'
-import { Gradient } from '@/components/core/gradient'
 import { Link } from '@/components/core/link'
-import { Heading, Lead, Subheading } from '@/components/core/text'
+import { Heading, Subheading } from '@/components/core/text'
 import { HeroBanner } from '@/components/hero-banner'
 import { MinusIcon } from '@heroicons/react/16/solid'
 import type { Metadata } from 'next'
@@ -87,7 +87,7 @@ const tiers: Tier[] = [
 function PricingCards() {
   return (
     <div className="relative py-24">
-      <Gradient className="absolute inset-x-0 top-48 bottom-0 rounded-lg" />
+      <div className="bg-subtle absolute inset-x-0 top-48 bottom-0 rounded-lg" />
       <Container className="relative">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {tiers.map((tier, tierIndex) => (
@@ -101,9 +101,11 @@ function PricingCards() {
 
 function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
   return (
-    <div className="relative rounded-lg border border-gray-200 bg-white p-10 pb-9 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+    <Card className="relative p-10 pb-9 shadow-sm">
       <Subheading>{tier.name}</Subheading>
-      <p className="mt-2 text-sm/6 text-gray-950/75 dark:text-gray-300">{tier.description}</p>
+      <p className="mt-2 text-sm/6 text-gray-950/75 dark:text-gray-300">
+        {tier.description}
+      </p>
       <div className="mt-8 flex items-center gap-4">
         <div className="text-5xl font-medium text-gray-950 dark:text-white">
           ${tier.priceMonthly}
@@ -114,7 +116,9 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </div>
       </div>
       <div className="mt-8 mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">Benefits</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">
+          Benefits
+        </h3>
         <ul className="mt-3 space-y-3">
           {tier.highlights?.map((props, featureIndex) => (
             <FeatureItem key={featureIndex} {...props} />
@@ -122,7 +126,9 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
         </ul>
       </div>
       <div className="mb-8">
-        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">Requirements</h3>
+        <h3 className="text-sm/6 font-medium text-gray-950 dark:text-white">
+          Requirements
+        </h3>
         <ul className="mt-3 space-y-1">
           {tier.requirements?.map((requirement, featureIndex) => (
             <RequirementItem key={featureIndex} requirement={requirement} />
@@ -132,7 +138,7 @@ function PricingCard({ tier }: { tier: (typeof tiers)[number] }) {
       <Button className="absolute right-4 bottom-4" size="small">
         <Link href={tier.href}>{tier?.buttonText || 'Unavailable...'}</Link>
       </Button>
-    </div>
+    </Card>
   )
 }
 
@@ -260,10 +266,7 @@ function FrequentlyAskedQuestions() {
           <p>
             If you have financial hardship, please reach out to the management
             committee at{' '}
-            <a
-              href="mailto:management@btq.org.au"
-              className="text-indigo-600 hover:underline dark:text-indigo-400"
-            >
+            <a href="mailto:management@btq.org.au" className="link-accent">
               management@btq.org.au
             </a>{' '}
             to discuss the possibility of having your fees waived.

@@ -1,5 +1,6 @@
 import { createPageMetadata } from '@/app/layout'
 import { Button } from '@/components/core/button'
+import { Card } from '@/components/core/card'
 import { Container } from '@/components/core/container'
 import { Heading, Lead, Subheading } from '@/components/core/text'
 import { Footer } from '@/components/footer/footer'
@@ -29,14 +30,14 @@ export const metadata: Metadata = createPageMetadata({
 /* ------------------------------------------------------------------ */
 function Hero() {
   return (
-    <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+    <div className="bg-brand-gradient">
       <Container className="relative">
         <Navbar filled />
         <div className="pt-16 pb-28 sm:pt-20 sm:pb-40 md:pt-28 md:pb-52">
           <h1 className="animate-fade-in-up font-display max-w-4xl text-5xl/[0.9] font-bold tracking-tight text-balance text-white sm:text-6xl/[0.85] md:text-7xl/[0.85]">
             Better Transport Queensland
           </h1>
-          <p className="animate-fade-in-up animation-delay-150 mt-8 max-w-xl text-lg/7 font-medium text-indigo-200 sm:text-xl/8">
+          <p className="animate-fade-in-up animation-delay-150 mt-8 max-w-xl text-lg/7 font-medium text-on-brand sm:text-xl/8">
             Queensland&apos;s leading advocacy group for public, active, and
             freight transport. We champion research-driven investment in
             world-class transport systems.
@@ -201,16 +202,16 @@ function Pillars() {
 
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((p) => (
-            <div
+            <Card
               key={p.title}
-              className="rounded-lg border border-gray-200 bg-white p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:border-gray-800 dark:bg-gray-900"
+              className="p-8 hover:-translate-y-0.5"
             >
               <span className="text-accent">{p.icon}</span>
-              <h3 className="text-heading mt-4 text-lg font-bold tracking-tight">
+              <h3 className="heading-3 mt-4">
                 {p.title}
               </h3>
               <p className="text-body mt-2 text-sm/6">{p.body}</p>
-            </div>
+            </Card>
           ))}
         </div>
       </Container>
@@ -278,7 +279,7 @@ function MapCTA() {
       <Heading as="h2" dark>
         Explore Our Transport Map
       </Heading>
-      <p className="mx-auto mt-4 max-w-xl text-lg/7 text-indigo-200">
+      <p className="mx-auto mt-4 max-w-xl text-lg/7 text-on-brand">
         See every rail line, bus route, and ferry — plus our proposed
         improvements — on an interactive map of South East Queensland.
       </p>
@@ -315,7 +316,7 @@ export default function Home() {
             <CommunitySection />
           </div>
         </main>
-        <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+        <div className="bg-brand-gradient">
           <MapCTA />
           <Footer bare />
         </div>

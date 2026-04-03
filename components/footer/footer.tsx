@@ -100,13 +100,13 @@ function Copyright() {
 export function Footer({ bare }: { bare?: boolean }) {
   const content = (
     <Container>
-      <div className="flex flex-col items-center justify-between gap-4 py-10 text-indigo-200 sm:flex-row">
+      <div className="flex flex-col items-center justify-between gap-4 py-10 text-on-brand sm:flex-row">
         <Copyright />
         <div className="flex items-center gap-6">
           <SocialLinks />
         </div>
       </div>
-      <div className="border-t border-indigo-200 py-4 text-center text-xs text-indigo-200">
+      <div className="border-t border-indigo-200 py-4 text-center text-xs text-on-brand">
         Better Transport Queensland is an independent community organisation. We
         are not affiliated with, endorsed by, or connected to the Queensland
         Government, TransLink, Queensland Rail, or any local council.
@@ -120,7 +120,7 @@ export function Footer({ bare }: { bare?: boolean }) {
 
   return (
     <footer className="justify-bottom">
-      <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+      <div className="bg-brand-gradient">
         {content}
       </div>
     </footer>
