@@ -4,7 +4,7 @@ import { Container } from '@/components/core/container'
 import { Heading, Lead } from '@/components/core/text'
 import ContactForm from '@/components/forms/contact-form'
 import { HeroBanner } from '@/components/hero-banner'
-import { isContactFormConfigured } from '@/lib/discourse-config'
+import { isContactFormConfigured } from '@/lib/discourse-config.server'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = createPageMetadata({
@@ -23,18 +23,18 @@ type CommitteeMember = {
 function CommitteeMemberCard({ name, role, email }: CommitteeMember) {
   return (
     <Card className="p-6">
-      <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg icon-well text-sm font-bold">
+      <div className="icon-well mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg text-sm font-bold">
         {name
           .split(' ')
           .map((n) => n[0])
           .join('')}
       </div>
-      <h3 className="text-lg font-semibold text-heading">{name}</h3>
-      <p className="mt-1 text-sm text-muted">{role}</p>
+      <h3 className="text-heading text-lg font-semibold">{name}</h3>
+      <p className="text-muted mt-1 text-sm">{role}</p>
       {email && (
         <a
           href={`mailto:${email}`}
-          className="mt-2 inline-block text-sm font-medium link-accent"
+          className="link-accent mt-2 inline-block text-sm font-medium"
         >
           {email}
         </a>
@@ -79,7 +79,7 @@ function GeneralContacts() {
   return (
     <section>
       <div className="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-900 dark:border-amber-700/70 dark:bg-amber-950/30 dark:text-amber-200">
-        <p className="text-sm font-semibold uppercase tracking-wide">
+        <p className="text-sm font-semibold tracking-wide uppercase">
           Important Notice
         </p>
         <p className="mt-2 text-sm leading-relaxed">
@@ -94,45 +94,61 @@ function GeneralContacts() {
         </p>
       </div>
       <Heading as="h2">Get in touch</Heading>
-      <p className="mt-4 max-w-3xl text-body">
+      <p className="text-body mt-4 max-w-3xl">
         We&apos;re always happy to take part in interviews on any topic relating
         to Queensland&apos;s transport system, such as policy, infrastructure,
         accessibility, and community impacts.
       </p>
       <section className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Card className="group relative p-8">
-          <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg icon-well">
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+          <div className="icon-well mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg">
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+              />
             </svg>
           </div>
-          <h3 className="heading-3">
-            General Enquiries
-          </h3>
-          <p className="mt-2 text-sm text-body">
+          <h3 className="heading-3">General Enquiries</h3>
+          <p className="text-body mt-2 text-sm">
             For any general enquiries or questions, please contact us at{' '}
             <a
               href="mailto:enquiries@btq.org.au"
-              className="font-medium link-accent"
+              className="link-accent font-medium"
             >
               enquiries@btq.org.au
             </a>
           </p>
         </Card>
         <Card className="group relative p-8">
-          <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg icon-well">
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+          <div className="icon-well mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg">
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z"
+              />
             </svg>
           </div>
-          <h3 className="heading-3">
-            Media Enquiries
-          </h3>
-          <p className="mt-2 text-sm text-body">
+          <h3 className="heading-3">Media Enquiries</h3>
+          <p className="text-body mt-2 text-sm">
             For any media enquiries or questions, please contact us at{' '}
             <a
               href="mailto:media@btq.org.au"
-              className="font-medium link-accent"
+              className="link-accent font-medium"
             >
               media@btq.org.au
             </a>
@@ -147,14 +163,14 @@ function ManagementCommittee() {
   return (
     <section>
       <Heading as="h2">Management Committee</Heading>
-      <p className="mt-6 max-w-3xl text-body">
+      <p className="text-body mt-6 max-w-3xl">
         Our Management Committee is made up of dedicated volunteers who guide
         Better Transport Queensland&apos;s strategy, governance, and advocacy
         work. Each member brings unique expertise and a shared commitment to
         improving transport outcomes across the state.
       </p>
 
-      <p className="mt-4 max-w-3xl text-body">
+      <p className="text-body mt-4 max-w-3xl">
         For the quickest response, please direct your general and media
         enquiries to the email addresses listed in the section above.
       </p>

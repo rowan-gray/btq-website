@@ -1,11 +1,9 @@
 import { CONTACT_FORM_MAX_LENGTHS, ContactPurpose } from '@/lib/contact-purpose'
 import {
-  DISCOURSE_API_KEY,
-  DISCOURSE_API_USERNAME,
-  DISCOURSE_CONTACT_CATEGORY_ID,
-  DISCOURSE_HOST,
+  getDiscourseConfig,
   isContactFormConfigured,
-} from '@/lib/discourse-config'
+  type DiscourseConfig,
+} from '@/lib/discourse-config.server'
 import {
   contactFormGlobalLimiter,
   contactFormLimiter,
@@ -236,7 +234,10 @@ function formatPurpose(value: string): string {
   return value.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
-function createDiscoursePayload(sanitizedData: SanitizedContactFormData) {
+function createDiscoursePayload(
+  sanitizedData: SanitizedContactFormData,
+  cfg: DiscourseConfig,
+) {
   const title = `[${formatPurpose(sanitizedData.purpose)}] ${sanitizedData.sanitizedSubject}`
 
   const raw = `**Name:** ${sanitizedData.sanitizedName}
@@ -246,7 +247,7 @@ function createDiscoursePayload(sanitizedData: SanitizedContactFormData) {
 
 ${sanitizedData.sanitizedMessage}`
 
-  const categoryId = parseInt(DISCOURSE_CONTACT_CATEGORY_ID ?? '0')
+  const categoryId = parseInt(cfg.contactCategoryId ?? '0')
   if (isNaN(categoryId) || categoryId <= 0) {
     throw new Error('Invalid DISCOURSE_CONTACT_CATEGORY_ID')
   }
@@ -256,16 +257,17 @@ ${sanitizedData.sanitizedMessage}`
 
 async function submitToDiscourse(
   sanitizedData: SanitizedContactFormData,
+  cfg: DiscourseConfig,
 ): Promise<NextResponse> {
   try {
-    const payload = createDiscoursePayload(sanitizedData)
+    const payload = createDiscoursePayload(sanitizedData, cfg)
 
-    const response = await fetch(`https://${DISCOURSE_HOST}/posts.json`, {
+    const response = await fetch(`https://${cfg.host}/posts.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Api-Key': DISCOURSE_API_KEY ?? '',
-        'Api-Username': DISCOURSE_API_USERNAME ?? '',
+        'Api-Key': cfg.apiKey ?? '',
+        'Api-Username': cfg.apiUsername ?? '',
       },
       body: JSON.stringify(payload),
     })
@@ -331,8 +333,10 @@ export async function POST(request: NextRequest) {
     const devModeResponse = handleDevMode(formData.subject)
     if (devModeResponse) return devModeResponse
 
+    var cfg = getDiscourseConfig()
+
     // Submit to Discourse
-    const response = await submitToDiscourse(sanitizedData)
+    const response = await submitToDiscourse(sanitizedData, cfg)
 
     // Increment rate limiters on success only
     if (response.status === 200) {
