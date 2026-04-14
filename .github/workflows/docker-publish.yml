@@ -7,7 +7,7 @@ name: Docker
 
 on:
   release:
-    types: [published, prereleased]
+    types: [published]
   pull_request:
     branches:
       - main
@@ -32,8 +32,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
