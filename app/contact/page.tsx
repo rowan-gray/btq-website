@@ -7,6 +7,8 @@ import { HeroBanner } from '@/components/hero-banner'
 import { isContactFormConfigured } from '@/lib/discourse-config.server'
 import type { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = createPageMetadata({
   title: 'Contact us',
   description:
