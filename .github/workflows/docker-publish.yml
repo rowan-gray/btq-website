@@ -7,12 +7,11 @@ name: Docker
 
 on:
   release:
-    types: [released]
+    types: [released, prereleased]
   pull_request:
     branches:
       - main
     types: [opened, synchronize, reopened]
-
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -20,10 +19,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -63,10 +60,25 @@ jobs:
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
+        if: github.event_name == 'release'
         id: meta
         uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            # Raw tag
+            type=ref,event=tag
+
+            type=semver,pattern={{version}}
+
+            # Stable tags (only for full releases)
+            type=semver,pattern={{major}}.{{minor}},enable=${{ github.event.release.prerelease == false }}
+            type=semver,pattern={{major}},enable=${{ github.event.release.prerelease == false }}
+            type=raw,value=latest,enable=${{ github.event.release.prerelease == false }}
+
+            # Beta tags (only for prereleases)
+            type=match,pattern=^v(\d+\.\d+\.\d+-(alpha|beta|rc)),group=1,enable=${{ github.event.release.prerelease }}
+            type=match,pattern=^v\d+\.\d+\.\d+-(alpha|beta|rc),group=1,enable=${{ github.event.release.prerelease }}
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
