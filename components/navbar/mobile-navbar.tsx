@@ -22,11 +22,11 @@ const xVariants = {
 }
 
 export function MobileNavbar({ filled, isOpen, onClick }: MobileNavbarProps) {
-  const color = !filled ? 'text-black dark:text-white' : ''
+  const color = filled ? 'text-white' : 'text-heading'
 
   return (
     <motion.button
-      className="relative flex size-12 items-center justify-center self-center rounded-lg hover:bg-black/5 dark:hover:bg-white/10 lg:hidden"
+      className="relative flex size-12 items-center justify-center self-center rounded-lg hover:bg-black/5 lg:hidden dark:hover:bg-gray-50/10"
       aria-label="Toggle main menu"
       onClick={onClick}
       whileTap={{ scale: 0.9 }}
@@ -58,8 +58,13 @@ export function MobileNavbar({ filled, isOpen, onClick }: MobileNavbarProps) {
 
 // Flatten NavItems into a list of links with optional group headers
 function getFlatNavItems() {
-  const items: { type: 'link'; href: string; label: string }[] | { type: 'header'; label: string }[] = []
-  const flat: ({ type: 'link'; href: string; label: string } | { type: 'header'; label: string })[] = []
+  const items:
+    | { type: 'link'; href: string; label: string }[]
+    | { type: 'header'; label: string }[] = []
+  const flat: (
+    | { type: 'link'; href: string; label: string }
+    | { type: 'header'; label: string }
+  )[] = []
 
   for (const item of NavItems) {
     if (isNavGroup(item)) {
@@ -72,6 +77,14 @@ function getFlatNavItems() {
     }
   }
   return flat
+}
+
+function Seperator({ filled }: { filled: true | undefined }) {
+  return (
+    <div
+      className={`h-px bg-linear-to-r from-transparent via-gray-300 to-transparent ${!filled ? 'dark:via-gray-700' : ''}`}
+    />
+  )
 }
 
 export function MobileNavbarMenu({
@@ -92,12 +105,10 @@ export function MobileNavbarMenu({
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.25, 0.8, 0.5, 1] }}
-          className={`overflow-hidden lg:hidden ${
-            !filled ? 'text-black dark:text-gray-200' : 'text-gray-200'
-          }`}
+          className={`overflow-hidden lg:hidden ${filled ? 'text-on-brand' : 'nav-mobile-content'}`}
         >
           <div className="relative flex flex-col py-4 text-center">
-            <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-700" />
+            <Seperator filled={filled} />
 
             {flatItems.map((item, i) =>
               item.type === 'header' ? (
@@ -114,14 +125,11 @@ export function MobileNavbarMenu({
                   className="relative"
                 >
                   <p
-                    className={`pt-4 pb-1 text-xs font-bold tracking-widest uppercase ${
-                      filled
-                        ? 'text-indigo-300'
-                        : 'text-gray-400 dark:text-gray-500'
-                    }`}
+                    className={`text-s pt-4 pb-1 font-bold tracking-widest uppercase ${filled ? 'nav-section-label-filled' : 'nav-section-label'}`}
                   >
                     {item.label}
                   </p>
+                  <Seperator filled={filled} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -139,9 +147,8 @@ export function MobileNavbarMenu({
                   <Link href={item.href} className="text-base font-medium">
                     <p className="py-3 text-xl">{item.label}</p>
                   </Link>
-                  <div className="absolute inset-x-0 bottom-0 translate-y-1/2">
-                    <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-700" />
-                  </div>
+
+                  <Seperator filled={filled} />
                 </motion.div>
               ),
             )}

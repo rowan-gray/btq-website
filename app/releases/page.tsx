@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic'
 
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { Snippets } from '@/components/topics/feed-snippets'
 import type { Metadata } from 'next'
@@ -23,12 +22,11 @@ export default function Page() {
         lead="Official statements and updates from Better Transport Queensland on public, active, and sustainable transport."
       />
 
-      <div className="flex-grow">
+      <div className="grow">
         <Container className="mt-12 mb-16">
           <Snippets categoryId="11" redirectRoute="releases" />
         </Container>
       </div>
-      <Footer />
     </main>
   )
 }

@@ -1,5 +1,4 @@
 import { Container } from '@/components/core/container'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import EmbeddedTopic, {
   generateMetadataFromTopic,
@@ -43,7 +42,6 @@ export default async function Page({ params: Params }: { params: Params }) {
           categoryTitle={categoryTitle}
         />
       </Container>
-      <Footer />
     </main>
   )
 }

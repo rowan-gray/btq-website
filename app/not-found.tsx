@@ -1,6 +1,5 @@
 import { Button } from '@/components/core/button'
 import { Container } from '@/components/core/container'
-import { Footer } from '@/components/footer/footer'
 import { Navbar } from '@/components/navbar/navbar'
 import type { Metadata } from 'next'
 
@@ -85,7 +84,6 @@ export default function NotFound() {
           </main>
         </div>
 
-        <Footer />
       </div>
     </div>
   )

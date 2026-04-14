@@ -47,7 +47,7 @@ export function Navbar({ filled }: NavbarProps) {
         </div>
         <div className="flex items-center gap-2">
           <DesktopNavbar filled={filled} />
-          <ThemeSwitcher />
+          <ThemeSwitcher filled={filled} />
           <MobileNavbar
             filled={filled}
             isOpen={isOpen}

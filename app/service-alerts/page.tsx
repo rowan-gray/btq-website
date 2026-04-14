@@ -1,6 +1,5 @@
 import { createPageMetadata } from '@/app/layout'
 import { Container } from '@/components/core/container'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { fetchTranslinkAlerts, scoreAlert } from '@/helpers/translinkAlertsHelper'
 import type { Metadata } from 'next'
@@ -32,7 +31,7 @@ export default async function ServiceAlertsPage() {
       <Container className="mt-10 mb-16">
         <AlertsClient alerts={alerts} areas={areas} />
 
-        <p className="mt-10 text-xs text-gray-400 dark:text-gray-600">
+        <p className="text-muted mt-10 text-xs">
           Data sourced from the{' '}
           <Link
             href="https://translink.com.au/about-translink/open-data"
@@ -46,7 +45,6 @@ export default async function ServiceAlertsPage() {
         </p>
       </Container>
 
-      <Footer />
     </div>
   )
 }

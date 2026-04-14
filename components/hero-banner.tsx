@@ -13,14 +13,14 @@ export function HeroBanner({
   children?: ReactNode
 }) {
   return (
-    <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900">
+    <div className="bg-brand-gradient">
       <Container className="relative">
         <Navbar filled />
         <div className="pb-16 pt-8">
           <Heading as="h1" dark>
             {title}
           </Heading>
-          <Lead className="mt-4 max-w-2xl text-indigo-200">{lead}</Lead>
+          <Lead className="mt-4 max-w-2xl text-on-brand">{lead}</Lead>
           {children}
         </div>
       </Container>

@@ -1,5 +1,4 @@
 import { createPageMetadata } from '@/app/layout'
-import { Footer } from '@/components/footer/footer'
 import { HeroBanner } from '@/components/hero-banner'
 import { TransportMap } from '@/components/transport-map'
 import type { Metadata } from 'next'
@@ -29,7 +28,6 @@ export default function MapPage() {
           <TransportMap className="h-full w-full" />
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
-export function ThemeSwitcher() {
+export function ThemeSwitcher({ filled }: { filled?: true }) {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -35,7 +35,7 @@ export function ThemeSwitcher() {
   return (
     <button
       onClick={cycleTheme}
-      className="flex h-9 w-9 items-center justify-center rounded-lg text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+      className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${filled ? 'nav-link-filled' : 'nav-link'}`}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
       title={`Switch to ${isDark ? 'light' : 'dark'} theme`}
     >

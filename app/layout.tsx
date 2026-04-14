@@ -1,6 +1,7 @@
-import '@/styles/tailwind.css'
 import { AlertStripServer } from '@/components/alert-strip-server'
+import { FooterProvider } from '@/components/footer/footer-provider'
 import { ThemeProvider } from '@/components/theme-provider'
+import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 import { Fira_Sans } from 'next/font/google'
 
@@ -79,14 +80,20 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scrollbar-gutter-stable" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scrollbar-gutter-stable"
+      suppressHydrationWarning
+    >
       <body
-        className={`${firaSans.className} min-h-screen bg-white text-gray-950 antialiased transition-colors duration-200 dark:bg-gray-950 dark:text-gray-100`}
+        className={`${firaSans.className} flex min-h-screen flex-col bg-page text-gray-950 antialiased transition-colors duration-200 dark:text-gray-100`}
       >
         <ThemeProvider>
+          <FooterProvider>
             <AlertStripServer />
-            {children}
-          </ThemeProvider>
+            <div className="flex flex-1 flex-col">{children}</div>
+          </FooterProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

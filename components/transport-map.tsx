@@ -163,15 +163,7 @@ export function TransportMap({
         layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: {
           'line-color': LAYER_COLORS.bus,
-          'line-width': [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            8,
-            0.5,
-            14,
-            2.5,
-          ],
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 0.5, 14, 2.5],
           'line-opacity': [
             'interpolate',
             ['linear'],
@@ -206,15 +198,7 @@ export function TransportMap({
         layout: { 'line-cap': 'round', 'line-join': 'round' },
         paint: {
           'line-color': LAYER_COLORS.tram,
-          'line-width': [
-            'interpolate',
-            ['linear'],
-            ['zoom'],
-            8,
-            1.5,
-            13,
-            3.5,
-          ],
+          'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.5, 13, 3.5],
           'line-opacity': 0.85,
         },
       })
@@ -399,10 +383,7 @@ export function TransportMap({
           if (e.features && e.features.length > 0) {
             const props = e.features[0].properties
             const name =
-              props?.name ??
-              props?.longName ??
-              props?.shortName ??
-              'Unknown'
+              props?.name ?? props?.longName ?? props?.shortName ?? 'Unknown'
             const description =
               props?.description ??
               (props?.longName
@@ -473,8 +454,7 @@ export function TransportMap({
           fetch('/gtfs-routes.json'),
           fetch('/proposed-routes.json'),
         ])
-        const gtfsData =
-          (await gtfsRes.json()) as GeoJSON.FeatureCollection
+        const gtfsData = (await gtfsRes.json()) as GeoJSON.FeatureCollection
         const proposedData =
           (await proposedRes.json()) as GeoJSON.FeatureCollection
         gtfsDataRef.current = gtfsData
@@ -548,7 +528,10 @@ export function TransportMap({
   useEffect(() => {
     if (!mapRef.current || !loaded) return
     const map = mapRef.current
-    for (const [key, layerId] of Object.entries(LAYER_ID_MAP) as [string, string][]) {
+    for (const [key, layerId] of Object.entries(LAYER_ID_MAP) as [
+      string,
+      string,
+    ][]) {
       if (map.getLayer(layerId)) {
         map.setLayoutProperty(
           layerId,
@@ -572,222 +555,241 @@ export function TransportMap({
 
   return (
     <>
-    <div className={`relative h-full w-full overflow-hidden ${className}`}>
-      <div ref={mapContainer} className="h-full w-full rounded-[inherit]" />
+      <div className={`relative h-full w-full overflow-hidden ${className}`}>
+        <div ref={mapContainer} className="h-full w-full rounded-[inherit]" />
 
-      {dataLoading && (
-        <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white/90 px-6 py-3 shadow-lg backdrop-blur-sm dark:bg-gray-900/90">
-          <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-            Loading transport routes…
-          </p>
+        {dataLoading && (
+          <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-gray-50/90 px-6 py-3 shadow-lg backdrop-blur-sm dark:bg-gray-900/90">
+            <p className="text-body text-sm font-medium">
+              Loading transport routes…
+            </p>
+          </div>
+        )}
+
+        <div className="absolute top-4 left-4 z-10 max-h-[calc(100%-2rem)] overflow-y-auto rounded-xl bg-gray-50/95 p-4 shadow-lg backdrop-blur-sm dark:bg-gray-900/95">
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <h3 className="text-heading text-sm font-bold tracking-tight">
+              Map Layers
+            </h3>
+            <button
+              onClick={() => setIsLayerPanelOpen((prev) => !prev)}
+              className="text-muted rounded-md p-1 transition-colors hover:bg-(--nav-hover-bg) hover:text-(--nav-hover-text)"
+              aria-label={
+                isLayerPanelOpen ? 'Collapse map layers' : 'Expand map layers'
+              }
+              title={
+                isLayerPanelOpen ? 'Collapse map layers' : 'Expand map layers'
+              }
+              aria-expanded={isLayerPanelOpen}
+            >
+              {isLayerPanelOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+
+          {isLayerPanelOpen && (
+            <>
+              <p className="text-muted mb-1 text-[0.65rem] font-semibold tracking-wider uppercase">
+                Current Network
+              </p>
+              {CURRENT_LAYERS.map((key) => (
+                <label
+                  key={key}
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-(--nav-hover-bg)"
+                >
+                  <input
+                    type="checkbox"
+                    checked={layers[key]}
+                    onChange={() => toggleLayer(key)}
+                    className="accent-indigo-600"
+                  />
+                  <span
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
+                  />
+                  <span className="text-body text-sm">{LAYER_LABELS[key]}</span>
+                </label>
+              ))}
+
+              <p className="text-muted mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider uppercase">
+                Proposed Changes
+              </p>
+              {PROPOSED_LAYERS.map((key) => (
+                <label
+                  key={key}
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-(--nav-hover-bg)"
+                >
+                  <input
+                    type="checkbox"
+                    checked={layers[key]}
+                    onChange={() => toggleLayer(key)}
+                    className="accent-indigo-600"
+                  />
+                  <span
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
+                  />
+                  <span className="text-body text-sm">{LAYER_LABELS[key]}</span>
+                </label>
+              ))}
+
+              <p className="text-muted mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider uppercase">
+                Analysis
+              </p>
+              {SPECIAL_LAYERS.map((key) => (
+                <label
+                  key={key}
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-(--nav-hover-bg)"
+                >
+                  <input
+                    type="checkbox"
+                    checked={layers[key]}
+                    onChange={() => toggleLayer(key)}
+                    className="accent-indigo-600"
+                  />
+                  <span
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
+                  />
+                  <span className="text-body text-sm">{LAYER_LABELS[key]}</span>
+                </label>
+              ))}
+            </>
+          )}
         </div>
-      )}
 
-      <div className="absolute top-4 left-4 z-10 max-h-[calc(100%-2rem)] overflow-y-auto rounded-xl bg-white/95 p-4 shadow-lg backdrop-blur-sm dark:bg-gray-900/95">
-        <div className="mb-2 flex items-center justify-between gap-2">
-          <h3 className="text-sm font-bold tracking-tight text-gray-900 dark:text-gray-100">
-            Map Layers
-          </h3>
+        {showExpandButton && (
           <button
-            onClick={() => setIsLayerPanelOpen((prev) => !prev)}
-            className="rounded-md p-1 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100"
-            aria-label={isLayerPanelOpen ? 'Collapse map layers' : 'Expand map layers'}
-            title={isLayerPanelOpen ? 'Collapse map layers' : 'Expand map layers'}
-            aria-expanded={isLayerPanelOpen}
+            onClick={openModal}
+            className="absolute top-4 right-4 z-10 rounded-lg bg-gray-50/95 p-2 shadow-lg backdrop-blur-sm transition-colors hover:bg-(--nav-hover-bg) dark:bg-gray-900/95"
+            aria-label="Expand map"
+            title="Expand map"
           >
-            {isLayerPanelOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            )}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-body h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8 3H5a2 2 0 0 0-2 2v3m16-5h-3a2 2 0 0 0-2 2v3M8 21H5a2 2 0 0 1-2-2v-3m16 5h-3a2 2 0 0 1-2-2v-3"
+              />
+            </svg>
           </button>
-        </div>
+        )}
 
-        {isLayerPanelOpen && (
-          <>
-            <p className="mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-300">
-              Current Network
-            </p>
-            {CURRENT_LAYERS.map((key) => (
-              <label
-                key={key}
-                className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100 dark:hover:bg-gray-700/50"
+        {selectedFeature && (
+          <div className="absolute right-4 bottom-4 z-10 max-w-sm rounded-xl bg-gray-50/95 p-4 shadow-lg backdrop-blur-sm dark:bg-gray-900/95">
+            <div className="mb-1 flex items-start justify-between gap-2">
+              <h3 className="text-heading text-sm font-bold">
+                {selectedFeature.name}
+              </h3>
+              <button
+                onClick={() => setSelectedFeature(null)}
+                className="text-muted shrink-0 cursor-pointer hover:text-(--nav-hover-text)"
+                aria-label="Close"
               >
-                <input
-                  type="checkbox"
-                  checked={layers[key]}
-                  onChange={() => toggleLayer(key)}
-                  className="accent-indigo-600"
-                />
+                ✕
+              </button>
+            </div>
+            <div className="mb-2 flex flex-wrap gap-1.5">
+              <span className="icon-well inline-block rounded-full px-2 py-0.5 text-xs font-medium">
+                {modeLabel(selectedFeature.mode)}
+              </span>
+              {selectedFeature.severity && (
                 <span
-                  className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
-                />
-                <span className="text-sm text-gray-700 dark:text-gray-200">{LAYER_LABELS[key]}</span>
-              </label>
-            ))}
-
-            <p className="mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-300">
-              Proposed Changes
-            </p>
-            {PROPOSED_LAYERS.map((key) => (
-              <label
-                key={key}
-                className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100 dark:hover:bg-gray-700/50"
-              >
-                <input
-                  type="checkbox"
-                  checked={layers[key]}
-                  onChange={() => toggleLayer(key)}
-                  className="accent-indigo-600"
-                />
-                <span
-                  className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
-                />
-                <span className="text-sm text-gray-700 dark:text-gray-200">{LAYER_LABELS[key]}</span>
-              </label>
-            ))}
-
-            <p className="mt-3 mb-1 text-[0.65rem] font-semibold tracking-wider text-gray-400 uppercase dark:text-gray-300">
-              Analysis
-            </p>
-            {SPECIAL_LAYERS.map((key) => (
-              <label
-                key={key}
-                className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-gray-100 dark:hover:bg-gray-700/50"
-              >
-                <input
-                  type="checkbox"
-                  checked={layers[key]}
-                  onChange={() => toggleLayer(key)}
-                  className="accent-indigo-600"
-                />
-                <span
-                  className={`h-2.5 w-2.5 shrink-0 rounded-full ${LAYER_CSS_COLORS[key]}`}
-                />
-                <span className="text-sm text-gray-700 dark:text-gray-200">{LAYER_LABELS[key]}</span>
-              </label>
-            ))}
-          </>
+                  className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${severityColor(selectedFeature.severity)}`}
+                >
+                  {selectedFeature.severity}
+                </span>
+              )}
+              {selectedFeature.category && (
+                <span className="inline-block rounded-full bg-(--surface-card-raised-bg) px-2 py-0.5 text-xs font-medium text-(--nav-text)">
+                  {selectedFeature.category}
+                </span>
+              )}
+            </div>
+            {selectedFeature.description && (
+              <p className="text-body text-sm leading-relaxed">
+                {selectedFeature.description}
+              </p>
+            )}
+          </div>
         )}
       </div>
 
       {showExpandButton && (
-        <button
-          onClick={openModal}
-          className="absolute top-4 right-4 z-10 rounded-lg bg-white/95 p-2 shadow-lg backdrop-blur-sm transition-colors hover:bg-gray-100 dark:bg-gray-900/95 dark:hover:bg-gray-700"
-          aria-label="Expand map"
-          title="Expand map"
+        <dialog
+          ref={dialogRef}
+          className="map-modal fixed inset-0 m-auto h-[90vh] max-h-none w-[95vw] max-w-360 rounded-xl border-0 p-0 shadow-2xl"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-700 dark:text-gray-200"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M8 3H5a2 2 0 0 0-2 2v3m16-5h-3a2 2 0 0 0-2 2v3M8 21H5a2 2 0 0 1-2-2v-3m16 5h-3a2 2 0 0 1-2-2v-3"
-            />
-          </svg>
-        </button>
-      )}
-
-      {selectedFeature && (
-        <div className="absolute right-4 bottom-4 z-10 max-w-sm rounded-xl bg-white/95 p-4 shadow-lg backdrop-blur-sm dark:bg-gray-900/95">
-          <div className="mb-1 flex items-start justify-between gap-2">
-            <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100">
-              {selectedFeature.name}
-            </h3>
-            <button
-              onClick={() => setSelectedFeature(null)}
-              className="shrink-0 cursor-pointer text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-              aria-label="Close"
-            >
-              ✕
-            </button>
-          </div>
-          <div className="mb-2 flex flex-wrap gap-1.5">
-            <span className="inline-block rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300">
-              {modeLabel(selectedFeature.mode)}
-            </span>
-            {selectedFeature.severity && (
-              <span
-                className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${severityColor(selectedFeature.severity)}`}
+          <div className="bg-page flex h-full flex-col overflow-hidden rounded-xl">
+            <div className="border-subtle flex shrink-0 items-center justify-between border-b px-4 py-3">
+              <h2 className="text-heading text-sm font-semibold">
+                Our Proposed Transport Map
+              </h2>
+              <button
+                onClick={() => dialogRef.current?.close()}
+                className="text-muted rounded-md p-1.5 transition-colors hover:bg-(--nav-hover-bg) hover:text-(--nav-hover-text)"
+                aria-label="Close"
               >
-                {selectedFeature.severity}
-              </span>
-            )}
-            {selectedFeature.category && (
-              <span className="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
-                {selectedFeature.category}
-              </span>
-            )}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className="min-h-0 flex-1">
+              {isModalOpen && (
+                <TransportMap
+                  showExpandButton={false}
+                  className="h-full w-full"
+                />
+              )}
+            </div>
           </div>
-          {selectedFeature.description && (
-            <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
-              {selectedFeature.description}
-            </p>
-          )}
-        </div>
+        </dialog>
       )}
-    </div>
-
-    {showExpandButton && (
-      <dialog
-        ref={dialogRef}
-        className="map-modal fixed inset-0 m-auto h-[90vh] w-[95vw] max-h-none max-w-360 rounded-xl border-0 p-0 shadow-2xl"
-      >
-        <div className="flex h-full flex-col overflow-hidden rounded-xl bg-white dark:bg-gray-900">
-          <div className="flex shrink-0 items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-700">
-            <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-              Our Proposed Transport Map
-            </h2>
-            <button
-              onClick={() => dialogRef.current?.close()}
-              className="rounded-md p-1.5 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-gray-200"
-              aria-label="Close"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-          <div className="min-h-0 flex-1">
-            {isModalOpen && (
-              <TransportMap showExpandButton={false} className="h-full w-full" />
-            )}
-          </div>
-        </div>
-      </dialog>
-    )}
     </>
   )
 }

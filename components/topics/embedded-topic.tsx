@@ -133,7 +133,7 @@ function renderWithTailwind(html: string) {
               isFirstVisibleParagraph = false
               node.attribs.class ||= ''
               node.attribs.class +=
-                ' mb-6 text-xl font-semibold leading-8 text-heading border-l-4 border-indigo-500 pl-4'
+                ' mb-6 text-xl font-semibold leading-8 text-heading border-l-4 border-accent pl-4'
               break
             }
 
@@ -179,7 +179,7 @@ function renderWithTailwind(html: string) {
             break
           case 'hr':
             return (
-              <hr className="my-10 border-t border-gray-200 dark:border-gray-800" />
+              <hr className="my-10 border-t border-subtle" />
             )
           case 'a':
             if (
@@ -193,7 +193,7 @@ function renderWithTailwind(html: string) {
             } else {
               node.attribs.class ||= ''
               node.attribs.class +=
-                ' font-medium text-indigo-600 underline decoration-indigo-300 underline-offset-2 hover:text-indigo-800 hover:decoration-indigo-500 dark:text-indigo-400 dark:decoration-indigo-600 dark:hover:text-indigo-300'
+                ' link-accent font-medium underline underline-offset-2'
             }
             break
           case 'ul':
@@ -211,7 +211,7 @@ function renderWithTailwind(html: string) {
           case 'blockquote':
             node.attribs.class ||= ''
             node.attribs.class +=
-              ' my-6 border-l-4 border-indigo-300 pl-4 italic text-gray-600 dark:border-indigo-700 dark:text-gray-400'
+              ' my-6 border-l-4 border-accent pl-4 italic text-prose'
             break
           case 'strong':
           case 'b':
@@ -254,7 +254,7 @@ export default async function EmbeddedTopic(params: {
       {/* Back link */}
       <a
         href={backRoute}
-        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium link-accent"
       >
         <span aria-hidden="true">&larr;</span>
         All {params.categoryTitle === 'Media Releases' ? 'releases' : 'posts'}
@@ -262,7 +262,7 @@ export default async function EmbeddedTopic(params: {
 
       {/* Title & meta */}
       <Heading as="h1">{post.title}</Heading>
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-gray-200 pb-6 text-sm text-muted dark:border-gray-800">
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-subtle pb-6 text-sm text-muted">
         {post.creator && (
           <span>
             {params.showAuthor ? <>@{post.creator} &middot; </> : null}
@@ -279,18 +279,18 @@ export default async function EmbeddedTopic(params: {
       </div>
 
       {/* Article body */}
-      <div className="prose-btq mt-8 text-base/7 text-gray-800 dark:text-gray-300">
+      <div className="prose-btq mt-8 text-base/7 text-prose">
         {renderWithTailwind(cleanHtml)}
       </div>
 
       {/* Forum CTA */}
-      <div className="mt-12 rounded-lg bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 p-8 text-white sm:p-12">
+      <div className="mt-12 rounded-lg bg-brand-gradient p-8 text-white sm:p-12">
         <Subheading as="h2" dark className="text-2xl">
           {params.linkToTopic
             ? 'See what others are saying about this post!'
             : 'Join the conversation on the BTQ Forum!'}
         </Subheading>
-        <Lead className="mt-4 max-w-3xl text-indigo-200">
+        <Lead className="mt-4 max-w-3xl text-on-brand">
           Stay up-to-date with the latest insights directly from the Better
           Transport Queensland (BTQ) Forum. Connect with engaged community
           members, share your thoughts, and be part of the conversation—everyone
