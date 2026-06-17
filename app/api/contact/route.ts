@@ -157,11 +157,19 @@ function validateFormData(formData: ContactFormData): NextResponse | null {
 }
 
 function sanitize(input: string): string {
-  return input
-    .replace(/[\x00-\x1F\x7F]/g, '') // Remove control characters
-    .replace(/<[^>]*>/g, '') // Remove all HTML tags (including <iframe>, <script>, etc.)
-    .replace(/&[^;]+;/g, '') // Remove HTML entities
-    .trim()
+  let current = input.trim()
+  let previous: string
+
+  do {
+    previous = current
+    current = current
+      .replace(/[\x00-\x1F\x7F]/g, '') // Remove control characters
+      .replace(/<[^>]*>/g, '') // Remove all HTML tags (including <iframe>, <script>, etc.)
+      .replace(/&[^;]+;/g, '') // Remove HTML entities
+      .trim()
+  } while (current !== previous)
+
+  return current
 }
 
 function sanitizeFormData(formData: ContactFormData): SanitizedContactFormData {
